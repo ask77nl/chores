@@ -1,4 +1,12 @@
 Chores::Application.routes.draw do
+  get "static_pages/home"
+
+  resources :projects
+
+  resources :chores
+
+  resources :emails
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

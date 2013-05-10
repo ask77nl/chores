@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  context_id: 1
+  title: MyString
+  parent_project_id: 1
+
+two:
+  context_id: 1
+  title: MyString
+  parent_project_id: 1
