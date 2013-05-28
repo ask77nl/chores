@@ -1,2 +1,17 @@
-<h1>Welcome to Chores!</h1>
-<p>Register or login to start doing your chores</p>
+<div class="center hero-unit">
+  <h1>Welcome to Chores!</h1>
+
+  <h2>
+    This is the home page for the
+    <a href="http://chores.com/">Personal version of Chores</a>
+  </h2>
+
+ <%if user_signed_in? %> 
+  <%= link_to "Start doing chores", chores_path, class: "btn btn-large btn-primary" %>
+  <% else %>
+
+<%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-large btn-primary" %>
+
+  <% end %>
+</div>
+

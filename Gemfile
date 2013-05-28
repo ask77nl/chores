@@ -1,17 +1,21 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
+gem 'bootstrap-sass', '2.1'
+gem 'devise'
+gem 'rolify'
+gem 'cancan'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development, :test do
   gem 'sqlite3' 
-  gem 'rspec-rails', '2.11.0'
+  gem 'rspec-rails', '2.12.0'
 end
 
 group :test do
-  gem 'capybara', '1.1.2'
+  gem 'capybara', '2.1.0'
 end
 
 # Gems used only for assets and not required
