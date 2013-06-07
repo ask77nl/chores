@@ -9,9 +9,8 @@ Chores::Application.routes.draw do
 
   resources :emails
 
-  resources :users
-
   devise_for :users
+  resources :users
 
   as :user do
     get "/login" => "devise/sessions#new", :as => :new_user_session
