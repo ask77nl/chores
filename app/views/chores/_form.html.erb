@@ -12,8 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :email_id %><br />
-    <%= f.number_field :email_id %>
+    <%= collection_select(:chore, :email_id, Email.all, :id, :subject) %>
   </div>
   <div class="field">
     <%= f.label :title %><br />

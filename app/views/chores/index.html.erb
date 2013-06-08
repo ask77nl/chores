@@ -14,7 +14,7 @@
 
 <% @chores.each do |chore| %>
   <tr>
-    <td><%= chore.email_id %></td>
+    <td><%= chore.email.subject %></td>
     <td><%= chore.title %></td>
     <td><%= chore.deadline %></td>
     <td><%= chore.choretype.name %></td>

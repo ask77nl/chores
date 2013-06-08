@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130608000929) do
+ActiveRecord::Schema.define(:version => 20130608050411) do
 
   create_table "chores", :force => true do |t|
     t.integer  "email_id"
     t.string   "title"
     t.datetime "deadline"
-    t.integer  "chore_type"
+    t.integer  "choretype_id"
     t.integer  "project_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "choretypes", :force => true do |t|

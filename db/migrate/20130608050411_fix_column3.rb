@@ -1,11 +1,12 @@
-class FixColumnName2 < ActiveRecord::Migration
+class FixColumn3 < ActiveRecord::Migration
   def up
   end
 
   def down
   end
 
-  def change
+ def change
    rename_column :chores, :chore_type, :choretype_id
   end
+
 end

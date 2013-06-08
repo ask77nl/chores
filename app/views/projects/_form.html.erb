@@ -12,16 +12,14 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :context_id %><br />
-    <%= f.number_field :context_id %>
+  <%= collection_select(:project, :context_id, ::Context.all, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :parent_project_id %><br />
-    <%= f.number_field :parent_project_id %>
+   <%= collection_select(:project, :parent_project_id, Project.all, :id, :title) %>
   </div>
   <div class="actions">
     <%= f.submit %>
