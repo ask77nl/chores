@@ -1,0 +1,23 @@
+<h1>Listing choretypes</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @choretypes.each do |choretype| %>
+  <tr>
+    <td><%= choretype.name %></td>
+    <td><%= link_to 'Show', choretype %></td>
+    <td><%= link_to 'Edit', edit_choretype_path(choretype) %></td>
+    <td><%= link_to 'Destroy', choretype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Choretype', new_choretype_path %>

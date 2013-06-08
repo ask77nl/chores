@@ -1,7 +1,15 @@
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to "Chores", '#', id: "logo" %>
+          <% if user_signed_in? %>
+          <%= link_to "Home", '/', id: "logo" %>
+          <%= link_to "Emails", emails_path, id: "logo" %>
+          <%= link_to "Chores", chores_path, id: "logo" %>
+          <%= link_to "Projects", projects_path, id: "logo" %>
+          <%= link_to "Contexts", contexts_path, id: "logo" %>
+          <% else %>
+          <%= link_to "Chores", '/', id: "logo" %>
+          <% end %>
           <nav>
             <ul class="nav pull-right">
 

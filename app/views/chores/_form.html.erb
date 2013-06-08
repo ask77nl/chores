@@ -24,12 +24,10 @@
     <%= f.datetime_select :deadline %>
   </div>
   <div class="field">
-    <%= f.label :type %><br />
-    <%= f.number_field :type %>
+    <%= collection_select(:chore, :choretype_id, Choretype.all, :id, :name) %>
   </div>
   <div class="field">
-    <%= f.label :project_id %><br />
-    <%= f.number_field :project_id %>
+    <%= collection_select(:chore, :project_id, Project.all, :id, :title) %>
   </div>
   <div class="actions">
     <%= f.submit %>
