@@ -11,3 +11,21 @@
  *= require_self
  *= require_tree .
  */
+
+      /* Sticky footer styles
+      -------------------------------------------------- */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    margin: 0 0 100px; /* bottom = footer height */
+}
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+}

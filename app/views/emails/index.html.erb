@@ -1,6 +1,6 @@
 <h1>Listing emails</h1>
 
-<table>
+<table class="table">
   <tr>
     <th>From</th>
     <th>To</th>
@@ -19,13 +19,13 @@
     <td><%= email.datetime %></td>
     <td><%= email.subject %></td>
     <td><%= email.body %></td>
-    <td><%= link_to 'Show', email %></td>
-    <td><%= link_to 'Edit', edit_email_path(email) %></td>
-    <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', email,{:class => "btn btn-info"}  %></td>
+    <td><%= link_to 'Edit', edit_email_path(email),{:class => "btn btn-primary"}  %></td>
+    <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger"  %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Email', new_email_path %>
+<%= link_to 'New Email', new_email_path,{:class => "btn btn-large btn-primary"}  %>

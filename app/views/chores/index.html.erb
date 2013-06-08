@@ -1,6 +1,12 @@
 <h1>Listing chores</h1>
 
-<table>
+ <ul class="nav nav-tabs">
+<% @contexts.each do |context| %>
+   <li><%=link_to context.name, chores_path(:context_id => context.id) %></li>
+<% end %>
+ </ul>
+
+<table class="table">
   <tr>
     <th>Email</th>
     <th>Title</th>
@@ -19,13 +25,13 @@
     <td><%= chore.deadline %></td>
     <td><%= chore.choretype.name %></td>
     <td><%= chore.project.title %></td>
-    <td><%= link_to 'Show', chore %></td>
-    <td><%= link_to 'Edit', edit_chore_path(chore) %></td>
-    <td><%= link_to 'Destroy', chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Show', chore,{:class => "btn btn-info"}  %></td>
+    <td><%= link_to 'Edit', edit_chore_path(chore),{:class => "btn btn-primary"} %></td>
+    <td><%= link_to 'Destroy', chore, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger" %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Chore', new_chore_path %>
+<%= link_to 'New Chore', new_chore_path, {:class => "btn btn-large btn-primary"} %>
