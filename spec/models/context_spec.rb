@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe Context do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+ before { @context = FactoryGirl.build(:context) }
+ subject { @context }
+
+ it { should respond_to(:name) }
+
 end

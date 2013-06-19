@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :context do
-    name "MyString"
+    name "Work"
   end
 end

@@ -1,5 +1,10 @@
 require 'spec_helper'
 
 describe Choretype do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+ before { @choretype = FactoryGirl.build(:choretype) }
+ subject { @choretype }
+
+ it { should respond_to(:name) }
+
 end
