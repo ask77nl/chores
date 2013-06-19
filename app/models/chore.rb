@@ -5,16 +5,22 @@ class Chore < ActiveRecord::Base
   belongs_to :choretype
 
 
- def all_chores_by_context(id)
+ def self.all_chores_by_context(id)
    if id != nil
-     @all_projects = Project.where(:context_id => params[:id])
+     @all_projects = Project.where(:context_id => id)
+     return nil if @all_projects == nil
 
+     @all_chores = nil
      @all_projects.each do |project|
-      @all_chores += Chore.where(:project_id => project.id)
+      if @all_chores == nil
+       @all_chores = Chore.where(:project_id => project.id)
+      else
+       @all_chores += Chore.where(:project_id => project.id)
+      end
      end
-     return @all_chores
+     @all_chores
    else
-    return nil
+    nil
    end
   end
 

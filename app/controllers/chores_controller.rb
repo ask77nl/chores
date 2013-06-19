@@ -2,11 +2,13 @@ class ChoresController < ApplicationController
   # GET /chores
   # GET /chores.json
   def index
-    if params[:context_id] != nil
-     @chores = Chore.all_chores_by_context(params[:context_id])
+    if params[:context_id] == nil
+      @active_context = Context.first.id
     else
-     @chores = Chore.all
+      @active_context = params[:context_id].to_s
     end
+    
+    @chores = Chore.all_chores_by_context(@active_context)
     @contexts = Context.all
 
     respond_to do |format|

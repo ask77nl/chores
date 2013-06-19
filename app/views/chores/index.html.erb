@@ -2,9 +2,20 @@
 
  <ul class="nav nav-tabs">
 <% @contexts.each do |context| %>
-   <li><%=link_to context.name, chores_path(:context_id => context.id) %></li>
+   <% if context.id.to_s == @active_context.to_s%>
+    <li class="active"><%=link_to context.name, chores_path(:context_id => context.id) %></li>
+   <% else %>
+    <li><%=link_to context.name, chores_path(:context_id => context.id) %></li>
+   <% end %>
 <% end %>
  </ul>
+
+<ul class="nav nav-pills">
+  <li class="active"><%=link_to "Active Actions", chores_path(:type => 1) %></li>
+  <li><%=link_to "Waiting for ...", chores_path(:type => 2) %></li>
+  <li><%=link_to 'Projects',projects_path(:context_id => @active_context) %></li>
+</ul>
+
 
 <table class="table">
   <tr>
@@ -18,7 +29,8 @@
     <th></th>
   </tr>
 
-<% @chores.each do |chore| %>
+<% if @chores != nil%>
+ <% @chores.each do |chore| %>
   <tr>
     <td><%= chore.email.subject %></td>
     <td><%= chore.title %></td>
@@ -29,6 +41,9 @@
     <td><%= link_to 'Edit', edit_chore_path(chore),{:class => "btn btn-primary"} %></td>
     <td><%= link_to 'Destroy', chore, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger" %></td>
   </tr>
+ <% end %>
+<% else %>
+  <tr><td colspan=8>No chores yet, create one!</td><tr>
 <% end %>
 </table>
 
