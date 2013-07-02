@@ -4,6 +4,10 @@ class Chore < ActiveRecord::Base
   belongs_to :project
   belongs_to :choretype
 
+  validates( :title, presence: true)
+  validates( :project_id, presence: true)
+  validates( :choretype_id, presence: true)
+
 
  def self.all_chores_by_context(id)
    if id != nil

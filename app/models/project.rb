@@ -7,4 +7,7 @@ class Project < ActiveRecord::Base
   belongs_to :parent, :class_name => "Project", :foreign_key => :parent_project_id
   has_many :children, :class_name => "Project", :foreign_key => :project_id
 
+  validates(:title, presence: true)
+  validates(:context_id, presence: true)
+
 end

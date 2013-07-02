@@ -18,4 +18,17 @@ describe Project do
 
 }
 
+ describe "when title  is not present" do
+    before { @project.title = "" }
+    it { should_not be_valid }
+ end
+
+ describe "when title or context is not present" do
+    before { @project.context_id = "" }
+    it { should_not be_valid }
+ end
+
+
+
+
 end

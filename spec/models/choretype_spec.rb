@@ -7,4 +7,9 @@ describe Choretype do
 
  it { should respond_to(:name) }
 
+describe "when name is not present" do
+    before { @choretype.name = "" }
+    it { should_not be_valid }
+  end
+
 end

@@ -8,7 +8,10 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role_ids
-  validates :email, :uniqueness => true
+
+  validates :password,  presence: true
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true,uniqueness:  true, format: { with: VALID_EMAIL_REGEX }
 
   # attr_accessible :title, :body
 end
