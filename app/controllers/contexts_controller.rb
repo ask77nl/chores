@@ -1,4 +1,6 @@
 class ContextsController < ApplicationController
+
+ before_filter :authenticate_user!
   # GET /contexts
   # GET /contexts.json
   def index

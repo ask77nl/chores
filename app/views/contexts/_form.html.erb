@@ -15,6 +15,10 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+  <div class="field">
+    <%= collection_select(:chore, :user_id, User.all, :id, :email) %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

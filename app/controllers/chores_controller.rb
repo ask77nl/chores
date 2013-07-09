@@ -1,4 +1,7 @@
 class ChoresController < ApplicationController
+
+before_filter :authenticate_user!
+
   # GET /chores
   # GET /chores.json
   def index

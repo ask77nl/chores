@@ -11,6 +11,8 @@ class Ability
       can [:read, :update], User do |account|
         account.email == user.email
       end
+ 
+    can :manage, Chore, :user_id => user.id
     end
     # Define abilities for the passed in user here. For example:
     #

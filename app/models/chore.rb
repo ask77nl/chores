@@ -1,12 +1,15 @@
 class Chore < ActiveRecord::Base
-  attr_accessible :deadline, :email_id, :project_id, :title, :choretype_id
+  attr_accessible :deadline, :email_id, :project_id, :title, :choretype_id, :user_id
   belongs_to :email
+  belongs_to :user
   belongs_to :project
   belongs_to :choretype
 
   validates( :title, presence: true)
   validates( :project_id, presence: true)
   validates( :choretype_id, presence: true)
+  validates(:user_id, presence: true)
+
 
 
  def self.all_chores_by_context(id)
