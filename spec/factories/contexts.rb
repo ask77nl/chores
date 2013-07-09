@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :context do
     name "Work"
+    user_id 1
   end
 end

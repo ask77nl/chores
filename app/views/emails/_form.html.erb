@@ -32,7 +32,7 @@
     <%= f.text_field :body %>
   </div>
   <div class="field">
-    <%= collection_select(:chore, :user_id, User.all, :id, :email) %>
+    <%= collection_select(:email, :user_id, User.all, :id, :email) %>
   </div>
 
   <div class="actions">

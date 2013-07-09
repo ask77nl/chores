@@ -25,7 +25,7 @@
     <%= f.submit %>
   </div>
   <div class="field">
-    <%= collection_select(:chore, :user_id, User.all, :id, :email) %>
+    <%= collection_select(:project, :user_id, User.all, :id, :email) %>
   </div>
 
 <% end %>

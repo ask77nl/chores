@@ -20,11 +20,14 @@ require 'spec_helper'
 
 describe ContextsController do
 
+  login_user
+
   # This should return the minimal set of attributes required to create a valid
   # Context. As you add validations to Context, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "name" => "MyString" }
+    { "name" => "MyString" ,
+      "user_id" => 1}
   end
 
   # This should return the minimal set of values that should be in the session
@@ -37,7 +40,7 @@ describe ContextsController do
   describe "GET index" do
     it "assigns all contexts as @contexts" do
       context = Context.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       assigns(:contexts).should eq([context])
     end
   end
@@ -45,14 +48,14 @@ describe ContextsController do
   describe "GET show" do
     it "assigns the requested context as @context" do
       context = Context.create! valid_attributes
-      get :show, {:id => context.to_param}, valid_session
+      get :show, {:id => context.to_param}
       assigns(:context).should eq(context)
     end
   end
 
   describe "GET new" do
     it "assigns a new context as @context" do
-      get :new, {}, valid_session
+      get :new, {}
       assigns(:context).should be_a_new(Context)
     end
   end
@@ -60,7 +63,7 @@ describe ContextsController do
   describe "GET edit" do
     it "assigns the requested context as @context" do
       context = Context.create! valid_attributes
-      get :edit, {:id => context.to_param}, valid_session
+      get :edit, {:id => context.to_param}
       assigns(:context).should eq(context)
     end
   end
@@ -69,18 +72,18 @@ describe ContextsController do
     describe "with valid params" do
       it "creates a new Context" do
         expect {
-          post :create, {:context => valid_attributes}, valid_session
+          post :create, {:context => valid_attributes}
         }.to change(Context, :count).by(1)
       end
 
       it "assigns a newly created context as @context" do
-        post :create, {:context => valid_attributes}, valid_session
+        post :create, {:context => valid_attributes}
         assigns(:context).should be_a(Context)
         assigns(:context).should be_persisted
       end
 
       it "redirects to the created context" do
-        post :create, {:context => valid_attributes}, valid_session
+        post :create, {:context => valid_attributes}
         response.should redirect_to(Context.last)
       end
     end
@@ -89,14 +92,14 @@ describe ContextsController do
       it "assigns a newly created but unsaved context as @context" do
         # Trigger the behavior that occurs when invalid params are submitted
         Context.any_instance.stub(:save).and_return(false)
-        post :create, {:context => { "name" => "invalid value" }}, valid_session
+        post :create, {:context => { "name" => "invalid value" }}
         assigns(:context).should be_a_new(Context)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Context.any_instance.stub(:save).and_return(false)
-        post :create, {:context => { "name" => "invalid value" }}, valid_session
+        post :create, {:context => { "name" => "invalid value" }}
         response.should render_template("new")
       end
     end
@@ -111,18 +114,18 @@ describe ContextsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Context.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
-        put :update, {:id => context.to_param, :context => { "name" => "MyString" }}, valid_session
+        put :update, {:id => context.to_param, :context => { "name" => "MyString" }}
       end
 
       it "assigns the requested context as @context" do
         context = Context.create! valid_attributes
-        put :update, {:id => context.to_param, :context => valid_attributes}, valid_session
+        put :update, {:id => context.to_param, :context => valid_attributes}
         assigns(:context).should eq(context)
       end
 
       it "redirects to the context" do
         context = Context.create! valid_attributes
-        put :update, {:id => context.to_param, :context => valid_attributes}, valid_session
+        put :update, {:id => context.to_param, :context => valid_attributes}
         response.should redirect_to(context)
       end
     end
@@ -132,7 +135,7 @@ describe ContextsController do
         context = Context.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Context.any_instance.stub(:save).and_return(false)
-        put :update, {:id => context.to_param, :context => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => context.to_param, :context => { "name" => "invalid value" }}
         assigns(:context).should eq(context)
       end
 
@@ -140,7 +143,7 @@ describe ContextsController do
         context = Context.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Context.any_instance.stub(:save).and_return(false)
-        put :update, {:id => context.to_param, :context => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => context.to_param, :context => { "name" => "invalid value" }}
         response.should render_template("edit")
       end
     end
@@ -150,13 +153,13 @@ describe ContextsController do
     it "destroys the requested context" do
       context = Context.create! valid_attributes
       expect {
-        delete :destroy, {:id => context.to_param}, valid_session
+        delete :destroy, {:id => context.to_param}
       }.to change(Context, :count).by(-1)
     end
 
     it "redirects to the contexts list" do
       context = Context.create! valid_attributes
-      delete :destroy, {:id => context.to_param}, valid_session
+      delete :destroy, {:id => context.to_param}
       response.should redirect_to(contexts_url)
     end
   end
