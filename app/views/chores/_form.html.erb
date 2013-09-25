@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= collection_select(:chore, :email_id, Email.all, :id, :subject) %>
+    <%= collection_select(:chore, :email_id, @emails, :id, :subject) %>
   </div>
   <div class="field">
     <%= f.label :title %><br />
@@ -26,12 +26,9 @@
     <%= collection_select(:chore, :choretype_id, Choretype.all, :id, :name) %>
   </div>
   <div class="field">
-    <%= collection_select(:chore, :project_id, Project.all, :id, :title) %>
+    <%= collection_select(:chore, :project_id, @projects, :id, :title) %>
   </div>
 
-  <div class="field">
-    <%= collection_select(:chore, :user_id, User.all, :id, :email) %>
-  </div>
 
   <div class="actions">
     <%= f.submit %>

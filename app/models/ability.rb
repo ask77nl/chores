@@ -9,10 +9,11 @@ class Ability
 #       account.id == user.id
 #    end
 
-    can :read, :all do |account|
-     account.user_id == user.id
-    end
+#    can :read, :all do |account|
+#     account.user_id == user.id
+#    end
 
+    can :create, :all
 
     can :manage, :all do |account|
      account.user_id == user.id
@@ -22,12 +23,12 @@ class Ability
       can :manage, :all
     end
 
-    if user.has_role? :user
-      can [:read, :update], User do |account|
-        account.email == user.email
-      end
+#    if user.has_role? :user
+#      can [:read, :update], User do |account|
+#        account.email == user.email
+#      end
  
-    end
+#   end
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

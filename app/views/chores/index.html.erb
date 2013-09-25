@@ -1,52 +1,62 @@
 <h1>Listing chores</h1>
 
  <ul class="nav nav-tabs">
-<% @contexts.each do |context| %>
-   <% if context.id.to_s == @active_context.to_s%>
-    <li class="active"><%=link_to context.name, chores_path(:context_id => context.id) %></li>
-   <% else %>
-    <li><%=link_to context.name, chores_path(:context_id => context.id) %></li>
-   <% end %>
-<% end %>
+<% if @contexts == nil %>
+No contexts yet, create one!
+<% else %>
+ <% @contexts.each do |context| %>
+    <% if context.id.to_s == @active_context.to_s%>
+     <li class="active"><%=link_to context.name, chores_path(:context => context.id, :choretype => @active_choretype.to_s) %></li>
+    <% else %>
+     <li><%=link_to context.name, chores_path(:context => context.id, :choretype => @active_choretype.to_s) %></li>
+    <% end %>
+ <% end %>
+  </ul>
+
+ <ul class="nav nav-pills">
+
+ <% @choretypes.each do |choretype| %>
+    <% if choretype.id.to_s == @active_choretype.to_s%>
+     <li class="active"><%=link_to choretype.name, chores_path(:context => @active_context, :choretype => choretype) %></li>
+    <% else %>
+     <li><%=link_to choretype.name, chores_path(:context => @active_context, :choretype => choretype) %></li>
+    <% end %>
+ <% end %>
+  <li><%=link_to 'Projects',projects_path(:context => @active_context) %></li>
  </ul>
 
-<ul class="nav nav-pills">
-  <li class="active"><%=link_to "Active Actions", chores_path(:type => 1) %></li>
-  <li><%=link_to "Waiting for ...", chores_path(:type => 2) %></li>
-  <li><%=link_to 'Projects',projects_path(:context_id => @active_context) %></li>
-</ul>
 
+ <table class="table">
+   <tr>
+     <th>Email</th>
+     <th>Title</th>
+     <th>Deadline</th>
+     <th>Type</th>
+     <th>Project</th>
+     <th></th>
+     <th></th>
+     <th></th>
+   </tr>
 
-<table class="table">
-  <tr>
-    <th>Email</th>
-    <th>Title</th>
-    <th>Deadline</th>
-    <th>Type</th>
-    <th>Project</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% if @chores != nil%>
- <% @chores.each do |chore| %>
-  <tr>
-    <td><%= chore.email.subject %></td>
-    <td><%= chore.title %></td>
-    <td><%= chore.deadline %></td>
-    <td><%= chore.choretype.name %></td>
-    <td><%= chore.project.title %></td>
-    <td><%= link_to 'Show', chore,{:class => "btn btn-info"}  %></td>
-    <td><%= link_to 'Edit', edit_chore_path(chore),{:class => "btn btn-primary"} %></td>
-    <td><%= link_to 'Destroy', chore, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger" %></td>
-  </tr>
+ <% if @chores != nil%>
+  <% @chores.each do |chore| %>
+   <tr>
+     <td><%= chore.email.subject %></td>
+     <td><%= chore.title %></td>
+     <td><%= chore.deadline %></td>
+     <td><%= chore.choretype.name %></td>
+     <td><%= chore.project.title %></td>
+     <td><%= link_to 'Show', chore,{:class => "btn btn-info"}  %></td>
+     <td><%= link_to 'Edit', edit_chore_path(chore),{:class => "btn btn-primary"} %></td>
+     <td><%= link_to 'Destroy', chore, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger" %></td>
+   </tr>
+  <% end %>
+ <% else %>
+   <tr><td colspan=8>No chores yet, create one!</td><tr>
  <% end %>
-<% else %>
-  <tr><td colspan=8>No chores yet, create one!</td><tr>
+ </table>
+
+ <br />
+
+ <%= link_to 'New Chore', new_chore_path, {:class => "btn btn-large btn-primary"} %>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Chore', new_chore_path, {:class => "btn btn-large btn-primary"} %>

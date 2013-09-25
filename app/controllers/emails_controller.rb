@@ -30,6 +30,7 @@ load_and_authorize_resource
   # GET /emails/new.json
   def new
     @email = Email.new
+    @email.user_id = current_user.id
 
     respond_to do |format|
       format.html # new.html.erb

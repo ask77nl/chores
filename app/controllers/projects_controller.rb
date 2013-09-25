@@ -30,6 +30,12 @@ load_and_authorize_resource
   # GET /projects/new.json
   def new
     @project = Project.new
+    @project.user_id = current_user.id
+
+    # we use list of projects and contexts on the view, need to prepare them
+    @projects = Project.find_all_by_user_id(current_user.id)
+    @contexts = Context.find_all_by_user_id(current_user.id)
+
 
     respond_to do |format|
       format.html # new.html.erb

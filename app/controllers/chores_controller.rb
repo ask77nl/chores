@@ -7,14 +7,25 @@ load_and_authorize_resource
   # GET /chores.json
   def index
     @contexts = Context.find_all_by_user_id(current_user.id)
+    @choretypes = Choretype.all
 
-    if params[:context_id] == nil
-      @active_context = @contexts.first.id
+    if @contexts.empty?
+      @active_context = nil
+      @chores = nil
     else
-      @active_context = params[:context_id].to_s
+      if params[:context] == nil
+        @active_context = @contexts.first.id
+      else
+        @active_context = params[:context].to_s
+      end
+     
+      if params[:choretype] == nil
+        @active_choretype = @choretypes.first.id
+      else
+        @active_choretype = params[:choretype].to_s
+      end
+      @chores = Chore.all_chores_by_context_type_and_user(@active_context,@active_choretype, current_user.id)
     end
-    
-    @chores = Chore.all_chores_by_context_and_user(@active_context, current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -38,6 +49,12 @@ load_and_authorize_resource
   # GET /chores/new.json
   def new
     @chore = Chore.new
+    @chore.user_id = current_user.id
+
+    # we use list of projects and emails on the view, need to prepare them
+    @projects = Project.find_all_by_user_id(current_user.id)
+    @emails = Email.find_all_by_user_id(current_user.id)
+
 
     respond_to do |format|
       format.html # new.html.erb

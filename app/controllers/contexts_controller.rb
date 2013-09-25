@@ -1,7 +1,7 @@
 class ContextsController < ApplicationController
 
  before_filter :authenticate_user!
-load_and_authorize_resource
+ load_and_authorize_resource
 
   # GET /contexts
   # GET /contexts.json
@@ -28,6 +28,7 @@ load_and_authorize_resource
   # GET /contexts/new.json
   def new
     @context = Context.new
+    @context.user_id = current_user.id
 
     respond_to do |format|
       format.html # new.html.erb

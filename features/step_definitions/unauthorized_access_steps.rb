@@ -9,7 +9,7 @@ end
 Given(/^user1 created chore "(.*?)"$/) do |choretitle|
     user = FactoryGirl.create(:user, :email => "ask@alleko.com")
     context = FactoryGirl.create(:context)
-    project = FactoryGirl.create(:project, :context_id => context.id)
+    project = FactoryGirl.create(:project, :context_id => context.id, :user_id => user.id)
     email = FactoryGirl.create(:email)
     choretype = FactoryGirl.create(:choretype)
     FactoryGirl.create(:chore, :title => choretitle, :user_id => user.id, :project_id => project.id, :email_id => email.id, :choretype_id => choretype.id)
