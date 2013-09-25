@@ -12,3 +12,10 @@ Examples:
 |projects|
 |emails|
 |contexts|
+
+
+Scenario: access to chores by wrong user
+Given user1 created chore "user1 chore"
+And user2 logged in
+And user2 visits the chores
+Then He should not see "user1 chore"

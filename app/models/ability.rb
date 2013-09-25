@@ -4,15 +4,29 @@ class Ability
  def initialize(user)
 
     user ||= User.new # guest user (not logged in)
+
+#    can :manage, Chore do |account|
+#       account.id == user.id
+#    end
+
+    can :read, :all do |account|
+     account.user_id == user.id
+    end
+
+
+    can :manage, :all do |account|
+     account.user_id == user.id
+    end
+
     if user.has_role? :admin
       can :manage, :all
     end
+
     if user.has_role? :user
       can [:read, :update], User do |account|
         account.email == user.email
       end
  
-    can :manage, Chore, :user_id => user.id
     end
     # Define abilities for the passed in user here. For example:
     #
@@ -40,5 +54,5 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
-  end
+ end
 end

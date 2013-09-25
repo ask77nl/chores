@@ -1,11 +1,12 @@
 class ContextsController < ApplicationController
 
  before_filter :authenticate_user!
+load_and_authorize_resource
+
   # GET /contexts
   # GET /contexts.json
   def index
-    @contexts = Context.all
-
+    @contexts = Context.find_all_by_user_id(current_user.id)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @contexts }

@@ -1,18 +1,20 @@
 class ChoresController < ApplicationController
-
 before_filter :authenticate_user!
+load_and_authorize_resource 
+
 
   # GET /chores
   # GET /chores.json
   def index
+    @contexts = Context.find_all_by_user_id(current_user.id)
+
     if params[:context_id] == nil
-      @active_context = Context.first.id
+      @active_context = @contexts.first.id
     else
       @active_context = params[:context_id].to_s
     end
     
-    @chores = Chore.all_chores_by_context(@active_context)
-    @contexts = Context.all
+    @chores = Chore.all_chores_by_context_and_user(@active_context, current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -23,6 +25,7 @@ before_filter :authenticate_user!
   # GET /chores/1
   # GET /chores/1.json
   def show
+    
     @chore = Chore.find(params[:id])
 
     respond_to do |format|
