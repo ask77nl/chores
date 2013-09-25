@@ -12,6 +12,7 @@
   <% end %>
 
   <div class="field">
+  <%= f.label :context %><br />  
   <%= collection_select(:project, :context_id, @contexts, :id, :name) %>
   </div>
   <div class="field">
@@ -19,6 +20,7 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
+   <%= f.label :parent_project %><br />
    <%= collection_select(:project, :parent_project_id, @projects, :id, :title) %>
   </div>
   <div class="actions">

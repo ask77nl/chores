@@ -45,6 +45,7 @@ class ContextsController < ApplicationController
   # POST /contexts.json
   def create
     @context = Context.new(params[:context])
+    @context.user_id = current_user.id
 
     respond_to do |format|
       if @context.save
@@ -61,6 +62,8 @@ class ContextsController < ApplicationController
   # PUT /contexts/1.json
   def update
     @context = Context.find(params[:id])
+    @context.user_id = current_user.id
+
 
     respond_to do |format|
       if @context.update_attributes(params[:context])

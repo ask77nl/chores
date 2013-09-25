@@ -71,6 +71,8 @@ load_and_authorize_resource
   # POST /chores.json
   def create
     @chore = Chore.new(params[:chore])
+    @chore.user_id = current_user.id
+
 
     respond_to do |format|
       if @chore.save
@@ -87,6 +89,7 @@ load_and_authorize_resource
   # PUT /chores/1.json
   def update
     @chore = Chore.find(params[:id])
+    @chore.user_id = current_user.id
 
     respond_to do |format|
       if @chore.update_attributes(params[:chore])

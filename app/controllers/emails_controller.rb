@@ -47,6 +47,8 @@ load_and_authorize_resource
   # POST /emails.json
   def create
     @email = Email.new(params[:email])
+    @email.user_id = current_user.id
+
 
     respond_to do |format|
       if @email.save
@@ -63,6 +65,7 @@ load_and_authorize_resource
   # PUT /emails/1.json
   def update
     @email = Email.find(params[:id])
+    @email.user_id = current_user.id
 
     respond_to do |format|
       if @email.update_attributes(params[:email])

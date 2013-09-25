@@ -52,6 +52,7 @@ load_and_authorize_resource
   # POST /projects.json
   def create
     @project = Project.new(params[:project])
+    @project.user_id = current_user.id
 
     respond_to do |format|
       if @project.save
@@ -68,6 +69,8 @@ load_and_authorize_resource
   # PUT /projects/1.json
   def update
     @project = Project.find(params[:id])
+    @project.user_id = current_user.id
+
 
     respond_to do |format|
       if @project.update_attributes(params[:project])

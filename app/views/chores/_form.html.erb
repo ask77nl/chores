@@ -12,6 +12,7 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :email %><br />
     <%= collection_select(:chore, :email_id, @emails, :id, :subject) %>
   </div>
   <div class="field">
@@ -23,9 +24,11 @@
     <%= f.datetime_select :deadline %>
   </div>
   <div class="field">
+    <%= f.label :choretype %><br />
     <%= collection_select(:chore, :choretype_id, Choretype.all, :id, :name) %>
   </div>
   <div class="field">
+    <%= f.label :project %><br />
     <%= collection_select(:chore, :project_id, @projects, :id, :title) %>
   </div>
 
