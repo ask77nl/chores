@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= collection_select(:chore, :email_id, @emails, :id, :subject) %>
+    <%= collection_select(:chore, :email_id, @emails, :id, :subject, {include_blank: 'None'}) %>
   </div>
   <div class="field">
     <%= f.label :title %><br />

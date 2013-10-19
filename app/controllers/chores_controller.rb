@@ -64,6 +64,10 @@ load_and_authorize_resource
 
   # GET /chores/1/edit
   def edit
+     # we use list of projects and emails on the view, need to prepare them
+    @projects = Project.find_all_by_user_id(current_user.id)
+    @emails = Email.find_all_by_user_id(current_user.id)
+
     @chore = Chore.find(params[:id])
   end
 

@@ -2,7 +2,11 @@
 
 <p>
   <b>Email:</b>
-  <%= @chore.email_id %>
+     <%if @chore.email_id == nil %>
+      -
+    <%else %>
+     <%= @chore.email.subject %>
+    <%end %>
 </p>
 
 <p>

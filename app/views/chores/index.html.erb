@@ -41,7 +41,14 @@ No contexts yet, create one!
  <% if @chores != nil%>
   <% @chores.each do |chore| %>
    <tr>
-     <td><%= chore.email.subject %></td>
+     <td>
+  <%if chore.email == nil %>
+      -
+    <%else %>
+     <%= chore.email.subject %>
+    <%end %>
+
+     </td>
      <td><%= chore.title %></td>
      <td><%= chore.deadline %></td>
      <td><%= chore.choretype.name %></td>
