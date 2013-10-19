@@ -12,6 +12,8 @@
  *= require_tree .
  */
 
+*= require bootstrap-datepicker
+
       /* Sticky footer styles
       -------------------------------------------------- */
 
@@ -29,3 +31,4 @@ footer {
     height: 40px;
     width: 100%;
 }
+
