@@ -12,7 +12,11 @@
 
 <p>
   <b>Parent project:</b>
-  <%= @project.parent.title %>
+  <%if @project.parent == nil %>
+    -
+  <%else %>
+   <%= @project.parent.title %>
+  <%end %>
 </p>
 
 

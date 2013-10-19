@@ -14,7 +14,13 @@
   <tr>
     <td><%= project.context.name %></td>
     <td><%= project.title %></td>
-    <td><%= project.parent.title %></td>
+    <td>
+    <%if project.parent == nil %>
+      -
+    <%else %>
+     <%= project.parent.title %>
+    <%end %>
+    </td>
     <td><%= link_to 'Show', project,{:class => "btn btn-info"}  %></td>
     <td><%= link_to 'Edit', edit_project_path(project),{:class => "btn btn-primary"}  %></td>
     <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger"  %></td>

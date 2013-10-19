@@ -21,7 +21,7 @@
   </div>
   <div class="field">
    <%= f.label :parent_project %><br />
-   <%= collection_select(:project, :parent_project_id, @projects, :id, :title) %>
+   <%= collection_select(:project, :parent_project_id, @projects, :id, :title, {include_blank: 'None'}) %>
   </div>
   <div class="actions">
     <%= f.submit %>
