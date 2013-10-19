@@ -13,9 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-//= require bootstrap-datepicker
+//= require bootstrap-datepicker/core
 
-$(document).on("focus", "[data-behaviour~='datepicker']", function(e){
-    $(this).datepicker({"format": "yyyy-mm-dd", "weekStart": 1, "autoclose": true})
-    $(this).datepicker().on('changeDate', function(ev) {
-    	{alert ('Changed')};
