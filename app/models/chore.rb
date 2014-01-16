@@ -1,5 +1,9 @@
 class Chore < ActiveRecord::Base
-  attr_accessible :deadline, :email_id, :project_id, :title, :choretype_id, :user_id
+  include IceCube
+
+  serialize :schedule, IceCube::Schedule
+  
+  attr_accessible :deadline, :email_id, :project_id, :title, :choretype_id, :user_id, :schedule
   belongs_to :email
   belongs_to :user
   belongs_to :project

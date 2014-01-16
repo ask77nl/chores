@@ -8,6 +8,7 @@ gem 'devise'
 gem 'rolify'
 gem 'cancan'
 gem 'bootstrap-datepicker-rails'
+gem 'ice_cube'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

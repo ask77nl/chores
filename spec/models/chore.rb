@@ -19,7 +19,7 @@ describe Chore do
   should respond_to(:choretype_id) 
   should respond_to(:email_id)
   should respond_to(:user_id)
-
+  should respond_to(:schedule)
 }
 
  describe "when title  is not present" do
