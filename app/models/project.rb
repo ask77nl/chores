@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :context_id, :parent_project_id, :title, :user_id
+#  attr_accessible :context_id, :parent_project_id, :title, :user_id
   has_many :chores
   belongs_to  :context
   belongs_to :user
