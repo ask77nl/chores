@@ -6,7 +6,7 @@ class ContextsController < ApplicationController
   # GET /contexts
   # GET /contexts.json
   def index
-    @contexts = Context.find_all_by_user_id(current_user.id)
+    @contexts = Context.where("id = ?",current_user.id)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @contexts }

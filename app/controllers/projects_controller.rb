@@ -7,7 +7,7 @@ load_and_authorize_resource
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.find_all_by_user_id(current_user.id)
+    @projects = Project.where("id = ?",current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb

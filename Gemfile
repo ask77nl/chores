@@ -9,6 +9,7 @@ gem 'rolify'
 gem 'cancan'
 gem 'bootstrap-datepicker-rails'
 gem 'ice_cube'
+gem 'protected_attributes'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

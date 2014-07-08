@@ -7,7 +7,7 @@ load_and_authorize_resource
   # GET /emails
   # GET /emails.json
   def index
-    @emails = Email.find_all_by_user_id(current_user.id)
+    @emails = Email.where("id = ?",current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb

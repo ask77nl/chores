@@ -7,7 +7,7 @@ load_and_authorize_resource
   # GET /chores
   # GET /chores.json
   def index
-    @contexts = Context.find_all_by_user_id(current_user.id)
+    @contexts = Context.where("id = ?",current_user.id)
     @choretypes = Choretype.all
 
     if @contexts.empty?

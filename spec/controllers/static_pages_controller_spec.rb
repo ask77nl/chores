@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StaticPagesController do
+describe StaticPagesController, :type => :controller do
 
   describe "GET 'home'" do
     it "returns http success" do

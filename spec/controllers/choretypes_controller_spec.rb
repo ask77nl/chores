@@ -18,7 +18,7 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe ChoretypesController do
+describe ChoretypesController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Choretype. As you add validations to Choretype, be sure to
@@ -110,8 +110,10 @@ describe ChoretypesController do
         # specifies that the Choretype created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Choretype.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
-        put :update, {:id => choretype.to_param, :choretype => { "name" => "MyString" }}, valid_session
+#        Choretype.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
+        expect_any_instance_of(Choretype).to receive(:update_attributes).with({ "name" => "MyString" })
+ 
+       put :update, {:id => choretype.to_param, :choretype => { "name" => "MyString" }}, valid_session
       end
 
       it "assigns the requested choretype as @choretype" do
