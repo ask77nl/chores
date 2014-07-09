@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe ChoretypesController, :type => :controller do
+describe ChoretypesController, :type => :routing do
   describe "routing" do
 
     it "routes to #index" do
