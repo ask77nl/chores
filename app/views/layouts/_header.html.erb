@@ -1,6 +1,10 @@
-    <header class="navbar navbar-fixed-top navbar-inverse">
+    <header>
+    
+
+    <nav class="navbar navbar-fixed-top navbar-inverse ">
+       <div class="container">
+
       <div class="navbar-left">
-        <div class="container">
           <% if user_signed_in? %>
           <%= link_to "Home", '/', id: "logo" %>
           <%= link_to "Emails", emails_path, id: "logo" %>
@@ -11,18 +15,20 @@
           <%= link_to "Chores", '/', id: "logo" %>
           <% end %>
        </div>
-      </div>
 
-      <div class="nabvar-text navbar-right">
-
-               <% if user_signed_in? %>
+      <div class="navbar-right navbar-inverse">
+       <p class="navbar-text">
+          <% if user_signed_in? %>
               Signed in as: <%= current_user.email %>
 	      <%= link_to('Log Out',
-                          destroy_user_session_path, {:method => 'delete', :confirm => 'Are you sure?'}, 
+                           destroy_user_session_path(:method => 'delete', :confirm => 'Are you sure?'), 
                        {:class => "navbar-link"})%>
-              <% else %>
+          <% else %>
               <%= link_to('Log In', new_user_session_path, {:class => "navbar-link"}) %>
-            <% end %>
+          <% end %>
+        </p>
+      </nav>
       </div>
+    </div>
     </header>
 
