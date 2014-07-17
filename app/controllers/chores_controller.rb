@@ -53,9 +53,8 @@ load_and_authorize_resource
     @chore.user_id = current_user.id
 
     # we use list of projects and emails on the view, need to prepare them
-    @projects = Project.find_all_by_user_id(current_user.id)
-    @emails = Email.find_all_by_user_id(current_user.id)
-
+   @projects = Project.where("id = ?",current_user.id)
+   @emails = Email.where("id = ?",current_user.id)
 
     respond_to do |format|
       format.html # new.html.erb

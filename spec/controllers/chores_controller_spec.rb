@@ -41,9 +41,12 @@ describe ChoresController, :type => :controller do
 
   describe "GET index" do
     it "assigns all chores as @chores" do
+      context = Context.create!({ "name" => "work" , "user_id" => 1})
+      choretype = Choretype.create!( { "name" => "to do" })
       chore = Chore.create! valid_attributes
       get :index, {}, valid_session
       assigns(:chores).should eq([chore])
+
     end
   end
 
@@ -124,7 +127,7 @@ describe ChoresController, :type => :controller do
       it "assigns the requested chore as @chore" do
         chore = Chore.create! valid_attributes
         put :update, {:id => chore.to_param, :chore => valid_attributes}, valid_session
-        assigns(:chore).should eq(choretype)
+        assigns(:chore).should eq(chore)
       end
 
       it "redirects to the choretype" do
