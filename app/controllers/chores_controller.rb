@@ -102,7 +102,7 @@ load_and_authorize_resource
      #form correct schedule based on the filled form
      if(params.has_key?(:frequencyRadios) || params.has_key?(:endRadios))
       schedule = Schedule.new(Time.now)
-    
+
       case params[:frequencyRadios]
         when "never"
 	when "every_n_days"
@@ -122,12 +122,13 @@ load_and_authorize_resource
 	when "every_month_day"
          schedule.add_recurrence_rule Rule.yearly.month_of_year(params[:yearly_month].underscore.to_sym).day_of_month(params[:yearly_day].to_i)
       end
-
       case params[:endRadios]
         when "no_end_date"
         when "end_after_n_repeats"
         when "end_by"
       end
+     
+
       @chore.schedule = schedule
      end  #end big if of params
       if @chore.update_attributes(params[:chore])

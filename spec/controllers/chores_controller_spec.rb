@@ -142,7 +142,7 @@ describe ChoresController, :type => :controller do
 
 #        expect_any_instance_of(Chore).to receive(:update_attributes).with({ "title" => "new chore",  "schedule" => schedule })
  
-       put :update, {:id => chore.to_param, :chore => { "title" => "new chore"}, "frequencyRadios" => "every_n_days","daily_day" => 1}, valid_session 
+      put :update, {:id => chore.to_param, :chore => { "title" => "new chore"}, "frequencyRadios" => "every_n_days","daily_day" => 1}, valid_session 
       expect(assigns(:chore).schedule.to_s).to eq(schedule.to_s)
       end
 
