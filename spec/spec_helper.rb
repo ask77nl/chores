@@ -52,6 +52,7 @@ RSpec.configure do |config|
   config.include(EmailSpec::Matchers)
 
   config.include Devise::TestHelpers, :type => :controller
+  config.include Devise::TestHelpers, :type => :view
   config.include ControllerMacros, :type => :controller
 
   config.raise_errors_for_deprecations!

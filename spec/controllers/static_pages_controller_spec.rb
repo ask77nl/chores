@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe StaticPagesController, :type => :controller do
 
+  before :each do
+   sign_out :user
+  end
+
   render_views
 
   describe "GET 'home'" do
@@ -25,13 +29,6 @@ describe StaticPagesController, :type => :controller do
     end
   end
 
-  describe "sign out" do
-    it "redirects to home page" do
-      get :sign_out
-      expect(current_user).to be_nil
-      expect(response).to render_template("index")
-    end
-  end
 
 
 end
