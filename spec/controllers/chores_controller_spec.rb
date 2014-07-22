@@ -45,10 +45,11 @@ describe ChoresController, :type => :controller do
        sign_in @user
 
       context = Context.create!({ "name" => "work" , "user_id" => @user.id})
-      choretype = Choretype.create!( { "name" => "to do", "context" => context.id })
+      choretype = Choretype.create!( { "name" => "to do", "context_id" => context.id })
+      project = Project.create!({"title"=> "read email", "user_id" => @user.id, "context_id" => context.id })
       chore = Chore.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:chores).should eq([chore])
+      expect(:chores).to eq([chore])
 
     end
   end

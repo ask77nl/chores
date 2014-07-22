@@ -12,7 +12,6 @@ load_and_authorize_resource
 
 
     if @contexts.empty?
-      print "no contexts, no chores!!!"
       @active_context = nil
       @chores = nil
     else
@@ -22,17 +21,15 @@ load_and_authorize_resource
         @active_context = params[:context].to_s
       end
 
-     print "got context"+@active_context.to_s
      
       if params[:choretype] == nil
         @active_choretype = @choretypes.first.id
       else
         @active_choretype = params[:choretype].to_s
       end
-     print "got choretype"+@active_choretype
 
       @chores = Chore.all_chores_by_context_type_and_user(@active_context,@active_choretype, current_user.id)
-      print "got chores as a result:"+@chores+"end of chores"
+      print "got chores as a result:  ",@chores.to_s,".\n"
     end
 
     respond_to do |format|
