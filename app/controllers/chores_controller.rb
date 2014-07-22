@@ -29,7 +29,7 @@ load_and_authorize_resource
       end
 
       @chores = Chore.all_chores_by_context_type_and_user(@active_context,@active_choretype, current_user.id)
-      print "got chores as a result:  ",@chores.to_s,".\n"
+      print "got chores as a result:  ",@chores.first.title.to_s,".\n"
     end
 
     respond_to do |format|

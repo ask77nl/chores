@@ -20,8 +20,19 @@ require 'spec_helper'
 
 describe ChoresController, :type => :controller do
 
+   before(:each) do
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    user = FactoryGirl.create(:user)
+    sign_in user
+ 
+    context = Context.create!({ "name" => "work" , "user_id" => user.id})
+    choretype = Choretype.create!( { "name" => "to do", "context_id" => context.id })
+    project = Project.create!({"title"=> "read email", "user_id" => user.id, "context_id" => context.id })
+
+  end
+
   # This should return the minimal set of attributes required to create a valid
-  # Choretype. As you add validations to Choretype, be sure to
+  # Chore. As you add validations to Chore, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
     {"title" => "test chore",
@@ -41,16 +52,9 @@ describe ChoresController, :type => :controller do
 
   describe "GET index" do
     it "assigns all chores as @chores" do
-       @user = FactoryGirl.create(:user)
-       sign_in @user
-
-      context = Context.create!({ "name" => "work" , "user_id" => @user.id})
-      choretype = Choretype.create!( { "name" => "to do", "context_id" => context.id })
-      project = Project.create!({"title"=> "read email", "user_id" => @user.id, "context_id" => context.id })
       chore = Chore.create! valid_attributes
       get :index, {}, valid_session
-      expect(:chores).to eq([chore])
-
+      expect(assigns(:chores)).to eq([chore])
     end
   end
 
