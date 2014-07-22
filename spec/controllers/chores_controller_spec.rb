@@ -41,8 +41,11 @@ describe ChoresController, :type => :controller do
 
   describe "GET index" do
     it "assigns all chores as @chores" do
-      context = Context.create!({ "name" => "work" , "user_id" => 1})
-      choretype = Choretype.create!( { "name" => "to do" })
+       @user = FactoryGirl.create(:user)
+       sign_in @user
+
+      context = Context.create!({ "name" => "work" , "user_id" => @user.id})
+      choretype = Choretype.create!( { "name" => "to do", "context" => context.id })
       chore = Chore.create! valid_attributes
       get :index, {}, valid_session
       assigns(:chores).should eq([chore])
