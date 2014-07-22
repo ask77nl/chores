@@ -14,5 +14,15 @@ describe "StaticPages", :type => :feature do
     end
 
   end
+
+   describe "About page" do
+
+    it "should have the content 'a personal version of Chores'" do
+      visit '/about'
+      expect(page).to have_content('a personal version of Chores')
+    end
+
+  end
+
 end
 

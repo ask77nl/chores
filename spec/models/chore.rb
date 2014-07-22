@@ -45,11 +45,11 @@ describe "when user_id is not present" do
 
 describe "when searching for chores" do
  it "should properly filter them" do
-   wrong_user_chore = FactoryGirl.create(:chore, choretype_id: @choretype.id, project_id: @project.id, user_id: 1)
-   wrong_project_chore = FactoryGirl.create(:chore,choretype_id: @choretype.id, project_id: 1 ,user_id: @user.id)
-   wrong_type_chore = FactoryGirl.create(:chore,choretype_id: 1, project_id: @project.id ,user_id: @user.id)
+   wrong_user_chore = FactoryGirl.create(:chore, choretype_id: @choretype.id, project_id: @project.id, user_id: 666)
+   wrong_project_chore = FactoryGirl.create(:chore,choretype_id: @choretype.id, project_id: 666 ,user_id: @user.id)
+   wrong_type_chore = FactoryGirl.create(:chore,choretype_id: 666, project_id: @project.id ,user_id: @user.id)
   
-   expect(Chore.all_chores_by_context_type_and_user(@context.id,@choretype.id,@user.id)).to eq(@chore) 
+   expect(Chore.all_chores_by_context_type_and_user(@context.id,@choretype.id,@user.id)).to eq([@chore]) 
   end
 end
    
