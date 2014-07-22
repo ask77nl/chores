@@ -29,7 +29,6 @@ load_and_authorize_resource
       end
 
       @chores = Chore.all_chores_by_context_type_and_user(@active_context,@active_choretype, current_user.id)
-      print "got chores as a result:  ",@chores.first.title.to_s,".\n"
     end
 
     respond_to do |format|
@@ -69,8 +68,8 @@ load_and_authorize_resource
   # GET /chores/1/edit
   def edit
      # we use list of projects and emails on the view, need to prepare them
-    @projects = Project.find_all_by_user_id(current_user.id)
-    @emails = Email.find_all_by_user_id(current_user.id)
+    @projects = Project.where("id = ?",current_user.id)
+    @emails = Email.where("id = ?",current_user.id)
 
     @chore = Chore.find(params[:id])
   end
@@ -101,6 +100,7 @@ load_and_authorize_resource
 
     respond_to do |format|
      #form correct schedule based on the filled form
+     if(params.has_key?(:frequencyRadios) || params.has_key?(:endRadios))
       schedule = Schedule.new(Time.now)
     
       case params[:frequencyRadios]
@@ -129,6 +129,7 @@ load_and_authorize_resource
         when "end_by"
       end
       @chore.schedule = schedule
+     end  #end big if of params
       if @chore.update_attributes(params[:chore])
         format.html { redirect_to @chore, notice: 'Chore was successfully updated.' }
         format.json { head :no_content }

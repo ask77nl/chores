@@ -62,14 +62,14 @@ describe ChoresController, :type => :controller do
     it "assigns the requested chore as @chore" do
       chore = Chore.create! valid_attributes
       get :show, {:id => chore.to_param}, valid_session
-      assigns(:chore).should eq(chore)
+      expect(assigns(:chore)).to eq(chore)
     end
   end
 
   describe "GET new" do
     it "assigns a new chore as @chore" do
       get :new, {}, valid_session
-      assigns(:chore).should be_a_new(Chore)
+      expect(assigns(:chore)).to  be_a_new(Chore)
     end
   end
 
@@ -77,7 +77,7 @@ describe ChoresController, :type => :controller do
     it "assigns the requested chore as @chore" do
       chore = Chore.create! valid_attributes
       get :edit, {:id => chore.to_param}, valid_session
-      assigns(:chore).should eq(chore)
+      expect(assigns(:chore)).to  eq(chore)
     end
   end
 
@@ -91,29 +91,29 @@ describe ChoresController, :type => :controller do
 
       it "assigns a newly created chore as @chore" do
         post :create, {:chore => valid_attributes}, valid_session
-        assigns(:chore).should be_a(Chore)
-        assigns(:chore).should be_persisted
+        expect(assigns(:chore)).to  be_a(Chore)
+        expect(assigns(:chore)).to  be_persisted
       end
 
       it "redirects to the created chore" do
         post :create, {:chore => valid_attributes}, valid_session
-        response.should redirect_to(Chore.last)
+        expect(response).to redirect_to(Chore.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved chore as @chore" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Chore.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Chore).to receive(:save).and_return(false)
         post :create, {:chore => { "title" => "invalid value" }}, valid_session
-        assigns(:chore).should be_a_new(Chore)
+        expect(assigns(:chore)).to be_a_new(Chore)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Chore.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Chore).to receive(:save).and_return(false)
         post :create, {:chore => { "title" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -121,7 +121,7 @@ describe ChoresController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested chore" do
-        choretype = Chore.create! valid_attributes
+        chore = Chore.create! valid_attributes
         # Assuming there are no other chores in the database, this
         # specifies that the Chore created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -129,19 +129,19 @@ describe ChoresController, :type => :controller do
 #        Chore.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
         expect_any_instance_of(Chore).to receive(:update_attributes).with({ "title" => "test chore" })
  
-       put :update, {:id => chore.to_param, :chore => { "type" => "test chore" }}, valid_session
+       put :update, {:id => chore.to_param, :chore => { "title" => "test chore" }}, valid_session
       end
 
       it "assigns the requested chore as @chore" do
         chore = Chore.create! valid_attributes
         put :update, {:id => chore.to_param, :chore => valid_attributes}, valid_session
-        assigns(:chore).should eq(chore)
+        expect(assigns(:chore)).to eq(chore)
       end
 
       it "redirects to the choretype" do
         chore = Chore.create! valid_attributes
         put :update, {:id => chore.to_param, :chore => valid_attributes}, valid_session
-        response.should redirect_to(chore)
+        expect(response).to redirect_to(chore)
       end
     end
 
@@ -149,17 +149,17 @@ describe ChoresController, :type => :controller do
       it "assigns the chore as @chore" do
         chore = Chore.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Chore.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Chore).to receive(:save).and_return(false)
         put :update, {:id => chore.to_param, :chore => { "title" => "wrong title" }}, valid_session
-        assigns(:chore).should eq(chore)
+        expect(assigns(:chore)).to  eq(chore)
       end
 
       it "re-renders the 'edit' template" do
         chore = Chore.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Chore.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Chore).to receive(:save).and_return(false)
         put :update, {:id => chore.to_param, :chore => { "title" => "wrong title" }}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -175,7 +175,7 @@ describe ChoresController, :type => :controller do
     it "redirects to the choretypes list" do
       chore = Chore.create! valid_attributes
       delete :destroy, {:id => chore.to_param}, valid_session
-      response.should redirect_to(chores_url)
+      expect(response).to redirect_to(chores_url)
     end
   end
 

@@ -54,5 +54,5 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.include ControllerMacros, :type => :controller
 
-
+  config.raise_errors_for_deprecations!
 end
