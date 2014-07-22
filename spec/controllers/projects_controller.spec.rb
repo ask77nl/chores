@@ -27,7 +27,7 @@ describe ProjectsController, :type => :controller do
     $user = FactoryGirl.create(:user)
     sign_in $user
  
-    $context = Context.create!({ "name" => "work" , "user_id" => $user.id})
+    $context = FactoryGirl.create(:context,user_id: $user.id)
   end
 
   # This should return the minimal set of attributes required to create a valid

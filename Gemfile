@@ -32,6 +32,7 @@ group :test do
   gem "factory_girl_rails", "~> 4.4.1"
   gem "database_cleaner"
   gem "email_spec"
+  gem 'faker', '~> 1.4.2'
 end
 
 # Gems used only for assets and not required

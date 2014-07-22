@@ -27,10 +27,11 @@ describe ChoresController, :type => :controller do
     $user = FactoryGirl.create(:user)
     sign_in $user
  
-    $context = Context.create!({ "name" => "work" , "user_id" => $user.id})
-    $choretype = Choretype.create!( { "name" => "to do", "context_id" => $context.id })
-    $project = Project.create!({"title"=> "read email", "user_id" => $user.id, "context_id" => $context.id })
-    $email = Email.create!({"subject"=> "first email","user_id" => $user.id})
+   # $context = Context.create!({ "name" => "work" , "user_id" => $user.id})
+    $context = FactoryGirl.create(:context, user_id: $user.id)
+    $choretype = FactoryGirl.create(:choretype)
+    $project = FactoryGirl.create(:project,user_id: $user.id,context_id: $context.id)
+    $email = FactoryGirl.create(:email,user_id: $user.id)
 
   end
 

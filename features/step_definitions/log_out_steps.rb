@@ -1,8 +1,6 @@
 Given(/^Visitor is logged it$/) do
   visit('/login')
-  user = FactoryGirl.attributes_for(:user)
-  User.create!(user)
-  user = FactoryGirl.build(:user)
+  user = FactoryGirl.create(:user)
   fill_in('user_email', :with => user.email)
   fill_in('user_password', :with => user.password)
   click_button('Sign in')

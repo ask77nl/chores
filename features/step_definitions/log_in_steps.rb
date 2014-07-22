@@ -8,7 +8,7 @@ Given(/^He is a registered user$/) do
 end
 
 When(/^He enters correct email address and passowrd$/) do
-  user = FactoryGirl.build(:user)
+  user = FactoryGirl.create(:user)
   fill_in('user_email', :with => user.email)
   fill_in('user_password', :with => user.password)
   click_button('Sign in')
