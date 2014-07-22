@@ -16,7 +16,7 @@ describe "Emails", :type => :feature do
     it "it should show an empty list" do
       visit emails_path
       expect(page).to have_content('No emails yet, create one!')
-      expect(page).to have_link('New email', new_email_path)
+      expect(page).to have_link('New Email', new_email_path)
     end
    end
  
@@ -32,7 +32,7 @@ describe "Emails", :type => :feature do
       fill_in('email_to', :with => email.to)
       fill_in('email_subject', :with => email.subject)
       fill_in('email_body', :with => email.body)
-      click_button('Create email')
+      click_button('Create Email')
 
       expect(page).to have_content('Email was successfully created.')
       expect(page).to have_content('From: '+email.from)

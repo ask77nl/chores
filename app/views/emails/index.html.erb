@@ -12,6 +12,8 @@
     <th></th>
   </tr>
 
+<% if @emais != nil%>
+
 <% @emails.each do |email| %>
   <tr>
     <td><%= email.from %></td>
@@ -23,6 +25,10 @@
     <td><%= link_to 'Edit', edit_email_path(email),{:class => "btn btn-primary"}  %></td>
     <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger"  %></td>
   </tr>
+<% end %>
+ <% else %>
+   <tr><td colspan=8>No emails yet, create one!</td><tr>
+
 <% end %>
 </table>
 
