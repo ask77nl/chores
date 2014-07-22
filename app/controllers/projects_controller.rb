@@ -34,8 +34,8 @@ load_and_authorize_resource
     @project.user_id = current_user.id
 
     # we use list of projects and contexts on the view, need to prepare them
-    @projects = Project.find_all_by_user_id(current_user.id)
-    @contexts = Context.find_all_by_user_id(current_user.id)
+    @projects = Project.where("id = ?",current_user.id)
+    @contexts = Context.where("id = ?",current_user.id)
 
 
     respond_to do |format|
@@ -48,8 +48,8 @@ load_and_authorize_resource
   def edit
 
      # we use list of projects and contexts on the view, need to prepare them
-    @projects = Project.find_all_by_user_id(current_user.id)
-    @contexts = Context.find_all_by_user_id(current_user.id)
+    @projects = Project.where("id = ?",current_user.id)
+    @contexts = Context.where("id = ?",current_user.id)
 
     @project = Project.find(params[:id])
   end

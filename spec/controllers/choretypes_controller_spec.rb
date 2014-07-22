@@ -38,7 +38,7 @@ describe ChoretypesController, :type => :controller do
     it "assigns all choretypes as @choretypes" do
       choretype = Choretype.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:choretypes).should eq([choretype])
+      expect(assigns(:choretypes)).to eq([choretype])
     end
   end
 
@@ -46,14 +46,14 @@ describe ChoretypesController, :type => :controller do
     it "assigns the requested choretype as @choretype" do
       choretype = Choretype.create! valid_attributes
       get :show, {:id => choretype.to_param}, valid_session
-      assigns(:choretype).should eq(choretype)
+      expect(assigns(:choretype)).to eq(choretype)
     end
   end
 
   describe "GET new" do
     it "assigns a new choretype as @choretype" do
       get :new, {}, valid_session
-      assigns(:choretype).should be_a_new(Choretype)
+      expect(assigns(:choretype)).to be_a_new(Choretype)
     end
   end
 
@@ -61,7 +61,7 @@ describe ChoretypesController, :type => :controller do
     it "assigns the requested choretype as @choretype" do
       choretype = Choretype.create! valid_attributes
       get :edit, {:id => choretype.to_param}, valid_session
-      assigns(:choretype).should eq(choretype)
+      expect(assigns(:choretype)).to eq(choretype)
     end
   end
 
@@ -75,29 +75,29 @@ describe ChoretypesController, :type => :controller do
 
       it "assigns a newly created choretype as @choretype" do
         post :create, {:choretype => valid_attributes}, valid_session
-        assigns(:choretype).should be_a(Choretype)
-        assigns(:choretype).should be_persisted
+        expect(assigns(:choretype)).to be_a(Choretype)
+        expect(assigns(:choretype)).to be_persisted
       end
 
       it "redirects to the created choretype" do
         post :create, {:choretype => valid_attributes}, valid_session
-        response.should redirect_to(Choretype.last)
+        expect(response).to redirect_to(Choretype.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved choretype as @choretype" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Choretype.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Choretype).to receive(:save).and_return(false)
         post :create, {:choretype => { "name" => "invalid value" }}, valid_session
-        assigns(:choretype).should be_a_new(Choretype)
+        expect(assigns(:choretype)).to be_a_new(Choretype)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Choretype.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Choretype).to receive(:save).and_return(false)
         post :create, {:choretype => { "name" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -119,13 +119,13 @@ describe ChoretypesController, :type => :controller do
       it "assigns the requested choretype as @choretype" do
         choretype = Choretype.create! valid_attributes
         put :update, {:id => choretype.to_param, :choretype => valid_attributes}, valid_session
-        assigns(:choretype).should eq(choretype)
+        expect(assigns(:choretype)).to eq(choretype)
       end
 
       it "redirects to the choretype" do
         choretype = Choretype.create! valid_attributes
         put :update, {:id => choretype.to_param, :choretype => valid_attributes}, valid_session
-        response.should redirect_to(choretype)
+        expect(response).to redirect_to(choretype)
       end
     end
 
@@ -133,17 +133,17 @@ describe ChoretypesController, :type => :controller do
       it "assigns the choretype as @choretype" do
         choretype = Choretype.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Choretype.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Choretype).to receive(:save).and_return(false)
         put :update, {:id => choretype.to_param, :choretype => { "name" => "invalid value" }}, valid_session
-        assigns(:choretype).should eq(choretype)
+        expect(assigns(:choretype)).to eq(choretype)
       end
 
       it "re-renders the 'edit' template" do
         choretype = Choretype.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Choretype.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Choretype).to receive(:save).and_return(false)
         put :update, {:id => choretype.to_param, :choretype => { "name" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -159,7 +159,7 @@ describe ChoretypesController, :type => :controller do
     it "redirects to the choretypes list" do
       choretype = Choretype.create! valid_attributes
       delete :destroy, {:id => choretype.to_param}, valid_session
-      response.should redirect_to(choretypes_url)
+      expect(response).to redirect_to(choretypes_url)
     end
   end
 

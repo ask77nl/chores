@@ -28,7 +28,7 @@ describe StaticPagesController, :type => :controller do
   describe "sign out" do
     it "redirects to home page" do
       get :sign_out
-      expect(current_user).should be_nil
+      expect(current_user).to be_nil
       expect(response).to render_template("index")
     end
   end
