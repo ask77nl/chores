@@ -48,7 +48,21 @@ describe "Emails", :type => :feature do
 
     end
    end
- 
+
+   describe "when many users create email" do
+    it "should show each users only his emails" do
+     email = FactoryGirl.create(:email,user_id: @user.id)
+     other_user = FactoryGirl.create(:user)
+     other_email = FactoryGirl.create(:email,user_id: other_user.id)
+   
+     visit emails_path
+
+     expect(page).to have_content(email.subject)
+     expect(page).to have_no_content(other_email.subject)
+      
+    end
+  end
+   
    describe "after there are some emails" do
     it "should be able to show it" do
      email = FactoryGirl.create(:email,user_id: @user.id)
@@ -60,9 +74,43 @@ describe "Emails", :type => :feature do
      expect(page).to have_content('To: '+email.to)
      expect(page).to have_content('Subject: '+email.subject)
      expect(page).to have_content('Body: '+email.body)
-
     end
    end
+   
+    it "should be able to edit it" do
+     email = FactoryGirl.create(:email,user_id: @user.id)
+     visit emails_path
+     expect(page).to have_content(email.subject)
+     click_link("Edit")
+   
+     expect(find_field('email_from').value).to  eq email.from
+     expect(find_field('email_to').value).to  eq email.to
+     expect(find_field('email_subject').value).to  eq email.subject
+     expect(find_field('email_body').value).to  eq email.body
+
+     new_subject = "new subject"
+     fill_in('email_subject', :with => new_subject)
+
+     click_button("Update Email")
+ 
+     expect(page).to have_content('Subject: '+new_subject)
+
+     visit emails_path
+
+     expect(page).to have_content(new_subject)
+   end
+
+   it "should be able to delete it" do
+     email = FactoryGirl.create(:email,user_id: @user.id)
+     visit emails_path
+     expect(page).to have_content(email.subject)
+     click_link("Destroy")
+#     click_button("OK")
+
+     expect(page).to have_no_content(email.subject)
+
+   end
+
    
   end
 end
