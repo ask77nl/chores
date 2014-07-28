@@ -24,14 +24,14 @@ describe ChoresController, :type => :controller do
 
    before(:each) do
     @request.env["devise.mapping"] = Devise.mappings[:user]
-    $user = FactoryGirl.create(:user)
-    sign_in $user
+    @user = FactoryGirl.create(:user)
+    sign_in @user
  
    # $context = Context.create!({ "name" => "work" , "user_id" => $user.id})
-    $context = FactoryGirl.create(:context, user_id: $user.id)
-    $choretype = FactoryGirl.create(:choretype)
-    $project = FactoryGirl.create(:project,user_id: $user.id,context_id: $context.id)
-    $email = FactoryGirl.create(:email,user_id: $user.id)
+    @context = FactoryGirl.create(:context, user_id: @user.id)
+    @choretype = FactoryGirl.create(:choretype)
+    @project = FactoryGirl.create(:project,user_id: @user.id,context_id: @context.id)
+    @email = FactoryGirl.create(:email,user_id: @user.id)
 
   end
 
@@ -80,8 +80,8 @@ describe ChoresController, :type => :controller do
       get :new, {}, valid_session
       expect(assigns(:chore)).to  be_a_new(Chore)
       #it also needs to prepare the list of emails and project for the select boxex
-      expect(assigns(:emails)).to eq([$email])
-      expect(assigns(:projects)).to eq([$project])
+      expect(assigns(:emails)).to eq([@email])
+      expect(assigns(:projects)).to eq([@project])
     end
   end
 
@@ -91,8 +91,8 @@ describe ChoresController, :type => :controller do
       get :edit, {:id => chore.to_param}, valid_session
       expect(assigns(:chore)).to  eq(chore)
      #it also needs to prepare the list of emails and project for the select boxex
-      expect(assigns(:emails)).to eq([$email])
-      expect(assigns(:projects)).to eq([$project])
+      expect(assigns(:emails)).to eq([@email])
+      expect(assigns(:projects)).to eq([@project])
 
     end
   end

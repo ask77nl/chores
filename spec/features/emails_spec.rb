@@ -20,7 +20,6 @@ describe "Emails", :type => :feature do
     end
    end
  
-  
 
    describe "when user creates email" do
     it "it should show the email and represent it in the list" do
@@ -49,7 +48,22 @@ describe "Emails", :type => :feature do
 
     end
    end
+ 
+   describe "after there are some emails" do
+    it "should be able to show it" do
+     email = FactoryGirl.create(:email,user_id: @user.id)
+     visit emails_path
+     expect(page).to have_content(email.subject)
+     click_link("Show")
+     
+     expect(page).to have_content('From: '+email.from)
+     expect(page).to have_content('To: '+email.to)
+     expect(page).to have_content('Subject: '+email.subject)
+     expect(page).to have_content('Body: '+email.body)
+
+    end
+   end
+   
   end
 end
-
 
