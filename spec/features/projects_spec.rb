@@ -12,6 +12,12 @@ describe "Projects", :type => :feature do
     fill_in('user_password', :with => @user.password)
     click_button('Sign in')
   end
+ 
+  after do
+    User.delete_all
+    Context.delete_all
+  end
+
 
   describe "when there is no projects" do
     it "it should show an empty list" do

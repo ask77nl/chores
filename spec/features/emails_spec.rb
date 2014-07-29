@@ -12,6 +12,10 @@ describe "Emails", :type => :feature do
     click_button('Sign in')
   end
 
+  after do
+   User.delete_all
+  end
+
   describe "when there is no emails" do
     it "it should show an empty list" do
       visit emails_path
