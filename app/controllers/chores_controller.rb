@@ -7,7 +7,7 @@ load_and_authorize_resource
   # GET /chores
   # GET /chores.json
   def index
-    @contexts = Context.where("id = ?",current_user.id)
+    @contexts = Context.where("user_id = ?",current_user.id)
     @choretypes = Choretype.all
 
 
@@ -56,8 +56,8 @@ load_and_authorize_resource
     @chore.user_id = current_user.id
 
     # we use list of projects and emails on the view, need to prepare them
-   @projects = Project.where("id = ?",current_user.id)
-   @emails = Email.where("id = ?",current_user.id)
+   @projects = Project.where("user_id = ?",current_user.id)
+   @emails = Email.where("user_id = ?",current_user.id)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -68,8 +68,8 @@ load_and_authorize_resource
   # GET /chores/1/edit
   def edit
      # we use list of projects and emails on the view, need to prepare them
-    @projects = Project.where("id = ?",current_user.id)
-    @emails = Email.where("id = ?",current_user.id)
+    @projects = Project.where("user_id = ?",current_user.id)
+    @emails = Email.where("user_id = ?",current_user.id)
 
     @chore = Chore.find(params[:id])
   end

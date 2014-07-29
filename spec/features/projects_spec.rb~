@@ -1,0 +1,104 @@
+require 'spec_helper'
+
+describe "Projects", :type => :feature do
+
+ context "user is logged in" do
+
+  before do
+    @user = FactoryGirl.create(:user)
+    @context = FactoryGild.create(:context)
+    visit new_user_session_path
+    fill_in('user_email', :with => @user.email)
+    fill_in('user_password', :with => @user.password)
+    click_button('Sign in')
+  end
+
+  describe "when there is no projects" do
+    it "it should show an empty list" do
+      visit projects_path
+      expect(page).to have_content('No projects yet, create one!')
+      expect(page).to have_link('New Project', new_project_path)
+    end
+   end
+ 
+
+   describe "when user creates project" do
+    it "it should show the project and represent it in the list" do
+      visit projects_path
+      click_link("New Project")
+
+      project = FactoryGirl.build(:project, context_id: @context_id)
+      fill_in('project_name', :with => project.title)
+      click_button('Create Project')
+
+      expect(page).to have_content('Project was successfully created.')
+      expect(page).to have_content('Title: '+project.title)
+      
+      visit projects_path
+     
+      expect(page).to have_content(project.title)
+      expect(page).to have_content(context.name)
+      
+    end
+   end
+
+   describe "when many users create project" do
+    it "should show each users only his projects" do
+     project = FactoryGirl.create(:project,user_id: @user.id)
+     other_user = FactoryGirl.create(:user)
+     other_project = FactoryGirl.create(:project,user_id: other_user.id)
+   
+     visit projects_path
+
+     expect(page).to have_content(project.title)
+     expect(page).to have_no_content(other_project.title)
+      
+    end
+  end
+   
+   describe "after there are some projects" do
+    it "should be able to show it" do
+     project = FactoryGirl.create(:project,user_id: @user.id)
+     visit projects_path
+     expect(page).to have_content(project.title)
+     click_link("Show")
+     
+     expect(page).to have_content('Title: '+project.title)
+    end
+   end
+   
+    it "should be able to edit it" do
+     project = FactoryGirl.create(:project,user_id: @user.id)
+     visit projects_path
+     expect(page).to have_content(project.title)
+     click_link("Edit")
+   
+     expect(find_field('project_name').value).to  eq project.title
+
+     new_name = "new title"
+     fill_in('project_title', :with => new_title)
+
+     click_button("Update Project")
+ 
+     expect(page).to have_content('Title: '+new_title)
+
+     visit projects_path
+
+     expect(page).to have_content(new_title)
+   end
+
+   it "should be able to delete it" do
+     project = FactoryGirl.create(:project,user_id: @user.id)
+     visit projects_path
+     expect(page).to have_content(project.title)
+     click_link("Destroy")
+#     click_button("OK")
+
+     expect(page).to have_no_content(project.title)
+
+   end
+
+   
+  end
+end
+
