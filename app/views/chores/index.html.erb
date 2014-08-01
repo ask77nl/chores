@@ -50,7 +50,11 @@ No contexts yet, create one!
 
      </td>
      <td><%= chore.title %></td>
-     <td><%= chore.deadline %></td>
+     <% if chore.deadline != nil %>
+      <td><%= chore.deadline.to_s(:due_date) %></td>
+     <% else %>
+      <td>-</td>
+     <%end%>
      <td><%= chore.choretype.name %></td>
      <td><%= chore.project.title %></td>
      <td><%= link_to 'Show', chore,{:class => "btn btn-info"}  %></td>

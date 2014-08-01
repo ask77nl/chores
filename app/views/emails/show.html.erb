@@ -11,8 +11,12 @@
 </p>
 
 <p>
-  <b>Datetime:</b>
-  <%= @email.datetime %>
+  <b>Received:</b>
+  <% if @email.datetime != nil %>
+   <%= @email.datetime.to_s(:due_date) %>
+  <% else %>
+    -
+  <%end%>
 </p>
 
 <p>

@@ -1,7 +1,7 @@
 class ChoresController < ApplicationController
 include IceCube
 before_filter :authenticate_user!
-load_and_authorize_resource 
+#load_and_authorize_resource 
 
 
   # GET /chores
@@ -77,6 +77,11 @@ load_and_authorize_resource
   # POST /chores
   # POST /chores.json
   def create
+    if(params[:chore][:datetime])
+     params[:chore][:datetime]=  DateTime.strptime(params[:chore][:datetime], "%m/%d/%Y").strftime("%Y-%m-%d")
+      end
+     puts params
+
     @chore = Chore.new(params[:chore])
     @chore.user_id = current_user.id
 
@@ -99,6 +104,9 @@ load_and_authorize_resource
     @chore.user_id = current_user.id
 
     respond_to do |format|
+     if(params[:chore][:datetime])
+      params[:chore][:datetime]=  DateTime.strptime(params[:chore][:datetime], "%m/%d/%Y").strftime("%Y-%m-%d")
+      end
      #form correct schedule based on the filled form
      if(params.has_key?(:frequencyRadios) || params.has_key?(:endRadios))
       schedule = Schedule.new(Time.now)

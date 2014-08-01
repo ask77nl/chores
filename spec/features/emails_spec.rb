@@ -35,6 +35,8 @@ describe "Emails", :type => :feature do
       fill_in('email_to', :with => email.to)
       fill_in('email_subject', :with => email.subject)
       fill_in('email_body', :with => email.body)
+      fill_in('email_datetime', :with => email.datetime.to_s(:due_date))
+#      print "filled in date:",email.datetime.to_s(:due_date),"\n"
       click_button('Create Email')
 
       expect(page).to have_content('Email was successfully created.')
@@ -42,6 +44,7 @@ describe "Emails", :type => :feature do
       expect(page).to have_content('To: '+email.to)
       expect(page).to have_content('Subject: '+email.subject)
       expect(page).to have_content('Body: '+email.body)
+      expect(page).to have_content('Received: '+email.datetime.to_s(:due_date))
 
       visit emails_path
      
@@ -78,6 +81,7 @@ describe "Emails", :type => :feature do
      expect(page).to have_content('To: '+email.to)
      expect(page).to have_content('Subject: '+email.subject)
      expect(page).to have_content('Body: '+email.body)
+     expect(page).to have_content(email.datetime.to_s(:due_date))
     end
    end
    
@@ -91,6 +95,7 @@ describe "Emails", :type => :feature do
      expect(find_field('email_to').value).to  eq email.to
      expect(find_field('email_subject').value).to  eq email.subject
      expect(find_field('email_body').value).to  eq email.body
+     expect(find_field('email_datetime').value).to eq email.datetime.to_s(:due_date)
 
      new_subject = "new subject"
      fill_in('email_subject', :with => new_subject)

@@ -8,5 +8,6 @@ FactoryGirl.define do
     email_id {Faker::Number.number(3)}
     choretype_id {Faker::Number.number(3)}
     project_id {Faker::Number.number(3)}
+    deadline {Time.at(Time.new(2014).to_f + rand * (Time.now.to_f - Time.new(2014).to_f)).to_date}
   end
 end

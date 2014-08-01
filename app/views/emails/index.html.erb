@@ -4,7 +4,7 @@
   <tr>
     <th>From</th>
     <th>To</th>
-    <th>Datetime</th>
+    <th>Received</th>
     <th>Subject</th>
     <th>Body</th>
     <th></th>
@@ -18,7 +18,11 @@
   <tr>
     <td><%= email.from %></td>
     <td><%= email.to %></td>
-    <td><%= email.datetime %></td>
+    <% if email.datetime != nil %>
+     <td><%= email.datetime.to_s(:due_date) %></td>
+    <% else %>
+     <td>-</td>
+    <%end%>
     <td><%= email.subject %></td>
     <td><%= email.body %></td>
     <td><%= link_to 'Show', email,{:class => "btn btn-info"}  %></td>

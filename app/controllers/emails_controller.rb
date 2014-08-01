@@ -1,7 +1,7 @@
 class EmailsController < ApplicationController
 
  before_filter :authenticate_user!
- load_and_authorize_resource
+# load_and_authorize_resource
 
 
   # GET /emails
@@ -45,7 +45,18 @@ class EmailsController < ApplicationController
 
   # POST /emails
   # POST /emails.json
+
   def create
+#    puts "Create email controller launched!"
+    #fix convert date to what rails expect by default
+    if(params[:email][:datetime])
+ #    print "create controller received date:",params[:email][:datetime],"\n"
+     params[:email][:datetime]=  DateTime.strptime(params[:email][:datetime], "%m/%d/%Y").strftime("%Y-%m-%d")
+  #    print "and converted it to:",params[:email][:datetime],"\n"
+     else
+ #     puts "got no date params in create email controller!"
+     end
+
     @email = Email.new(params[:email])
     @email.user_id = current_user.id
 
@@ -68,6 +79,13 @@ class EmailsController < ApplicationController
     @email.user_id = current_user.id
 
     respond_to do |format|
+
+      #fix convert date to what rails expect by default
+      if(params[:email][:datetime])
+  #       print "update controller received date:",params[:email][:datetime],"\n"
+         params[:email][:datetime]=  DateTime.strptime(params[:email][:datetime], "%m/%d/%Y").strftime("%Y-%m-%d")
+  #     print "and converted it to:",params[:email][:datetime],"\n"
+      end
       if @email.update_attributes(params[:email])
         format.html { redirect_to @email, notice: 'Email was successfully updated.' }
         format.json { head :no_content }
@@ -89,4 +107,9 @@ class EmailsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+#private
+#    def email_params
+#      params.require(:email).permit!
+#    end
 end

@@ -44,8 +44,11 @@ describe "Chores", :type => :feature do
       select(@email.subject,:from => 'chore[email_id]')
       select(@choretype.name,:from => 'chore[choretype_id]')
       select(@project.title,:from => 'chore[project_id]')
+      fill_in('chore_datetime', :with => chore.deadline.to_s(:due_date))
       
       click_button('Create Chore')
+  
+     puts page.body
 
       expect(page).to have_content('Chore was successfully created.')
       expect(page).to have_content('Title: '+chore.title)
