@@ -77,10 +77,10 @@ before_filter :authenticate_user!
   # POST /chores
   # POST /chores.json
   def create
-    if(params[:chore][:datetime])
-     params[:chore][:datetime]=  DateTime.strptime(params[:chore][:datetime], "%m/%d/%Y").strftime("%Y-%m-%d")
+    if(params[:chore][:deadline] != '')
+     params[:chore][:deadline]=  DateTime.strptime(params[:chore][:deadline], "%m/%d/%Y").strftime("%Y-%m-%d")
       end
-     puts params
+    print "create chores controller launched with ", params,"\n"
 
     @chore = Chore.new(params[:chore])
     @chore.user_id = current_user.id
@@ -103,9 +103,11 @@ before_filter :authenticate_user!
     @chore = Chore.find(params[:id])
     @chore.user_id = current_user.id
 
+    print "chore update controller received params: ", params,"\n"
+
     respond_to do |format|
-     if(params[:chore][:datetime])
-      params[:chore][:datetime]=  DateTime.strptime(params[:chore][:datetime], "%m/%d/%Y").strftime("%Y-%m-%d")
+     if(params[:chore][:deadline] != "")
+      params[:chore][:deadline]=  DateTime.strptime(params[:chore][:deadline], "%m/%d/%Y").strftime("%Y-%m-%d")
       end
      #form correct schedule based on the filled form
      if(params.has_key?(:frequencyRadios) || params.has_key?(:endRadios))

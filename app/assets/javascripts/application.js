@@ -15,6 +15,3 @@
 //= require_tree .
 //= require bootstrap-datepicker
 
-$ -> $('[data-behaviour~=datepicker]').datepicker({"format": "mm/dd/yyyy", "autoclose": true});
-
-
