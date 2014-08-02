@@ -49,7 +49,7 @@ class EmailsController < ApplicationController
   def create
 #    puts "Create email controller launched!"
     #fix convert date to what rails expect by default
-    if(params[:email][:datetime])
+    if(params[:email][:datetime] != "" and params[:email][:datetime] != nil )
  #    print "create controller received date:",params[:email][:datetime],"\n"
      params[:email][:datetime]=  DateTime.strptime(params[:email][:datetime], "%m/%d/%Y").strftime("%Y-%m-%d")
   #    print "and converted it to:",params[:email][:datetime],"\n"
@@ -81,7 +81,7 @@ class EmailsController < ApplicationController
     respond_to do |format|
 
       #fix convert date to what rails expect by default
-      if(params[:email][:datetime])
+      if(params[:email][:datetime] and params[:email][:datetime] != nil)
   #       print "update controller received date:",params[:email][:datetime],"\n"
          params[:email][:datetime]=  DateTime.strptime(params[:email][:datetime], "%m/%d/%Y").strftime("%Y-%m-%d")
   #     print "and converted it to:",params[:email][:datetime],"\n"

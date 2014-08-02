@@ -21,8 +21,8 @@ html {
     position: relative;
     min-height: 100%;
 }
-body {
-    margin: 0 0 100px; /* bottom = footer height */
+push {
+    margin: 0 0 40px; /* bottom = footer height */
 }
 footer {
     position: absolute;

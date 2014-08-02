@@ -24,14 +24,10 @@
   <div class="field" >
     <%= f.label :deadline %><br />
     <% if @chore.deadline != nil %>
-     <input type="text" data-behaviour='datepicker'  value="<%=@chore.deadline.to_s(:due_date)%>" class="span2" name="chore[deadline]" id="chore_deadline">
+     <input type="text" data-behaviour='datepicker'  value="<%=@chore.deadline.to_s(:due_date)%>" name="chore[deadline]" id="chore_deadline">
     <% else %>
-      <input type="text" data-behaviour='datepicker'  value="" class="span2" name="chore[deadline]" id="chore_deadline">
+      <input type="text" data-behaviour='datepicker'  value=""  name="chore[deadline]" id="chore_deadline">
     <%end%>
-
-    <span class="add-on"><i class="icon-th"></i></span>
-</div>
-
   </div>
   <div class="field">
     <%= f.label :choretype %><br />
@@ -127,14 +123,15 @@ End after <input type="text" class="input-mini" name="end_repeats" id="end_repea
 <label class="radio">
   <input type="radio" name="endRadios" id="endRadios3" value="end_by" checked>
 End by
-      <input type="text" data-behaviour='datepicker'  value="" class="span2" name="end_date" id="end_date">
+      <input type="text" data-behaviour='datepicker'  value=""  name="end_date" id="end_date">
 </label>
 
 </fieldset>
-</div>
 </div>
 
   <div class="actions">
     <%= f.submit %>
   </div>
+
+</div>
 <% end %>

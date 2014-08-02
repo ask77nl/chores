@@ -141,8 +141,6 @@ describe ChoresController, :type => :controller do
         schedule = IceCube::Schedule.new(Time.now)
         schedule.add_recurrence_rule IceCube::Rule.daily(1)
 
-#        expect_any_instance_of(Chore).to receive(:update_attributes).with({ "title" => "new chore",  "schedule" => schedule })
- 
       put :update, {:id => chore.to_param, :chore => { "title" => "new chore"}, "frequencyRadios" => "every_n_days","daily_day" => 1}, valid_session 
       expect(assigns(:chore).schedule.to_s).to eq(schedule.to_s)
       end
