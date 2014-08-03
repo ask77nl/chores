@@ -12,7 +12,7 @@
   <% end %>
 
 <div class="row">
- <div class = "span4">
+ <div class = "col-md-4">
   <div class="field">
     <%= f.label :email %><br />
     <%= collection_select(:chore, :email_id, @emails, :id, :subject, {include_blank: 'None'}) %>
@@ -38,7 +38,7 @@
     <%= collection_select(:chore, :project_id, @projects, :id, :title) %>
   </div>
 </div>
-<div class="span8">
+<div class="col-md-8">
 <fieldset>
 <legend>Daily</legend>
 <label class="radio">
@@ -128,10 +128,10 @@ End by
 
 </fieldset>
 </div>
+</div>
 
-  <div class="actions">
+  <div class="row">
     <%= f.submit %>
   </div>
 
-</div>
 <% end %>

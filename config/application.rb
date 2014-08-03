@@ -60,7 +60,9 @@ module Chores
     config.assets.version = '1.0'
 
     #added for devise
-   config.assets.initialize_on_precompile = false
+    config.assets.initialize_on_precompile = false
+  
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
    config.generators do |g|
     g.test_framework :rspec, fixture: true
