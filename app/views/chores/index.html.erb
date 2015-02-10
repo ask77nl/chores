@@ -25,7 +25,6 @@ No contexts yet, create one!
   <li><%=link_to 'Projects',projects_path(:context => @active_context) %></li>
  </ul>
 
-
  <table class="table">
    <tr>
      <th>Email</th>
@@ -38,7 +37,7 @@ No contexts yet, create one!
      <th></th>
    </tr>
 
- <% if @chores.length != 0%>
+ <% if @chores != nil%>
   <% @chores.each do |chore| %>
    <tr>
      <td>

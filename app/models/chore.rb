@@ -30,7 +30,12 @@ class Chore < ActiveRecord::Base
        @all_chores += Chore.where(:project_id => project.id, :user_id =>user_id, :choretype_id => choretype_id)
       end
      end
-     @all_chores
+    #return nil if no chores found
+     if @all_chores.blank? 
+	return nil
+      else 
+	return @all_chores
+      end
    else
     nil
    end
