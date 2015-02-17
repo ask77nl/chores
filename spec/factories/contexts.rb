@@ -3,7 +3,7 @@ require 'faker'
 
 FactoryGirl.define do
   factory :context do
-    name {Faker::Lorem.word}
+    name {Faker::Lorem.sentence.tr!(" ", "_")}
     user_id {Faker::Number.number(3)} 
   end
 end

@@ -3,7 +3,7 @@ require 'faker'
 
 FactoryGirl.define do
   factory :chore do
-    title {Faker::Lorem.sentence} 
+    title {Faker::Lorem.sentence.tr!(" ", "_")} 
     user_id {Faker::Number.number(3)} 
     email_id {Faker::Number.number(3)}
     choretype_id {Faker::Number.number(3)}
