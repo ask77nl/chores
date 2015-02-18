@@ -21,14 +21,6 @@
     <%= f.label :title %><br />
     <%= f.text_field :title %>
   </div>
-  <div class="field" >
-    <%= f.label :deadline %><br />
-    <% if @chore.deadline != nil %>
-     <input type="text" data-behaviour='datepicker'  value="<%=@chore.deadline.to_s(:due_date)%>" name="chore[deadline]" id="chore_deadline">
-    <% else %>
-      <input type="text" data-behaviour='datepicker'  value=""  name="chore[deadline]" id="chore_deadline">
-    <%end%>
-  </div>
   <div class="field">
     <%= f.label :choretype %><br />
     <%= collection_select(:chore, :choretype_id, Choretype.all, :id, :name) %>
@@ -38,100 +30,13 @@
     <%= collection_select(:chore, :project_id, @projects, :id, :title) %>
   </div>
 </div>
-<div class="col-md-8">
-<fieldset>
-<legend>Daily</legend>
-<label class="radio">
-  <input type="radio" name="frequencyRadios" id="frequencyRadios1" value="never" checked>
-Never
-</label>
 
-<label class="radio">
-  <input type="radio" name="frequencyRadios" id="frequencyRadios2" value="every_n_days">
-Every <input type="text" class="input-mini" name="daily_day" id="daily_day" placeholder="1">day(s)
-</label>
-<label class="radio">
-  <input type="radio" name="frequencyRadios" id="frequencyRadios3" value="every_weekday" >
-Every weekday
-</label>
+<%= render :partial => "schedule", :locals => {:f => f} %>
 
-</fieldset>
-<fieldset>
-<legend>Weekly</legend>
-<label class="radio">
-  <input type="radio" name="frequencyRadios" id="frequencyRadios4" value="every_week" >
-Every <input type="text" class="input-mini" name="weekly_week" id="weekly_week" placeholder="1"> week
-</label>
-<label class="checkbox inline"> <input type="checkbox" name="weekly_monday" value="weekly_monday" >Monday</label>
-<label class="checkbox inline">  <input type="checkbox" name="weekly_tuesday" value="weekly_tuesday" >Tuesday</label>
-
-<label class="checkbox inline">  <input type="checkbox" name="weekly_wednesday" value="weekly_wednesday" >Wednesday</label>
-
-<label class="checkbox inline">  <input type="checkbox" name="weekly_thursday" value="weekly_thursday" >Thursday</label>
-
-<label class="checkbox inline">  <input type="checkbox" name="weekly_friday" value="weekly_friday" >Friday</label>
-
-<label class="checkbox inline">  <input type="checkbox" name="weekly_saturday" value="weekly_saturday" >Saturday</label>
-
-<label class="checkbox inline">  <input type="checkbox" name="weekly_sunday" value="weekly_sunday" >Sunday</label>
-
-
-</label>
-</fieldset>
-<fieldset>
-<legend>Monthly</legend>
-<label class="radio">
-  <input type="radio" name="frequencyRadios" id="frequencyRadios5" value="every_day_n_of_n_month" >
-Day <input type="text" class="input-mini" name="monthly_day" id="monthly_day" placeholder="1"> of every <input type="text" class="input-mini" name="monthly_month" id="monthly_month" placeholder="1"> month
-</label>
-
-</fieldset>
-<fieldset>
-<legend>Yearly</legend>
-<label class="radio">
-  <input type="radio" name="frequencyRadios" id="frequencyRadios6" value="every_month_day" >
-</label>
-Every 
-<select class="inline"  name="yearly_month" in="yearly_month">
-<option>January</option>
-<option>February</option>
-<option>March</option>
-<option>April</option>
-<option>May</option>
-<option>June</option>
-<option>July</option>
-<option>August</option>
-<option>September</option>
-<option>October</option>
-<option>November</option>
-<option>December</option>
-</select> 
-
-<input type="text" class="input-mini" name="yearly_day" id="yearly_day" placeholder="1">
-
-</fieldset>
-<fieldset>
-<legend>End by</legend>
-<label class="radio">
-  <input type="radio" name="endRadios" id="endRadios1" value="no_end_date" checked>
-No End Date
-</label>
-<label class="radio">
-  <input type="radio" name="endRadios" id="endRadios2" value="end_after_n_repeats" checked>
-End after <input type="text" class="input-mini" name="end_repeats" id="end_repeats" placeholder="1">  repeats
-</label>
-<label class="radio">
-  <input type="radio" name="endRadios" id="endRadios3" value="end_by" checked>
-End by
-      <input type="text" data-behaviour='datepicker'  value=""  name="end_date" id="end_date">
-</label>
-
-</fieldset>
-</div>
 </div>
 
-  <div class="row">
+  <div class="actions">
     <%= f.submit %>
   </div>
-
+</div>
 <% end %>
