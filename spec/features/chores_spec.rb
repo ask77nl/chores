@@ -47,10 +47,11 @@ describe "Chores", :type => :feature do
       fill_in('chore_deadline', :with => chore.deadline.to_s(:due_date))
 
 #      print "filled in chore deadline: ",chore.deadline.to_s(:due_date),"\n"
+      #puts page.body
       
-      click_button('Create Chore')
+        click_button('Create Chore')
   
-#      puts page.body
+
 
       expect(page).to have_content('Chore was successfully created.')
       expect(page).to have_content('Title: '+chore.title)

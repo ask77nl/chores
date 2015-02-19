@@ -136,15 +136,7 @@ describe ChoresController, :type => :controller do
 
   describe "PUT update" do
     describe "with valid params" do
-      it "updates the requested chore" do
-        chore = Chore.create! valid_attributes
-        schedule = IceCube::Schedule.new(Time.now)
-        schedule.add_recurrence_rule IceCube::Rule.daily(1)
-
-      put :update, {:id => chore.to_param, :chore => { "title" => "new chore"}, "frequencyRadios" => "every_n_days","daily_day" => 1}, valid_session 
-      expect(assigns(:chore).schedule.to_s).to eq(schedule.to_s)
-      end
-
+      
       it "assigns the requested chore as @chore" do
         chore = Chore.create! valid_attributes
         put :update, {:id => chore.to_param, :chore => valid_attributes}, valid_session

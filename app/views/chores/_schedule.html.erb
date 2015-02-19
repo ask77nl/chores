@@ -16,73 +16,11 @@
 
 
 <div class="panel panel-primary">
- <div class="panel-heading">Frequency: <%= @chore.schedule =%>
-</div>
+ <div class="panel-heading">Frequency:</div>
  <div class="panel-body">
-  <fieldset>
-   <legend>Daily</legend>
-    <label class="radio">
-     <input type="radio" name="frequencyRadios" id="frequencyRadios1" value="never" checked>Never</label>
-   <label class="radio">
-     <input type="radio" name="frequencyRadios" id="frequencyRadios2" value="every_n_days"> Every <input type="text" class="input-mini" name="daily_day" id="daily_day" placeholder="1">day(s)</label>
-   <label class="radio">
-    <input type="radio" name="frequencyRadios" id="frequencyRadios3" value="every_weekday" >Every weekday</label>
-</fieldset>
-<fieldset>
-<legend>Weekly</legend>
-<label class="radio">
-  <input type="radio" name="frequencyRadios" id="frequencyRadios4" value="every_week" >
-Every <input type="text" class="input-mini" name="weekly_week" id="weekly_week" placeholder="1"> week
-</label>
-<label class="checkbox inline"> <input type="checkbox" name="weekly_monday" value="weekly_monday" >Monday</label>
-<label class="checkbox inline">  <input type="checkbox" name="weekly_tuesday" value="weekly_tuesday" >Tuesday</label>
-
-<label class="checkbox inline">  <input type="checkbox" name="weekly_wednesday" value="weekly_wednesday" >Wednesday</label>
-
-<label class="checkbox inline">  <input type="checkbox" name="weekly_thursday" value="weekly_thursday" >Thursday</label>
-
-<label class="checkbox inline">  <input type="checkbox" name="weekly_friday" value="weekly_friday" >Friday</label>
-
-<label class="checkbox inline">  <input type="checkbox" name="weekly_saturday" value="weekly_saturday" >Saturday</label>
-
-<label class="checkbox inline">  <input type="checkbox" name="weekly_sunday" value="weekly_sunday" >Sunday</label>
-
-
-</label>
-</fieldset>
-<fieldset>
-<legend>Monthly</legend>
-<label class="radio">
-  <input type="radio" name="frequencyRadios" id="frequencyRadios5" value="every_day_n_of_n_month" >
-Day <input type="text" class="input-mini" name="monthly_day" id="monthly_day" placeholder="1"> of every <input type="text" class="input-mini" name="monthly_month" id="monthly_month" placeholder="1"> month
-</label>
-
-</fieldset>
-<fieldset>
-<legend>Yearly</legend>
-<label class="radio">
-  <input type="radio" name="frequencyRadios" id="frequencyRadios6" value="every_month_day" >
-</label>
-Every 
-<select class="inline"  name="yearly_month" in="yearly_month">
-<option>January</option>
-<option>February</option>
-<option>March</option>
-<option>April</option>
-<option>May</option>
-<option>June</option>
-<option>July</option>
-<option>August</option>
-<option>September</option>
-<option>October</option>
-<option>November</option>
-<option>December</option>
-</select> 
-
-<input type="text" class="input-mini" name="yearly_day" id="yearly_day" placeholder="1">
-
-</fieldset>
-
+ 
+ <%= f.select_recurring :schedule, nil, :allow_blank => true %>
+  
  </div>
 </div>
 

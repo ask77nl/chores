@@ -35,7 +35,11 @@
 
 <p>
   <b>Schedule:</b>
-  <%= @chore.schedule %>
+   <% if(@chore.schedule!= "null" and @chore.schedule != nil)%>
+    <%= RecurringSelect.dirty_hash_to_rule(@chore.schedule) %>
+   <% else %>
+    not recurring
+  <%end%>
 </p>
 
 

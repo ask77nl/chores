@@ -9,6 +9,7 @@ gem 'rolify'
 gem 'cancan'
 gem 'bootstrap-datepicker-rails'
 gem 'ice_cube'
+gem 'recurring_select'
 gem 'protected_attributes'
 
 # Bundle edge Rails instead:
