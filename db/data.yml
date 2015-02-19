@@ -1,0 +1,392 @@
+
+---
+emails:
+  columns:
+  - id
+  - from
+  - to
+  - datetime
+  - subject
+  - body
+  - created_at
+  - updated_at
+  - user_id
+  records: 
+  - - 2
+    - ask@alleko.com
+    - salleko@smartertravelmedia.com
+    - 
+    - test2
+    - test4
+    - '2014-07-22 06:23:12.923380'
+    - '2014-07-22 06:23:12.923380'
+    - 1
+  - - 3
+    - ask@alleko.com
+    - salleko@smartertravelmedia.com
+    - 
+    - weww
+    - eeee
+    - '2014-07-22 06:25:05.109374'
+    - '2014-07-22 06:25:05.109374'
+    - 1
+  - - 4
+    - ask@alleko.com
+    - salleko@smartertravelmedia.com
+    - 
+    - test
+    - test2
+    - '2014-07-22 07:06:13.932383'
+    - '2014-07-22 07:06:13.932383'
+    - 1
+
+---
+projects:
+  columns:
+  - id
+  - context_id
+  - title
+  - parent_project_id
+  - created_at
+  - updated_at
+  - user_id
+  records: 
+  - - 1
+    - 1
+    - Running and overall sport
+    - 
+    - '2015-02-18 17:28:58.507015'
+    - '2015-02-18 17:28:58.507015'
+    - 2
+  - - 2
+    - 1
+    - Psychological self improvement
+    - 
+    - '2015-02-18 17:30:55.505153'
+    - '2015-02-18 17:30:55.505153'
+    - 2
+  - - 3
+    - 1
+    - have fun on strava
+    - 1
+    - '2015-02-18 17:31:20.315963'
+    - '2015-02-18 17:31:20.315963'
+    - 2
+  - - 4
+    - 1
+    - stop device and site addiction
+    - 2
+    - '2015-02-18 17:32:06.849456'
+    - '2015-02-18 17:32:23.711970'
+    - 2
+  - - 5
+    - 1
+    - Finances
+    - 
+    - '2015-02-18 17:33:36.722966'
+    - '2015-02-18 17:33:36.722966'
+    - 2
+  - - 6
+    - 1
+    - 401Ks
+    - 5
+    - '2015-02-18 17:33:50.141602'
+    - '2015-02-18 17:33:50.141602'
+    - 2
+  - - 7
+    - 1
+    - Taxes 2014
+    - 5
+    - '2015-02-18 17:34:34.454883'
+    - '2015-02-18 17:34:34.454883'
+    - 2
+  - - 8
+    - 1
+    - stock market investment
+    - 5
+    - '2015-02-18 17:35:49.453064'
+    - '2015-02-18 17:35:49.453064'
+    - 2
+  - - 9
+    - 1
+    - House chores and misc
+    - 
+    - '2015-02-18 17:37:28.295368'
+    - '2015-02-18 17:37:28.295368'
+    - 2
+  - - 10
+    - 1
+    - Fix root canals
+    - 9
+    - '2015-02-18 17:37:41.116583'
+    - '2015-02-18 17:37:41.116583'
+    - 2
+  - - 11
+    - 1
+    - Email is broken
+    - 
+    - '2015-02-19 02:02:26.726674'
+    - '2015-02-19 02:02:26.726674'
+    - 2
+  - - 12
+    - 1
+    - Blog
+    - 11
+    - '2015-02-19 02:02:42.401048'
+    - '2015-02-19 02:02:42.401048'
+    - 2
+
+---
+users:
+  columns:
+  - id
+  - email
+  - encrypted_password
+  - reset_password_token
+  - reset_password_sent_at
+  - remember_created_at
+  - sign_in_count
+  - current_sign_in_at
+  - last_sign_in_at
+  - current_sign_in_ip
+  - last_sign_in_ip
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - salleko@smartertravelmedial.com
+    - "$2a$10$j7OBncKxfLq9ZnNiCKRMW.9Dki45Ufw/.GlMAKHq4gbxQQQ0OizI."
+    - 
+    - 
+    - 
+    - 1
+    - '2014-07-22 06:02:45.899354'
+    - '2014-07-22 06:02:45.899354'
+    - 127.0.0.1
+    - 127.0.0.1
+    - '2014-07-22 06:02:45.889568'
+    - '2014-07-22 06:02:45.900556'
+  - - 2
+    - ask@alleko.com
+    - "$2a$10$c9zuLfWdCPocE7tXqWrpQOQWGbeqR2LbX2KUuZNDnwaLz6g5.Rww6"
+    - 
+    - 
+    - 
+    - 2
+    - '2015-02-18 22:59:48.483880'
+    - '2015-02-17 16:20:36.005592'
+    - 127.0.0.1
+    - 127.0.0.1
+    - '2015-02-17 16:20:35.976742'
+    - '2015-02-18 22:59:48.485855'
+
+---
+contexts:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  - user_id
+  records: 
+  - - 1
+    - Home
+    - '2015-02-18 17:28:31.573712'
+    - '2015-02-18 17:28:31.573712'
+    - 2
+
+---
+choretypes:
+  columns:
+  - id
+  - name
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - TODO
+    - '2014-07-06 18:14:31.871802'
+    - '2014-07-06 18:14:31.871802'
+  - - 2
+    - Waiting
+    - '2014-07-06 18:14:31.881447'
+    - '2014-07-06 18:14:31.881447'
+  - - 3
+    - Appointment
+    - '2014-07-06 18:14:31.887034'
+    - '2014-07-06 18:14:31.887034'
+
+---
+chores:
+  columns:
+  - id
+  - email_id
+  - title
+  - deadline
+  - choretype_id
+  - project_id
+  - created_at
+  - updated_at
+  - user_id
+  - schedule
+  records: 
+  - - 1
+    - 
+    - select and interval training on esplanade for attempt on a strava segment
+    - 
+    - 1
+    - 3
+    - '2015-02-18 17:29:38.364442'
+    - '2015-02-19 00:51:11.018675'
+    - 2
+    - |
+      ---
+      :validations:
+        :day:
+        - 1
+      :rule_type: IceCube::WeeklyRule
+      :interval: 1
+      :week_start: 0
+  - - 2
+    - 
+    - read or listen to the Willpower Instinct
+    - 
+    - 1
+    - 4
+    - '2015-02-18 17:33:05.856271'
+    - '2015-02-19 00:41:45.834438'
+    - 2
+    - |
+      --- !ruby/hash:ActiveSupport::HashWithIndifferentAccess {}
+  - - 3
+    - 
+    - discuss with Bella moving everything to T. Rowe Price
+    - 
+    - 1
+    - 6
+    - '2015-02-18 17:34:13.980773'
+    - '2015-02-18 17:34:13.980773'
+    - 2
+    - 
+  - - 4
+    - 
+    - check if I understand all correctly and get all forms from https://www.myfidelitysite.com/p/1388137072/346/stock-plan-resource-center/sec/13096
+    - 
+    - 1
+    - 7
+    - '2015-02-18 17:34:56.123162'
+    - '2015-02-18 17:34:56.123162'
+    - 2
+    - 
+  - - 5
+    - 
+    - http://apps.irs.gov/app/vita/sitemap.jsp
+    - 
+    - 1
+    - 7
+    - '2015-02-18 17:35:13.749080'
+    - '2015-02-19 00:34:51.130467'
+    - 2
+    - |
+      ---
+      :start_time: 2015-02-18 19:34:51.122539609 -05:00
+      :rrules: []
+      :rtimes: []
+      :extimes: []
+  - - 6
+    - 
+    - http://www.irs.gov/Filing
+    - 
+    - 1
+    - 7
+    - '2015-02-18 17:35:28.140503'
+    - '2015-02-19 00:50:50.603892'
+    - 2
+    - |
+      ---
+      :validations:
+        :day:
+        - 1
+      :rule_type: IceCube::WeeklyRule
+      :interval: 1
+      :week_start: 0
+  - - 7
+    - 
+    - https://www.betterment.com/portfolio/
+    - 
+    - 1
+    - 8
+    - '2015-02-18 17:36:10.896634'
+    - '2015-02-18 17:36:10.896634'
+    - 2
+    - 
+  - - 8
+    - 
+    - http://www.mrmoneymustache.com/2014/11/04/why-i-put-my-last-100000-into-betterment/
+    - 
+    - 1
+    - 8
+    - '2015-02-18 17:36:24.567477'
+    - '2015-02-18 17:36:24.567477'
+    - 2
+    - 
+  - - 9
+    - 
+    - http://www.bogleheads.org/wiki/Lazy_portfolios
+    - 
+    - 1
+    - 8
+    - '2015-02-18 17:36:39.193838'
+    - '2015-02-18 17:36:39.193838'
+    - 2
+    - 
+  - - 10
+    - 
+    - http://zerodha.com/varsity/module/technical-analysis/
+    - 
+    - 1
+    - 8
+    - '2015-02-18 17:36:53.685739'
+    - '2015-02-18 17:36:53.685739'
+    - 2
+    - 
+  - - 11
+    - 
+    - wait till bella find another root canal
+    - 
+    - 2
+    - 10
+    - '2015-02-18 17:38:02.707613'
+    - '2015-02-18 17:38:02.707613'
+    - 2
+    - 
+  - - 12
+    - 
+    - Wednesday CR workout
+    - '2015-02-19 00:00:00.000000'
+    - 3
+    - 1
+    - '2015-02-18 17:38:54.337790'
+    - '2015-02-19 01:17:19.544310'
+    - 2
+    - '{"interval":1,"until":null,"count":null,"validations":{"day":[3]},"rule_type":"IceCube::WeeklyRule","week_start":0}'
+  - - 13
+    - 
+    - Add articles to the emailbroken blog
+    - '2015-02-19 00:00:00.000000'
+    - 3
+    - 12
+    - '2015-02-19 02:04:04.293232'
+    - '2015-02-19 02:04:04.293232'
+    - 2
+    - '{"interval":1,"until":null,"count":null,"validations":{"day":[2,5]},"rule_type":"IceCube::WeeklyRule","week_start":0}'
+  - - 14
+    - 
+    - backups of all my PCs and servers
+    - 
+    - 3
+    - 9
+    - '2015-02-19 02:07:15.292773'
+    - '2015-02-19 02:07:15.292773'
+    - 2
+    - '{"interval":1,"until":null,"count":null,"validations":{"day":[0]},"rule_type":"IceCube::WeeklyRule","week_start":0}'

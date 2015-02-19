@@ -77,7 +77,7 @@ before_filter :authenticate_user!
   # POST /chores
   # POST /chores.json
   def create
-    if(params[:chore][:deadline] != '' and params[:chore][:deadline] != nil)
+    if(params[:chore][:deadline] != '' and params[:chore][:deadline] != nil and params[:chore][:deadline] != "not set")
      params[:chore][:deadline]=  DateTime.strptime(params[:chore][:deadline], "%m/%d/%Y").strftime("%Y-%m-%d")
       end
    # print "create chores controller launched with ", params,"\n"

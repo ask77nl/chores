@@ -11,6 +11,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'ice_cube'
 gem 'recurring_select'
 gem 'protected_attributes'
+gem 'yaml_db'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
