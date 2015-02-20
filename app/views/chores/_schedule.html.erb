@@ -3,7 +3,17 @@
 <div class="panel panel-primary">
  <div class="panel-heading">First appointment</div>
  <div class="panel-body">
-   <div class="field" >
+    
+  <div class="field" >
+    <%= f.label :startdate %><br />
+    <% if @chore.startdate != nil %>
+     <input type="text" data-behaviour='datepicker'  value="<%=@chore.startdate.to_s(:due_date)%>" name="chore[startdate]" id="chore_startdate">
+    <% else %>
+      <input type="text" data-behaviour='datepicker'  value="not set"  name="chore[startdate]" id="chore_startdate">
+    <%end%>
+  </div>
+     
+  <div class="field" >
     <%= f.label :deadline %><br />
     <% if @chore.deadline != nil %>
      <input type="text" data-behaviour='datepicker'  value="<%=@chore.deadline.to_s(:due_date)%>" name="chore[deadline]" id="chore_deadline">
@@ -11,6 +21,8 @@
       <input type="text" data-behaviour='datepicker'  value="not set"  name="chore[deadline]" id="chore_deadline">
     <%end%>
   </div>
+ 
+ 
  </div>
 </div>
 

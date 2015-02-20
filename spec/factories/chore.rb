@@ -8,7 +8,8 @@ FactoryGirl.define do
     email_id {Faker::Number.number(3)}
     choretype_id {Faker::Number.number(3)}
     project_id {Faker::Number.number(3)}
-    deadline {Time.at(Time.new(2014).to_f + rand * (Time.now.to_f - Time.new(2014).to_f)).to_date}
+    startdate {Time.at(Time.new(2014).to_f + rand * (Time.now.to_f - Time.new(2014).to_f)).to_date}
+    deadline {startdate + rand(30)}
     schedule "{\"interval\":1,\"until\":null,\"count\":null,\"validations\":null,\"rule_type\":\"IceCube::DailyRule\"}"
   end
 end

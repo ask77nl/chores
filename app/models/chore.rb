@@ -4,13 +4,13 @@ class Chore < ActiveRecord::Base
   include IceCube
   #serialize :schedule, IceCube::Schedule
   
-  #recuring model stuff
+  #recurring model stuff
   include ActiveModel::Validations
   include ActiveModel::Conversion
   extend ActiveModel::Naming
   
   
-  attr_accessible :deadline, :email_id, :project_id, :title, :choretype_id, :user_id, :schedule
+  attr_accessible :startdate, :deadline, :email_id, :project_id, :title, :choretype_id, :user_id, :schedule
   belongs_to :email
   belongs_to :user
   belongs_to :project

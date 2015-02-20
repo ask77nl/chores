@@ -15,6 +15,15 @@
 </p>
 
 <p>
+  <b>Start Date:</b>
+  <% if @chore.startdate != nil %>
+   <%= @chore.startdate.to_s(:due_date) %>
+  <% else %>
+    -
+  <%end%>
+</p>
+
+<p>
   <b>Deadline:</b>
   <% if @chore.deadline != nil %>
    <%= @chore.deadline.to_s(:due_date) %>

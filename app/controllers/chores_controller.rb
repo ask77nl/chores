@@ -80,6 +80,9 @@ before_filter :authenticate_user!
     if(params[:chore][:deadline] != '' and params[:chore][:deadline] != nil and params[:chore][:deadline] != "not set")
      params[:chore][:deadline]=  DateTime.strptime(params[:chore][:deadline], "%m/%d/%Y").strftime("%Y-%m-%d")
       end
+    if(params[:chore][:startdate] != "" and params[:chore][:startdate] != nil and params[:chore][:startdate] != "not set")
+      params[:chore][:startdate]=  DateTime.strptime(params[:chore][:startdate], "%m/%d/%Y").strftime("%Y-%m-%d")
+      end 
    # print "create chores controller launched with ", params,"\n"
 
     @chore = Chore.new(params[:chore])
@@ -109,6 +112,10 @@ before_filter :authenticate_user!
      if(params[:chore][:deadline] != "" and params[:chore][:deadline] != nil and params[:chore][:deadline] != "not set")
       params[:chore][:deadline]=  DateTime.strptime(params[:chore][:deadline], "%m/%d/%Y").strftime("%Y-%m-%d")
       end
+    if(params[:chore][:startdate] != "" and params[:chore][:startdate] != nil and params[:chore][:startdate] != "not set")
+      params[:chore][:startdate]=  DateTime.strptime(params[:chore][:startdate], "%m/%d/%Y").strftime("%Y-%m-%d")
+      end  
+      
       
       #logger.fatal "params = "
       #logger.fatal params[:chore]

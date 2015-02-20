@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140107054856) do
+ActiveRecord::Schema.define(version: 20150220124606) do
 
   create_table "chores", force: true do |t|
     t.integer  "email_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20140107054856) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.text     "schedule"
+    t.datetime "startdate"
   end
 
   create_table "choretypes", force: true do |t|
