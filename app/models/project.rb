@@ -1,4 +1,7 @@
 class Project < ActiveRecord::Base
+  acts_as_nested_set
+  include TheSortableTree::Scopes
+  
   attr_accessible :context_id, :parent_project_id, :title, :user_id
   has_many :chores
   belongs_to  :context

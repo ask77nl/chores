@@ -1,8 +1,15 @@
 class ProjectsController < ApplicationController
+  
+  include TheSortableTreeController::Rebuild  
+
 
 before_filter :authenticate_user!
 load_and_authorize_resource
 
+ #stuff for sorted tree 
+  def manage
+    @pages = Project.nested_set.select('project_id, title, context, parent_project_id').all
+  end
 
   # GET /projects
   # GET /projects.json

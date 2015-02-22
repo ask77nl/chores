@@ -5,7 +5,14 @@ Chores::Application.routes.draw do
  get '/about' => 'static_pages#about', as: :about_page
  get '/contact' => 'static_pages#contact', as: :contact_page
 
-  resources :projects
+  resources :projects do
+    collection do
+      get :manage
+      
+      # required for Sortable GUI server side actions
+      post :rebuild
+    end
+  end
   resources :chores
   resources :emails
 

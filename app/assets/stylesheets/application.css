@@ -10,6 +10,9 @@
  *
  *= require_self
  *= require_tree .
+ *= require tree
+ *= require sortable_tree
+ *= require nested_options
  *= require bootstrap-datepicker3
  *= require recurring_select
  */
