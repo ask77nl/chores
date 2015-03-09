@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  acts_as_nested_set
+  acts_as_nested_set :parent_column => :parent_project_id
   include TheSortableTree::Scopes
   
   attr_accessible :context_id, :parent_project_id, :title, :user_id

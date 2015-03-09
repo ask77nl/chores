@@ -35,8 +35,9 @@
 
 </table>
 
-<br />
+<h2>View as a tree</h2>
+
+<%=  sortable_tree @projects  %>
 
 <%= link_to 'New Project', new_project_path,{:class => "btn btn-large btn-primary"}  %>
 
-<%=  sortable_tree @projects  %>
