@@ -1,41 +1,4 @@
-<h1>Listing projects</h1>
-
-<table class="table">
-  <tr>
-    <th>Context</th>
-    <th>Title</th>
-    <th>Parent project</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% if @projects.length != 0%>
-
-<% @projects.each do |project| %>
-  <tr>
-    <td><%= project.context.name %></td>
-    <td><%= project.title %></td>
-    <td>
-    <%if project.parent == nil %>
-      -
-    <%else %>
-     <%= project.parent.title %>
-    <%end %>
-    </td>
-    <td><%= link_to 'Show', project,{:class => "btn btn-info"}  %></td>
-    <td><%= link_to 'Edit', edit_project_path(project),{:class => "btn btn-primary"}  %></td>
-    <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger"  %></td>
-  </tr>
-<% end %>
- <% else %>
-   <tr><td colspan=6>No projects yet, create one!</td><tr>
-
-<% end %>
-
-</table>
-
-<h2>View as a tree</h2>
+<h1>View as a tree</h1>
 
 <%=  sortable_tree @projects  %>
 
