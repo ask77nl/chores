@@ -43,7 +43,7 @@ describe "Projects", :type => :feature do
       visit projects_path
      
       expect(page).to have_content(project.title)
-      expect(page).to have_content(@context.name)
+      
       
     end
    end
@@ -89,7 +89,7 @@ describe "Projects", :type => :feature do
 
      visit projects_path
      expect(page).to have_content(project.title)
-     click_link("Show")
+     click_link(project.title)
      
      expect(page).to have_content('Title: '+project.title)
     end
@@ -102,7 +102,11 @@ describe "Projects", :type => :feature do
 
      visit projects_path
      expect(page).to have_content(project.title)
-     click_link("Edit", :href =>"/projects/"+project.id.to_s+"/edit")
+     
+     
+     edit_url = "/projects/"+project.id.to_s+"/edit"
+     edit_anchor = "//a[@href='"+edit_url+"']"
+     find(:xpath, edit_anchor).click
    
      expect(find_field('project_title').value).to  eq project.title
 
@@ -127,8 +131,9 @@ describe "Projects", :type => :feature do
 
      visit projects_path
      expect(page).to have_content(project.title)
-     click_link("Destroy")
-#     click_button("OK")
+     delete_url = "/projects/"+project.id.to_s
+     delete_filter = "//a[@href='"+delete_url+"' and @class = 'delete']"
+     find(:xpath, delete_filter).click
 
      expect(page).to have_no_content(project.title)
 

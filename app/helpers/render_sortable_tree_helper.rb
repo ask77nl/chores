@@ -33,7 +33,7 @@ module RenderSortableTreeHelper
         url = h.url_for(:controller => options[:klass].pluralize, :action => :show, :id => node)
         title_field = options[:title]
 
-        "#{ h.link_to(node.send(title_field), url) }"
+        "<h4>#{ h.link_to(node.send(title_field), url) }</h4>"
       end
 
       def controls
@@ -43,16 +43,16 @@ module RenderSortableTreeHelper
         destroy_path = h.url_for(:controller => options[:klass].pluralize, :action => :destroy, :id => node)
 
         "
-          
-            #{ h.link_to 'edit', edit_path, {:class => "btn btn-primary"} }
-            #{ h.link_to 'destroy', destroy_path, :class => "btn btn-danger", :method => :delete, :data => { :confirm => 'Are you sure?' } }
-          
+          <div class='controls'>
+            #{ h.link_to '', edit_path, :class => :edit }
+            #{ h.link_to '', destroy_path, :class => :delete, :method => :delete, :data => { :confirm => 'Are you sure?' } }
+          </div>
         "
       end
 
       def children
         unless options[:children].blank?
-          "<ul class='nested_set'>#{ options[:children] }</ul>"
+          "<ol class='nested_set'>#{ options[:children] }</ol>"
         end
       end
 
