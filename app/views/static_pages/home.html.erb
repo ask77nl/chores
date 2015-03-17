@@ -5,18 +5,13 @@
     This is the home page for the
     <a href="http://chores.com/">Personal version of Chores</a>
   </h2>
-
+</div>
  <%if user_signed_in? %> 
-  <%= link_to "Start doing chores", chores_path, class: "btn btn-large btn-primary" %>
-  <% else %>
-
-<%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-large btn-primary" %>
-
-  <% end %>
-  </div>
-  <h3>List of new features:</h3>
+  <div class="center hero-unit">
+    <%= link_to "Start doing chores", chores_path, class: "btn btn-large btn-primary" %>
+  </div> 
+   <h3>List of new features:</h3>
     <ul>
-        <li>Move SomeDay projects/chores to separate views</li>
         <li>Create view with current status quo: next actions, today's appointments, open projects without next action</li>
         <li>Add calendar view for appointments</li>
         <li>separate view for done chores/projects</li>
@@ -28,7 +23,17 @@
         <li>Context is not saved, choretype is not saved when clicking on "new"</li> 
         <li>Chore with dates should become appointment, not todo</li>
         <li>Project sorting within one hierarchy level doesn't work</li>
+        <li>Clicking back after update of a someday project moves to the list of active projects</li>
+        <li>projects, chores, emails are always pluralized in the header</li>
     </ul>
+ 
+  <% else %>
+    <div class="center hero-unit">
+      <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-large btn-primary" %>
+    </div>
+  <% end %>
+  
+ 
   
 
 

@@ -1,4 +1,4 @@
-<h1>Listing <%= @projects.length  if @projects != nil%> active projects</h1>
+<h1>Listing <%= @projects.length  if @projects != nil%> Someday/May be Projects</h1>
 
 <% if @projects != nil and @projects.count != 0 %>
 
@@ -7,10 +7,9 @@
   <% end%>
 
 <% else %>
-   <h2>No projects yet, create one!</h2>
+   <h2>No projects there, all projects are active</h2>
 <% end %>
 
 <%= link_to 'New Project', new_project_path,{:class => "btn btn-large btn-primary"}  %>
 
-<p><%=link_to 'Someday/May be projects',someday_projects_path %></p>
-
+<p><%=link_to 'Active projects',projects_path %></p>

@@ -13,5 +13,34 @@ class Project < ActiveRecord::Base
   validates(:title, presence: true)
   validates(:context_id, presence: true)
   validates(:user_id, presence: true)
+  
+  def self.all_active_projects(context_id,user_id)
+    if context_id == nil
+      context_id = Context.first.id
+    end
+   
+    @all_projects = Project.where(:context_id => context_id, :user_id =>user_id, :someday => false)
+    return @all_projects
+  end
+  
+  def self.all_someday_projects(context_id,user_id)
+    if context_id == nil
+      context_id = Context.first.id
+    end
+   
+    @all_projects = Project.where(:context_id => context_id, :user_id =>user_id, :someday => true)
+    return @all_projects
+  end
 
+  def parent_project_id=(parent_project_id)
+    #if projects was put to someday list, it must be brought to root level
+     #puts "launching setter"
+    if(self.someday)
+      #self.move_to_root
+      write_attribute(:parent_project_id, nil)
+      #puts "moving project with title="+self.title.to_s+" to root!"
+    else
+      write_attribute(:parent_project_id, parent_project_id)
+    end
+  end
 end

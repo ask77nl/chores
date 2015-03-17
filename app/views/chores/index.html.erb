@@ -1,4 +1,4 @@
-<h1>Listing chores</h1>
+<h1>Listing <%= @chores.length  if @chores != nil%> active chores</h1>
 
  <ul class="nav nav-tabs">
 <% if @contexts.length == 0 %>

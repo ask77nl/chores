@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150316133844) do
+ActiveRecord::Schema.define(version: 20150317143136) do
 
   create_table "chores", force: true do |t|
     t.integer  "email_id"
@@ -57,10 +57,10 @@ ActiveRecord::Schema.define(version: 20150316133844) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "lft",               default: 0, null: false
-    t.integer  "rgt",               default: 0, null: false
+    t.integer  "lft",               default: 0,     null: false
+    t.integer  "rgt",               default: 0,     null: false
     t.text     "comments"
-    t.boolean  "someday"
+    t.boolean  "someday",           default: false, null: false
   end
 
   create_table "roles", force: true do |t|

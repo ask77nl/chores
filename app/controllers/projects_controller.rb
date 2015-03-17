@@ -7,17 +7,28 @@ before_filter :authenticate_user!
 load_and_authorize_resource
 
  #stuff for sorted tree 
-  def manage
-    @pages = Project.nested_set.select('project_id, title, context, parent_project_id').all
-  end
+ # def manage
+ #   @pages = Project.nested_set.select('project_id, title, context, parent_project_id').all
+ # end
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.where("user_id = ?",current_user.id)
+    #by default show only active projects, not someday projects
+    @projects = Project.all_active_projects(params[:context_id],current_user.id )
 
     respond_to do |format|
       format.html # index.html.erb
+      format.json { render json: @projects }
+    end
+  end
+  
+  def someday
+    #similar to main index, but show only someday projects
+    @projects = Project.all_someday_projects(params[:context_id],current_user.id )
+
+    respond_to do |format|
+      format.html # someday.html.erb
       format.json { render json: @projects }
     end
   end
@@ -26,8 +37,7 @@ load_and_authorize_resource
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }

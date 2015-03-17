@@ -156,6 +156,24 @@ describe "when there are chores of several contexts and types" do
      expect(page).to have_content(new_title)
      expect(page).to have_content(new_project.title)
    end
+   
+    it "if the project is marked as Someday, the chore should disappear" do
+     chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
+
+     visit projects_path
+     
+     edit_url = "/projects/"+@project.id.to_s+"/edit"
+     edit_anchor = "//a[@href='"+edit_url+"']"
+     find(:xpath, edit_anchor).click
+   
+     find(:css, "#project_someday").set(true)
+     click_button("Update Project")
+     
+      
+     visit chores_path
+     expect(page).not_to have_content(chore.title)
+     
+   end
 
    it "should be able to delete it" do
      chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)

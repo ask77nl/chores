@@ -96,8 +96,8 @@ describe "Projects", :type => :feature do
    end
    
     it "should be able to edit it" do
-       parent_project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
-
+     
+      parent_project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
       project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
 
      visit projects_path
@@ -125,7 +125,7 @@ describe "Projects", :type => :feature do
      expect(page).to have_content(new_title)
      expect(page).to have_content(parent_project.title)
    end
-
+   
    it "should be able to delete it" do
       project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
 
@@ -138,8 +138,37 @@ describe "Projects", :type => :feature do
      expect(page).to have_no_content(project.title)
 
    end
-
+   describe "after an active project already exist" do
+    it "should be able to mark it as a someday project, it must become a root project and be visible only in the someday project list" do
+      parent_project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
+      project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id, parent_project_id: parent_project.id)
+     
+     visit projects_path
+     expect(page).to have_content(project.title)
+     
+     edit_url = "/projects/"+project.id.to_s+"/edit"
+     edit_anchor = "//a[@href='"+edit_url+"']"
+     find(:xpath, edit_anchor).click
    
+     expect(find_field('project_title').value).to  eq project.title
+
+
+     find(:css, "#project_someday").set(true)
+      
+     click_button("Update Project")
+     expect(page).to have_content('Someday/May be')
+
+     visit projects_path
+
+     expect(page).not_to have_content(project.title)
+     
+     visit someday_projects_path
+     
+     expect(page).to have_content(project.title)
+   end
   end
+  end
+  
+ 
 end
 

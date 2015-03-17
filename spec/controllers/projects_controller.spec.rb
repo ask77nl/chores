@@ -48,16 +48,25 @@ describe ProjectsController, :type => :controller do
   end
 
   describe "GET index" do
-    it "assigns projects with correct context, type and user as @projects" do
+    it "assigns only active projects as @projects" do
       project = Project.create! valid_attributes
-      wrong_user_project = Project.create!({"title" => "test project", "user_id" => 2, "context_id" => 1})
-    wrong_context_project = Project.create!({"title" => "test project", "user_id" => 1,"context_id" => 2})
+      Project.create!("title" => "test title 1", "context_id" => 1,"user_id" => 1, "someday" => true)
       get :index, {"user_id" => 1,"context_id" => 1}, valid_session
       expect(assigns(:projects)).to eq([project])
       expect(assigns(:projects).length).to eq(1)
     end
   end
 
+  describe "GET someday" do
+    it "assigns only someday projects as @projects" do
+      Project.create! valid_attributes
+      project2 = Project.create!("title" => "test title 1", "context_id" => 1,"user_id" => 1, "someday" => true)
+      get :someday, {"user_id" => 1,"context_id" => 1}, valid_session
+      expect(assigns(:projects)).to eq([project2])
+      expect(assigns(:projects).length).to eq(1)
+    end
+  end
+  
   describe "GET show" do
     it "assigns the requested project as @project" do
       project = Project.create! valid_attributes

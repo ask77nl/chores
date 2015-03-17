@@ -43,12 +43,22 @@ describe "when user_id is not present" do
     it { should_not be_valid }
  end
 
-describe "when searching for chores" do
- it "should properly filter them" do
-   wrong_user_chore = FactoryGirl.create(:chore, choretype_id: @choretype.id, project_id: @project.id, user_id: 666)
-   wrong_project_chore = FactoryGirl.create(:chore,choretype_id: @choretype.id, project_id: 666 ,user_id: @user.id)
-   wrong_type_chore = FactoryGirl.create(:chore,choretype_id: 666, project_id: @project.id ,user_id: @user.id)
-  
+describe "when requesting all chores by context and user" do
+ it "should not show chores from a wrong user" do
+   FactoryGirl.create(:chore, choretype_id: @choretype.id, project_id: @project.id, user_id: 666)
+   expect(Chore.all_chores_by_context_type_and_user(@context.id,@choretype.id,@user.id)).to eq([@chore]) 
+  end
+ it "should not show chores from a wrong project" do
+   FactoryGirl.create(:chore,choretype_id: @choretype.id, project_id: 666 ,user_id: @user.id)
+   expect(Chore.all_chores_by_context_type_and_user(@context.id,@choretype.id,@user.id)).to eq([@chore]) 
+  end
+  it "should not show chores from a wrong choretype" do
+   FactoryGirl.create(:chore,choretype_id: 666, project_id: @project.id ,user_id: @user.id)
+   expect(Chore.all_chores_by_context_type_and_user(@context.id,@choretype.id,@user.id)).to eq([@chore]) 
+  end
+  it "should not show chores from someday projects" do
+   someday_project = FactoryGirl.create(:project, context_id: @context.id, someday: true)
+   FactoryGirl.create(:chore,choretype_id: @choretype.id, project_id: someday_project.id ,user_id: @user.id)
    expect(Chore.all_chores_by_context_type_and_user(@context.id,@choretype.id,@user.id)).to eq([@chore]) 
   end
 end

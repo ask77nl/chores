@@ -7,7 +7,8 @@ Chores::Application.routes.draw do
 
   resources :projects do
     collection do
-      get :manage
+      #get :manage - probably don't need
+      get :someday
       
       # required for Sortable GUI server side actions
       post :rebuild
