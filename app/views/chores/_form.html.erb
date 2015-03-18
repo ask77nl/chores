@@ -27,7 +27,7 @@
   </div>
   <div class="field">
     <%= f.label :project %><br />
-    <%= collection_select(:chore, :project_id, @projects, :id, :title) %>
+    <%= select_tag :project_id, nested_options(@projects), class: :nested_options, name: "chore[project_id]", id: "chore[project_id]" %>
   </div>
 </div>
 

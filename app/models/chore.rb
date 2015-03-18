@@ -25,24 +25,14 @@ class Chore < ActiveRecord::Base
 
  def self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)
    if context_id != nil
-     #we return only active projects for the current context
-     @all_projects = Project.where(:context_id => context_id, :someday => false)
-     return nil if @all_projects == nil
-
-     @all_chores = nil
-     @all_projects.each do |project|
-      
-      if @all_chores == nil
-       @all_chores = Chore.where(:project_id => project.id, :user_id =>user_id, :choretype_id => choretype_id)
-      else
-       @all_chores += Chore.where(:project_id => project.id, :user_id =>user_id, :choretype_id => choretype_id)
-      end
-     end
-    #return nil if no chores found
+     
+     #alternative complex join
+     @all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: choretype_id}, projects: {context_id: context_id, someday: false}})
+     
      if @all_chores.blank? 
-	return nil
+        return nil
       else 
-	return @all_chores
+        return @all_chores
       end
    else
     nil
@@ -51,7 +41,8 @@ class Chore < ActiveRecord::Base
 
  def self.appointment_occurrences(context_id,start_time, end_time,user_id)
    #will use http://www.rubydoc.info/github/seejohnrun/ice_cube/IceCube/Schedule#occurrences_between-instance_method to return events
-    nil
+   #in controller they need to be formated in json with options http://fullcalendar.io/docs/event_data/Event_Object/
+   nil
   end
  
 end

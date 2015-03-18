@@ -79,7 +79,8 @@ describe ChoresController, :type => :controller do
     it "assigns a new chore as @chore" do
       get :new, {}, valid_session
       expect(assigns(:chore)).to  be_a_new(Chore)
-      #it also needs to prepare the list of emails and project for the select boxex
+      #it also needs to prepare the list of emails and active project for the select boxes
+      Project.create!("title" => "test title 2", "context_id" => 1,"user_id" => 1, "someday" => true)
       expect(assigns(:emails)).to eq([@email])
       expect(assigns(:projects)).to eq([@project])
     end
@@ -90,7 +91,8 @@ describe ChoresController, :type => :controller do
       chore = Chore.create! valid_attributes
       get :edit, {:id => chore.to_param}, valid_session
       expect(assigns(:chore)).to  eq(chore)
-     #it also needs to prepare the list of emails and project for the select boxex
+     #it also needs to prepare the list of emails and active projects for the select boxes
+      Project.create!("title" => "test title 2", "context_id" => 1,"user_id" => 1, "someday" => true)
       expect(assigns(:emails)).to eq([@email])
       expect(assigns(:projects)).to eq([@project])
 
