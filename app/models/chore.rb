@@ -49,4 +49,9 @@ class Chore < ActiveRecord::Base
    end
   end
 
+ def self.appointment_occurrences(context_id,start_time, end_time,user_id)
+   #will use http://www.rubydoc.info/github/seejohnrun/ice_cube/IceCube/Schedule#occurrences_between-instance_method to return events
+    nil
+  end
+ 
 end

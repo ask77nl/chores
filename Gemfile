@@ -17,6 +17,8 @@ gem "the_sortable_tree", "~> 2.5.0"
 gem "jquery-ui-rails"
 gem 'haml'
 gem 'haml-rails'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

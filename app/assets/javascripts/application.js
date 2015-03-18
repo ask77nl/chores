@@ -23,3 +23,6 @@
 //= require bootstrap-datepicker
 //= require recurring_select
 
+//= require moment
+//= require fullcalendar
+
