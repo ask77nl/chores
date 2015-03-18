@@ -12,19 +12,22 @@
   </div> 
    <h3>List of new features:</h3>
     <ul>
-        <li>Create view with current status quo: next actions, today's appointments, open projects without next action</li>
         <li>Add calendar view for appointments</li>
+        <li>Create view with current status quo: next actions, today's appointments, open projects without next action</li>
+        <li>Redo the chores/calendar/project tree navigation, make it more logical</li>
         <li>separate view for done chores/projects</li>
     </ul>
   <h3>List of bugs/improvements:</h3>
     <ul>
-        <li>Project selection dropbox should contain hierarchical view</li>
+        <li>Project selection dropbox should contain hierarchical view and only active projects</li>
         <li>Projects are not filtered by context</li>
         <li>Context is not saved, choretype is not saved when clicking on "new"</li> 
         <li>Chore with dates should become appointment, not todo</li>
         <li>Project sorting within one hierarchy level doesn't work</li>
         <li>Clicking back after update of a someday project moves to the list of active projects</li>
         <li>projects, chores, emails are always pluralized in the header</li>
+        <li>Return all chores by context loop could probably be done within ActiveRecord</li>
+        <li>The user creation and devise rights don't have unit tests</li>
     </ul>
  
   <% else %>

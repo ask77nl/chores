@@ -40,6 +40,7 @@ group :test do
   gem "database_cleaner"
   gem "email_spec"
   gem 'faker', '~> 1.4.2'
+  gem 'simplecov'
 end
 
 # Gems used only for assets and not required

@@ -85,4 +85,9 @@ No contexts yet, create one!
  <br />
 
  <%= link_to 'New Chore', new_chore_path, {:class => "btn btn-large btn-primary"} %>
+ 
+ <% if (@active_choretype.to_s == '3') %>
+ <h2>Calendar view</h2>
+ 
+ <% end %>
 <% end %>
