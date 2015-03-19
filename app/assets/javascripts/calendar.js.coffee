@@ -15,7 +15,7 @@ $(document).ready ->
       url: '/chores/occurrences',
     }],
 
-    timeFormat: 'h:mm t{ - h:mm t} ',
+#    timeFormat: 'h:mm t{ - h:mm t} ',
     dragOpacity: "0.5"
 
     eventDrop: (event, dayDelta, minuteDelta, allDay, revertFunc) ->

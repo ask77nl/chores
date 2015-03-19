@@ -10,6 +10,7 @@ class Chore < ActiveRecord::Base
   extend ActiveModel::Naming
   
   
+  
   attr_accessible :startdate, :deadline, :email_id, :project_id, :title, :choretype_id, :user_id, :schedule
   belongs_to :email
   belongs_to :user
@@ -41,7 +42,7 @@ class Chore < ActiveRecord::Base
 
  def self.appointment_occurrences(context_id,start_time, end_time,user_id)
    if context_id != nil
-      #will use http://www.rubydoc.info/github/seejohnrun/ice_cube/IceCube/Schedule#occurrences_between-instance_method to return events
+      #uses http://www.rubydoc.info/github/seejohnrun/ice_cube/IceCube/Schedule#occurrences_between-instance_method to return events
       
       @all_occurrences = []
       all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: 3}, projects: {context_id: context_id, someday: false}})
@@ -49,10 +50,16 @@ class Chore < ActiveRecord::Base
       
      for chore in all_chores do 
        #schedule = IceCube::Schedule.from_yaml(chore[:schedule])
-       schedule = IceCube::Schedule.new(start_time)
-       schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))
-       temp_occurrences = schedule.occurrences_between(start_time, end_time)
-         @all_occurrences += temp_occurrences
+       if (chore[:schedule] != {} and chore[:schedule] != nil)
+        schedule = IceCube::Schedule.new(start_time)
+        schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))
+        for occurence_date in schedule.occurrences_between(start_time, end_time) do
+           occurrence_hash = {id: chore.id, title: chore.title, start: occurence_date.start_time , end: occurence_date.end_time, url: "/chores/"+chore.id.to_s+"/edit", allDay: true}
+          @all_occurrences << occurrence_hash
+        end
+       end
+       
+         
      end
      
      return @all_occurrences
