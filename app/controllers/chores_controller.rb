@@ -20,7 +20,6 @@ before_filter :authenticate_user!
       else
         @active_context = params[:context].to_s
       end
-
      
       if params[:choretype] == nil
         @active_choretype = @choretypes.first.id
@@ -36,6 +35,43 @@ before_filter :authenticate_user!
       format.json { render json: @chores }
     end
   end
+  
+  # GET /occurrences.json only!
+  def occurrences
+    @contexts = Context.where("user_id = ?",current_user.id)
+
+
+    if @contexts.empty?
+      @active_context = nil
+      @occurrences = nil
+    else
+      if params[:context] == nil
+        @active_context = @contexts.first.id
+      else
+        @active_context = params[:context].to_s
+      end
+     
+    begin
+         start_date = Date.parse(params[:start])
+      rescue ArgumentError
+         return nil
+    end
+    begin
+         end_date = Date.parse(params[:end])
+      rescue ArgumentError
+         return nil
+    end
+      
+      @occurrences = Chore.appointment_occurrences(@active_context,start_date,end_date, current_user.id)
+    end
+    
+    #occurrences need to be formated in json with options http://fullcalendar.io/docs/event_data/Event_Object/
+    
+    respond_to do |format|
+      format.json { render json: @occurrences }
+    end
+  end
+  
 
   # GET /chores/1
   # GET /chores/1.json
@@ -88,7 +124,9 @@ before_filter :authenticate_user!
     @chore = Chore.new(params[:chore])
     @chore.user_id = current_user.id
 
-
+    #attempt to serialize schedule correctly
+    #@chore.schedule = IceCube::Schedule.from_yaml(params[:chore][:schedule])
+    
     respond_to do |format|
       if @chore.save
         format.html { redirect_to @chore, notice: 'Chore was successfully created.' }
@@ -117,8 +155,9 @@ before_filter :authenticate_user!
       end  
       
       
-      #logger.fatal "params = "
-      #logger.fatal params[:chore]
+      
+      #attempt to serialize schedule correctly
+      #@chore.schedule = IceCube::Schedule.from_yaml(params[:chore][:schedule])
       
       if @chore.update_attributes(params[:chore])
         format.html { redirect_to @chore, notice: 'Chore was successfully updated.' }

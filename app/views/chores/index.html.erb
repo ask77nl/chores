@@ -65,8 +65,8 @@ No contexts yet, create one!
        <%end%>
      </td>
      <td>
-      <% if(chore.schedule!= "null" and chore.schedule != nil)%>
-       <%= RecurringSelect.dirty_hash_to_rule(chore.schedule) %>
+      <% if(chore.schedule != {} and chore.schedule != nil)%>
+       <%= RecurringSelect.dirty_hash_to_rule(chore.schedule).to_s%>
       <% else %>
        -
       <%end%>  

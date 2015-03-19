@@ -14,7 +14,12 @@ Chores::Application.routes.draw do
       post :rebuild
     end
   end
-  resources :chores
+  resources :chores do
+    collection do
+      get :occurrences
+    end
+  end
+  
   resources :emails
 
   devise_for :users

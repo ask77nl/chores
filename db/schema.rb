@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317143136) do
+ActiveRecord::Schema.define(version: 20150319163101) do
 
   create_table "chores", force: true do |t|
     t.integer  "email_id"

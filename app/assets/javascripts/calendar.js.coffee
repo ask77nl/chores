@@ -12,7 +12,7 @@ $(document).ready ->
     slotMinutes: 30,
 
     eventSources: [{
-      url: '/chores',
+      url: '/chores/occurrences',
     }],
 
     timeFormat: 'h:mm t{ - h:mm t} ',

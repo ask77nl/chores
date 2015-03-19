@@ -19,6 +19,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+gem 'jbuilder'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -32,6 +33,8 @@ end
 group :development, :test do
   gem 'sqlite3' 
   gem 'rspec-rails', '3.0.1'
+  gem 'ruby-debug-ide'
+  gem 'debase'
 end
 
 group :test do

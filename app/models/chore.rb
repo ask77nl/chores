@@ -2,7 +2,7 @@ class Chore < ActiveRecord::Base
 
   #IceCube stuff
   include IceCube
-  #serialize :schedule, IceCube::Schedule
+  serialize :schedule, Hash
   
   #recurring model stuff
   include ActiveModel::Validations
@@ -19,7 +19,7 @@ class Chore < ActiveRecord::Base
   validates( :title, presence: true)
   validates( :project_id, presence: true)
   validates( :choretype_id, presence: true)
-  validates(:user_id, presence: true)
+  validates( :user_id, presence: true)
 
 
 
@@ -40,9 +40,42 @@ class Chore < ActiveRecord::Base
   end
 
  def self.appointment_occurrences(context_id,start_time, end_time,user_id)
-   #will use http://www.rubydoc.info/github/seejohnrun/ice_cube/IceCube/Schedule#occurrences_between-instance_method to return events
-   #in controller they need to be formated in json with options http://fullcalendar.io/docs/event_data/Event_Object/
-   nil
+   if context_id != nil
+      #will use http://www.rubydoc.info/github/seejohnrun/ice_cube/IceCube/Schedule#occurrences_between-instance_method to return events
+      
+      @all_occurrences = []
+      all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: 3}, projects: {context_id: context_id, someday: false}})
+      
+      
+     for chore in all_chores do 
+       #schedule = IceCube::Schedule.from_yaml(chore[:schedule])
+       schedule = IceCube::Schedule.new(start_time)
+       schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))
+       temp_occurrences = schedule.occurrences_between(start_time, end_time)
+         @all_occurrences += temp_occurrences
+     end
+     
+     return @all_occurrences
+  else
+    nil
   end
  
+ end
+ 
+ def schedule=(new_schedule)
+   
+     if new_schedule == nil or new_schedule == 'null'
+     
+      write_attribute(:schedule, {})
+     else
+      write_attribute(:schedule, RecurringSelect.dirty_hash_to_rule(new_schedule).to_hash)
+     end
+  end
+ 
+ def converted_schedule
+  the_schedule = Schedule.new(self.start_date)
+  the_schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(self.schedule))
+  the_schedule
 end
+end
+
