@@ -140,6 +140,7 @@ describe "when there are chores of several contexts and types" do
      expect(page).to have_select('chore[email_id]', :selected => @email.subject);
      expect(page).to have_select('chore[choretype_id]', :selected => @choretype.name);
      expect(page).to have_select('chore[project_id]', :options => [@project.title, new_project.title]);
+     expect(page).to have_select('chore[project_id]', :selected => @project.title);
 
      new_title = "new title"
      fill_in('chore_title', :with => new_title)

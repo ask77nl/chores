@@ -84,5 +84,15 @@ class Chore < ActiveRecord::Base
   the_schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(self.schedule))
   the_schedule
 end
+
+ def self.project
+  if self.project_id
+    return Project.find(self.project_id)
+  else
+    nil
+  end
+ 
+ end
+ 
 end
 

@@ -42,6 +42,13 @@ describe "when user_id is not present" do
     before { @chore.user_id = "" }
     it { should_not be_valid }
  end
+ 
+describe "when requesting it's project via getter" do
+   
+    it "it should return the correct project object" do
+      expect(@chore.project).to eq @project
+    end
+ end
 
 describe "when requesting all chores by context and user" do
  it "should not show chores from a wrong user" do
