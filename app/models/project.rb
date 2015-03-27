@@ -19,7 +19,8 @@ class Project < ActiveRecord::Base
       context_id = Context.first.id
     end
    
-    @all_projects = Project.where(:context_id => context_id, :user_id =>user_id, :someday => false)
+    #@all_projects = Project.where(:context_id => context_id, :user_id =>user_id, :someday => false)
+    @all_projects = Project.nested_set.select('*').where(:context_id => context_id, :user_id =>user_id, :someday => false)
     return @all_projects
   end
   
@@ -28,7 +29,7 @@ class Project < ActiveRecord::Base
       context_id = Context.first.id
     end
    
-    @all_projects = Project.where(:context_id => context_id, :user_id =>user_id, :someday => true)
+    @all_projects = Project.nested_set.select('*').where(:context_id => context_id, :user_id =>user_id, :someday => true)
     return @all_projects
   end
 
