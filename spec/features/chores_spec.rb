@@ -111,21 +111,7 @@ describe "when there are chores of several contexts and types" do
   end
 
    
-   describe "after there are some chores" do
-    it "should be able to show it" do
-     chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
 
-     visit chores_path
-     expect(page).to have_content(chore.title)
-     click_link("Show")
-     
-     expect(page).to have_content('Title: '+chore.title)
-     expect(page).to have_content(@email.subject)
-     expect(page).to have_content(@choretype.name)
-     expect(page).to have_content(@project.title)
-
-    end
-   end
    
     it "should be able to edit it" do
      chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
@@ -134,7 +120,7 @@ describe "when there are chores of several contexts and types" do
 
      visit chores_path
      expect(page).to have_content(chore.title)
-     click_link("Edit", :href =>"/chores/"+chore.id.to_s+"/edit")
+     click_link(chore.title, :href =>"/chores/"+chore.id.to_s+"/edit")
    
      expect(find_field('chore_title').value).to  eq chore.title
      expect(page).to have_select('chore[email_id]', :selected => @email.subject);
@@ -181,7 +167,7 @@ describe "when there are chores of several contexts and types" do
 
      visit chores_path
      expect(page).to have_content(chore.title)
-     click_link("Destroy")
+     click_link("Delete")
 #     click_button("OK")
 
      expect(page).to have_no_content(chore.title)

@@ -34,15 +34,14 @@ No contexts yet, create one!
      <th>Deadline</th>
      <th>Schedule</th>
      <th></th>
-     <th></th>
-     <th></th>
    </tr>
 
  <% if @chores != nil%>
   <% @chores.each do |chore| %>
    <tr>
-     <td><%= chore.project.title %></td>
-     <td><%= chore.title %></td>
+     <td><%=link_to chore.project.title, edit_project_path(chore.project)%></td>
+     
+     <td><%= link_to chore.title, edit_chore_path(chore)%></td>
      <td>
        <%if chore.email == nil %>
         -
@@ -72,9 +71,7 @@ No contexts yet, create one!
       <%end%>  
      </td>
      
-     <td><%= link_to 'Show', chore,{:class => "btn btn-info"}  %></td>
-     <td><%= link_to 'Edit', edit_chore_path(chore),{:class => "btn btn-primary"} %></td>
-     <td><%= link_to 'Destroy', chore, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger" %></td>
+     <td><%= link_to "Delete", chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
    </tr>
   <% end %>
  <% else %>

@@ -28,7 +28,7 @@ class Chore < ActiveRecord::Base
    if context_id != nil
      
      #alternative complex join
-     @all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: choretype_id}, projects: {context_id: context_id, someday: false}})
+     @all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: choretype_id}, projects: {context_id: context_id, someday: false}}).order("projects.lft asc")
      
      if @all_chores.blank? 
         return nil
