@@ -39,7 +39,7 @@ No contexts yet, create one!
  <% if @chores != nil%>
   <% @chores.each do |chore| %>
    <tr>
-     <td><%=link_to chore.project.title, edit_project_path(chore.project)%></td>
+     <td><%=link_to @projects.where(:id =>chore.project_id).first.title, edit_project_path(@projects.where(:id =>chore.project_id).first)%></td>
      
      <td><%= link_to chore.title, edit_chore_path(chore)%></td>
      <td>

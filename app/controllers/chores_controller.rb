@@ -28,6 +28,8 @@ before_filter :authenticate_user!
       end
 
       @chores = Chore.all_chores_by_context_type_and_user(@active_context,@active_choretype, current_user.id)
+      #also prepare active projects, because we use it to display project titles.
+      @projects = Project.all_active_projects(params[:context_id],current_user.id )
     end
 
     respond_to do |format|
@@ -92,7 +94,8 @@ before_filter :authenticate_user!
     @chore.user_id = current_user.id
 
     # we use list of projects and emails on the view, need to prepare them
-   @projects = Project.where({user_id: current_user.id, someday: false})
+   
+   @projects = Project.all_active_projects(params[:context_id],current_user.id )
    @emails = Email.where("user_id = ?",current_user.id)
 
     respond_to do |format|
@@ -103,8 +106,9 @@ before_filter :authenticate_user!
 
   # GET /chores/1/edit
   def edit
-     # we use list of projects and emails on the view, need to prepare them
-    @projects = Project.where({user_id: current_user.id, someday: false})
+   
+    #@projects = Project.where({user_id: current_user.id, someday: false})
+    @projects = Project.all_active_projects(params[:context_id],current_user.id )
     @emails = Email.where("user_id = ?",current_user.id)
 
     @chore = Chore.find(params[:id])

@@ -51,7 +51,8 @@ load_and_authorize_resource
     @project.user_id = current_user.id
 
     # we use list of projects and contexts on the view, need to prepare them
-    @projects = Project.where("user_id = ?",current_user.id)
+    @projects = Project.all_active_projects(params[:context_id],current_user.id )
+    
     @contexts = Context.where("user_id = ?",current_user.id)
 
 
@@ -65,7 +66,7 @@ load_and_authorize_resource
   def edit
 
      # we use list of projects and contexts on the view, need to prepare them
-    @projects = Project.where("user_id = ?",current_user.id)
+    @projects = Project.all_active_projects(params[:context_id],current_user.id )
     @contexts = Context.where("user_id = ?",current_user.id)
 
     @project = Project.find(params[:id])
