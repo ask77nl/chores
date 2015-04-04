@@ -7,6 +7,7 @@
       <div class="navbar-left">
           <% if user_signed_in? %>
           <%= link_to "Home", '/', id: "logo" %>
+          <%= link_to "Status Quo", status_quo_chores_path, id: "logo" %>
           <%= link_to "Emails", emails_path, id: "logo" %>
           <%= link_to "Chores", chores_path, id: "logo" %>
           <%= link_to "Projects", projects_path, id: "logo" %>

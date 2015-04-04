@@ -32,8 +32,40 @@ before_filter :authenticate_user!
       #puts "chores controller calling projects with context "+@active_context.to_s+" and user_id "+current_user.id.to_s
       @projects = Project.all_active_projects(@active_context,current_user.id )
     end
+    
+        respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @chores }
+    end
+  end
+  
+  # GET /status_quo
+  # GET /status_quo.json
+  def status_quo
+    @contexts = Context.where("user_id = ?",current_user.id)
+    @choretypes = Choretype.all
 
-    respond_to do |format|
+
+    if @contexts.empty?
+      @active_context = nil
+      @chores = nil
+    else
+      if params[:context] == nil
+        @active_context = @contexts.first.id
+      else
+        @active_context = params[:context].to_s
+      end
+     
+      choretype_todo = 1 #always todo only in the status quo. Warning: using undeclared constant!
+      choretype_appointment = 3
+            
+      @chores = Chore.all_active_chores(@active_context,choretype_todo, current_user.id)
+    
+      @appointments = Chore.all_today_and_missed_appointments(@active_context,choretype_appointment, current_user.id)
+      @projects = Project.all_active_projects(@active_context,current_user.id )
+    end
+    
+        respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @chores }
     end
@@ -158,9 +190,7 @@ before_filter :authenticate_user!
     if(params[:chore][:startdate] != "" and params[:chore][:startdate] != nil and params[:chore][:startdate] != "not set")
       params[:chore][:startdate]=  DateTime.strptime(params[:chore][:startdate], "%m/%d/%Y").strftime("%Y-%m-%d")
       end  
-      
-      
-      
+       
       #attempt to serialize schedule correctly
       #@chore.schedule = IceCube::Schedule.from_yaml(params[:chore][:schedule])
       

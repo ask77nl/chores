@@ -17,6 +17,7 @@ Chores::Application.routes.draw do
   resources :chores do
     collection do
       get :occurrences
+      get :status_quo
     end
   end
   
