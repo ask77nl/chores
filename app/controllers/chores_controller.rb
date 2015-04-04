@@ -29,7 +29,8 @@ before_filter :authenticate_user!
 
       @chores = Chore.all_chores_by_context_type_and_user(@active_context,@active_choretype, current_user.id)
       #also prepare active projects, because we use it to display project titles.
-      @projects = Project.all_active_projects(params[:context_id],current_user.id )
+      #puts "chores controller calling projects with context "+@active_context.to_s+" and user_id "+current_user.id.to_s
+      @projects = Project.all_active_projects(@active_context,current_user.id )
     end
 
     respond_to do |format|

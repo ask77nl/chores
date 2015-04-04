@@ -39,8 +39,15 @@ No contexts yet, create one!
  <% if @chores != nil%>
   <% @chores.each do |chore| %>
    <tr>
-     <td><%=link_to @projects.where(:id =>chore.project_id).first.title, edit_project_path(@projects.where(:id =>chore.project_id).first)%></td>
-     
+     <td>
+        <%project_id_iterator = chore.project_id%>
+        <%project_path = ''%>
+        <%while project_id_iterator != nil%>
+          <%project_path =  link_to(@projects.find(project_id_iterator).title, edit_project_path(@projects.find(project_id_iterator))) +' > '+ project_path%>
+          <% project_id_iterator = @projects.find(project_id_iterator).parent_project_id %>
+        <%end%>
+        <%=project_path%>
+     </td>
      <td><%= link_to chore.title, edit_chore_path(chore)%></td>
      <td>
        <%if chore.email == nil %>

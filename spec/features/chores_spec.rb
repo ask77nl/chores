@@ -93,8 +93,10 @@ describe "when there are chores of several contexts and types" do
    
      expect(page).to have_content(other_context.name)
      
-     puts "other context has project with id: "+Project.all_active_projects(other_context.id,@user.id ).first.id.to_s
-     puts "other context should display chore with project id: "+Chore.all_chores_by_context_type_and_user(other_context,@choretype, @user.id).first.project_id.to_s
+     #puts "other context has project with id: "+Project.all_active_projects(other_context.id,@user.id ).first.id.to_s
+     #puts "other context should display chore with project id: "+Chore.all_chores_by_context_type_and_user(other_context,@choretype, @user.id).first.project_id.to_s
+     #puts "other context should display chores: "+Chore.all_chores_by_context_type_and_user(other_context,@choretype, @user.id).length.to_s
+     
      
      click_link(other_context.name)
   
@@ -114,7 +116,21 @@ describe "when there are chores of several contexts and types" do
     end
   end
 
+   describe "when there are nested projects" do
+    it "all of them should be displayed in chore listing" do
+
+    child_project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id, parent_project_id: @project.id)
+    
+       
+    child_project_chore = FactoryGirl.create(:chore, project_id: child_project.id, choretype_id: @choretype.id, user_id: @user.id)
    
+    visit chores_path(:context => @context.id, :choretype =>@choretype.id)
+
+     expect(page).to have_content(child_project_chore.title)
+     expect(page).to have_content(@project.title+' > '+child_project.title)
+      
+    end
+  end
 
    
     it "should be able to edit it" do

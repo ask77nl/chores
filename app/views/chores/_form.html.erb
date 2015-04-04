@@ -12,29 +12,30 @@
   <% end %>
 
 <div class="row">
- <div class = "col-md-4">
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= collection_select(:chore, :email_id, @emails, :id, :subject, {include_blank: 'None'}) %>
-  </div>
+ <!--<div class = "col-md-4"> -->
+  
   <div class="field">
     <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :size => "90" %>
+  </div>
+ <div class="field">
+    <%= f.label :project %><br />
+    <%= select_tag :project_id, nested_options(@projects, :selected => @chore.project), class: :nested_options, name: "chore[project_id]", id: "chore[project_id]" %>
   </div>
   <div class="field">
     <%= f.label :choretype %><br />
     <%= collection_select(:chore, :choretype_id, Choretype.all, :id, :name) %>
   </div>
-  <div class="field">
-    <%= f.label :project %><br />
-    <%= select_tag :project_id, nested_options(@projects, :selected => @chore.project), class: :nested_options, name: "chore[project_id]", id: "chore[project_id]" %>
-  </div>
-</div>
+  
+<!--</div>-->
 
 <%= render :partial => "schedule", :locals => {:f => f} %>
 
 </div>
-
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= collection_select(:chore, :email_id, @emails, :id, :subject, {include_blank: 'None'}) %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
