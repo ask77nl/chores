@@ -66,7 +66,7 @@ class Chore < ActiveRecord::Base
     for chore in reoccurring_chores do 
           schedule = IceCube::Schedule.new()
           schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))
-          if schedule.occurs_on?(Date.today)
+          if schedule.occurs_on?(Time.zone.now.to_date)
             appointments << chore
           end
       end

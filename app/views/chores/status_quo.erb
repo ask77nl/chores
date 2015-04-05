@@ -13,7 +13,7 @@ No contexts yet, create one!
  <% end %>
   </ul>
 
-<h2>Listing <%= @appointments.length  if @appointments != nil%> today <%=Date.today%> in zone <%=Time.zone.to_s%> and missed appointments</h2>
+<h2>Listing <%= @appointments.length  if @appointments != nil%> today <%=Time.zone.now.to_date%> and missed appointments</h2>
 
 <table class="table">
    <tr>
