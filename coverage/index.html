@@ -14,7 +14,7 @@
       <img src="./assets/0.9.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-04T20:46:38-04:00">2015-04-04T20:46:38-04:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-05T11:40:39-04:00">2015-04-05T11:40:39-04:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -1706,7 +1706,7 @@
         <li class="covered" data-hits="1" data-linenumber="155">
           <span class="hits">1</span>
           
-          <code class="ruby">     params[:chore][:deadline]=  DateTime.strptime(params[:chore][:deadline], &quot;%m/%d/%Y&quot;).strftime(&quot;%Y-%m-%d&quot;)</code>
+          <code class="ruby">     params[:chore][:deadline]=  DateTime.strptime(params[:chore][:deadline], &quot;%m/%d/%Y&quot;).strftime(&quot;%Y-%m-%d %z&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="156">
@@ -1724,7 +1724,7 @@
         <li class="missed" data-hits="0" data-linenumber="158">
           
           
-          <code class="ruby">      params[:chore][:startdate]=  DateTime.strptime(params[:chore][:startdate], &quot;%m/%d/%Y&quot;).strftime(&quot;%Y-%m-%d&quot;)</code>
+          <code class="ruby">      params[:chore][:startdate]=  DateTime.strptime(params[:chore][:startdate], &quot;%m/%d/%Y&quot;).strftime(&quot;%Y-%m-%d %z&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="159">
@@ -1910,7 +1910,7 @@
         <li class="covered" data-hits="1" data-linenumber="189">
           <span class="hits">1</span>
           
-          <code class="ruby">      params[:chore][:deadline]=  DateTime.strptime(params[:chore][:deadline], &quot;%m/%d/%Y&quot;).strftime(&quot;%Y-%m-%d&quot;)</code>
+          <code class="ruby">      params[:chore][:deadline]=  DateTime.strptime(params[:chore][:deadline], &quot;%m/%d/%Y&quot;).strftime(&quot;%Y-%m-%d %z&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="190">
@@ -1928,7 +1928,7 @@
         <li class="covered" data-hits="1" data-linenumber="192">
           <span class="hits">1</span>
           
-          <code class="ruby">      params[:chore][:startdate]=  DateTime.strptime(params[:chore][:startdate], &quot;%m/%d/%Y&quot;).strftime(&quot;%Y-%m-%d&quot;)</code>
+          <code class="ruby">      params[:chore][:startdate]=  DateTime.strptime(params[:chore][:startdate], &quot;%m/%d/%Y&quot;).strftime(&quot;%Y-%m-%d %z&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="193">
@@ -3500,19 +3500,19 @@
         <li class="never" data-hits="" data-linenumber="53">
           
           
-          <code class="ruby"> #    print &quot;create controller received date:&quot;,params[:email][:datetime],&quot;\n&quot;</code>
+          <code class="ruby">    # print &quot;create controller received date:&quot;,params[:email][:datetime],&quot;\n&quot;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="54">
           <span class="hits">1</span>
           
-          <code class="ruby">     params[:email][:datetime]=  DateTime.strptime(params[:email][:datetime], &quot;%m/%d/%Y&quot;).strftime(&quot;%Y-%m-%d&quot;)</code>
+          <code class="ruby">     params[:email][:datetime]=  DateTime.strptime(params[:email][:datetime], &quot;%m/%d/%Y&quot;).strftime(&quot;%Y-%m-%d %z&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="55">
           
           
-          <code class="ruby">  #    print &quot;and converted it to:&quot;,params[:email][:datetime],&quot;\n&quot;</code>
+          <code class="ruby">   #   print &quot;and converted it to:&quot;,params[:email][:datetime],&quot;\n&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="56">
@@ -3524,7 +3524,7 @@
         <li class="never" data-hits="" data-linenumber="57">
           
           
-          <code class="ruby"> #     puts &quot;got no date params in create email controller!&quot;</code>
+          <code class="ruby">   #   puts &quot;got no date params in create email controller!&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="58">
@@ -3692,19 +3692,19 @@
         <li class="never" data-hits="" data-linenumber="85">
           
           
-          <code class="ruby">  #       print &quot;update controller received date:&quot;,params[:email][:datetime],&quot;\n&quot;</code>
+          <code class="ruby">         #puts &quot;update controller received date:&quot;,params[:email][:datetime],&quot;\n&quot;</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="86">
           <span class="hits">1</span>
           
-          <code class="ruby">         params[:email][:datetime]=  DateTime.strptime(params[:email][:datetime], &quot;%m/%d/%Y&quot;).strftime(&quot;%Y-%m-%d&quot;)</code>
+          <code class="ruby">         params[:email][:datetime]=  DateTime.strptime(params[:email][:datetime], &quot;%m/%d/%Y&quot;).strftime(&quot;%Y-%m-%d %z&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="87">
           
           
-          <code class="ruby">  #     print &quot;and converted it to:&quot;,params[:email][:datetime],&quot;\n&quot;</code>
+          <code class="ruby">         #puts &quot;and converted it to:&quot;,params[:email][:datetime],&quot;\n&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="88">
@@ -6560,7 +6560,7 @@
         <li class="missed" data-hits="0" data-linenumber="60">
           
           
-          <code class="ruby">    appointments =  all_chores.where(&quot;startdate &lt; ? and schedule is null&quot;, Date.tomorrow)</code>
+          <code class="ruby">    appointments =  all_chores.where(&quot;startdate &lt; ? and schedule is null&quot;, Time.zone.now.to_date + 1.day)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="61">
@@ -6584,7 +6584,7 @@
         <li class="missed" data-hits="0" data-linenumber="64">
           
           
-          <code class="ruby">    reoccurring_chores = all_chores.where(&quot;schedule is not null&quot;, Date.today)</code>
+          <code class="ruby">    reoccurring_chores = all_chores.where(&quot;schedule is not null&quot;, Time.zone.now.to_date)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="65">
@@ -6614,7 +6614,7 @@
         <li class="missed" data-hits="0" data-linenumber="69">
           
           
-          <code class="ruby">          if schedule.occurs_on?(Date.today)</code>
+          <code class="ruby">          if schedule.occurs_on?(Time.zone.now.to_date)</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="70">

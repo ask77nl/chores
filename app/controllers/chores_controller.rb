@@ -152,10 +152,10 @@ before_filter :authenticate_user!
   # POST /chores.json
   def create
     if(params[:chore][:deadline] != '' and params[:chore][:deadline] != nil and params[:chore][:deadline] != "not set")
-     params[:chore][:deadline]=  DateTime.strptime(params[:chore][:deadline], "%m/%d/%Y").strftime("%Y-%m-%d")
+     params[:chore][:deadline]=  DateTime.strptime(params[:chore][:deadline], "%m/%d/%Y").strftime("%Y-%m-%d %z")
       end
     if(params[:chore][:startdate] != "" and params[:chore][:startdate] != nil and params[:chore][:startdate] != "not set")
-      params[:chore][:startdate]=  DateTime.strptime(params[:chore][:startdate], "%m/%d/%Y").strftime("%Y-%m-%d")
+      params[:chore][:startdate]=  DateTime.strptime(params[:chore][:startdate], "%m/%d/%Y").strftime("%Y-%m-%d %z")
       end 
    # print "create chores controller launched with ", params,"\n"
 
@@ -186,10 +186,10 @@ before_filter :authenticate_user!
 
     respond_to do |format|
      if(params[:chore][:deadline] != "" and params[:chore][:deadline] != nil and params[:chore][:deadline] != "not set")
-      params[:chore][:deadline]=  DateTime.strptime(params[:chore][:deadline], "%m/%d/%Y").strftime("%Y-%m-%d")
+      params[:chore][:deadline]=  DateTime.strptime(params[:chore][:deadline], "%m/%d/%Y").strftime("%Y-%m-%d %z")
       end
     if(params[:chore][:startdate] != "" and params[:chore][:startdate] != nil and params[:chore][:startdate] != "not set")
-      params[:chore][:startdate]=  DateTime.strptime(params[:chore][:startdate], "%m/%d/%Y").strftime("%Y-%m-%d")
+      params[:chore][:startdate]=  DateTime.strptime(params[:chore][:startdate], "%m/%d/%Y").strftime("%Y-%m-%d %z")
       end  
        
       #attempt to serialize schedule correctly

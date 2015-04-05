@@ -8,7 +8,7 @@ factory :email do
     subject {Faker::Lorem.sentence.tr!(" ", "_")}
     body {Faker::Lorem.paragraph}
     user_id {Faker::Number.number(3)}
-    datetime {Time.at(Time.new(2014).to_f + rand * (Time.now.to_f - Time.new(2014).to_f)).to_date}
+    datetime {Time.zone.at(Time.new(2014).to_f + rand * (Time.zone.now.to_f - Time.new(2014).to_f))}
  end
 end
 

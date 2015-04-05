@@ -50,11 +50,11 @@ class EmailsController < ApplicationController
 #    puts "Create email controller launched!"
     #fix convert date to what rails expect by default
     if(params[:email][:datetime] != "" and params[:email][:datetime] != nil )
- #    print "create controller received date:",params[:email][:datetime],"\n"
-     params[:email][:datetime]=  DateTime.strptime(params[:email][:datetime], "%m/%d/%Y").strftime("%Y-%m-%d")
-  #    print "and converted it to:",params[:email][:datetime],"\n"
+    # print "create controller received date:",params[:email][:datetime],"\n"
+     params[:email][:datetime]=  DateTime.strptime(params[:email][:datetime], "%m/%d/%Y").strftime("%Y-%m-%d %z")
+   #   print "and converted it to:",params[:email][:datetime],"\n"
      else
- #     puts "got no date params in create email controller!"
+   #   puts "got no date params in create email controller!"
      end
 
     @email = Email.new(params[:email])
@@ -82,9 +82,9 @@ class EmailsController < ApplicationController
 
       #fix convert date to what rails expect by default
       if(params[:email][:datetime] and params[:email][:datetime] != nil)
-  #       print "update controller received date:",params[:email][:datetime],"\n"
-         params[:email][:datetime]=  DateTime.strptime(params[:email][:datetime], "%m/%d/%Y").strftime("%Y-%m-%d")
-  #     print "and converted it to:",params[:email][:datetime],"\n"
+         #puts "update controller received date:",params[:email][:datetime],"\n"
+         params[:email][:datetime]=  DateTime.strptime(params[:email][:datetime], "%m/%d/%Y").strftime("%Y-%m-%d %z")
+         #puts "and converted it to:",params[:email][:datetime],"\n"
       end
       if @email.update_attributes(params[:email])
         format.html { redirect_to @email, notice: 'Email was successfully updated.' }
