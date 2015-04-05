@@ -59,6 +59,7 @@ class Chore < ActiveRecord::Base
    
     appointments =  all_chores.where("startdate < ? and schedule is null", Time.zone.now.to_date + 1.day)
    
+    #puts "now appointments length is "+ appointments.length.to_s
     #then get all active reoccurring events
    
     reoccurring_chores = all_chores.where("schedule is not null", Time.zone.now.to_date)
@@ -108,10 +109,12 @@ end
  
  def schedule=(new_schedule)
    
+     #puts "received schedule "+new_schedule
      if new_schedule == nil or new_schedule == 'null'
       write_attribute(:schedule, nil)
      else
       write_attribute(:schedule, RecurringSelect.dirty_hash_to_rule(new_schedule).to_hash)
+      
      end
   end
  

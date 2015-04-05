@@ -14,7 +14,7 @@
       <img src="./assets/0.9.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-05T11:40:39-04:00">2015-04-05T11:40:39-04:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-05T14:30:47-04:00">2015-04-05T14:30:47-04:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -213,7 +213,7 @@
       <tr>
         <td class="strong"><a href="#9f63e179f5da7db16c78d9bf26dc7ff1b32bbab0" class="src_link" title="app/models/chore.rb">app/models/chore.rb</a></td>
         <td class="red strong">50.0 %</td>
-        <td>134</td>
+        <td>137</td>
         <td>58</td>
         <td>29</td>
         <td>29</td>
@@ -448,7 +448,7 @@
       <tr>
         <td class="strong"><a href="#9f63e179f5da7db16c78d9bf26dc7ff1b32bbab0" class="src_link" title="app/models/chore.rb">app/models/chore.rb</a></td>
         <td class="red strong">50.0 %</td>
-        <td>134</td>
+        <td>137</td>
         <td>58</td>
         <td>29</td>
         <td>29</td>
@@ -6572,151 +6572,151 @@
         <li class="never" data-hits="" data-linenumber="62">
           
           
-          <code class="ruby">    #then get all active reoccurring events</code>
+          <code class="ruby">    #puts &quot;now appointments length is &quot;+ appointments.length.to_s</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="63">
           
           
+          <code class="ruby">    #then get all active reoccurring events</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="64">
+          
+          
           <code class="ruby">   </code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="64">
+        <li class="missed" data-hits="0" data-linenumber="65">
           
           
           <code class="ruby">    reoccurring_chores = all_chores.where(&quot;schedule is not null&quot;, Time.zone.now.to_date)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="65">
+        <li class="never" data-hits="" data-linenumber="66">
           
           
           <code class="ruby">      </code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="66">
-          
-          
-          <code class="ruby">    for chore in reoccurring_chores do </code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="67">
           
           
-          <code class="ruby">          schedule = IceCube::Schedule.new()</code>
+          <code class="ruby">    for chore in reoccurring_chores do </code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="68">
           
           
-          <code class="ruby">          schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))</code>
+          <code class="ruby">          schedule = IceCube::Schedule.new()</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="69">
           
           
-          <code class="ruby">          if schedule.occurs_on?(Time.zone.now.to_date)</code>
+          <code class="ruby">          schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="70">
           
           
-          <code class="ruby">            appointments &lt;&lt; chore</code>
+          <code class="ruby">          if schedule.occurs_on?(Time.zone.now.to_date)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="71">
+        <li class="missed" data-hits="0" data-linenumber="71">
           
           
-          <code class="ruby">          end</code>
+          <code class="ruby">            appointments &lt;&lt; chore</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="72">
           
           
-          <code class="ruby">      end</code>
+          <code class="ruby">          end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="73">
           
           
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="74">
+          
+          
           <code class="ruby">      </code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="74">
+        <li class="missed" data-hits="0" data-linenumber="75">
           
           
           <code class="ruby">    return appointments</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="75">
+        <li class="never" data-hits="" data-linenumber="76">
           
           
           <code class="ruby">   else</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="76">
+        <li class="never" data-hits="" data-linenumber="77">
           
           
           <code class="ruby">     nil</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="77">
+        <li class="never" data-hits="" data-linenumber="78">
           
           
           <code class="ruby">   end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="78">
+        <li class="never" data-hits="" data-linenumber="79">
           
           
           <code class="ruby">end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="79">
+        <li class="never" data-hits="" data-linenumber="80">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="80">
+        <li class="covered" data-hits="1" data-linenumber="81">
           <span class="hits">1</span>
           
           <code class="ruby"> def self.appointment_occurrences(context_id,start_time, end_time,user_id)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="81">
+        <li class="missed" data-hits="0" data-linenumber="82">
           
           
           <code class="ruby">   if context_id != nil</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="82">
+        <li class="never" data-hits="" data-linenumber="83">
           
           
           <code class="ruby">      #uses http://www.rubydoc.info/github/seejohnrun/ice_cube/IceCube/Schedule#occurrences_between-instance_method to return events</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="83">
+        <li class="never" data-hits="" data-linenumber="84">
           
           
           <code class="ruby">      </code>
-        </li>
-      
-        <li class="missed" data-hits="0" data-linenumber="84">
-          
-          
-          <code class="ruby">      @all_occurrences = []</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="85">
           
           
-          <code class="ruby">      all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: 3}, projects: {context_id: context_id, someday: false}})</code>
+          <code class="ruby">      @all_occurrences = []</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="86">
+        <li class="missed" data-hits="0" data-linenumber="86">
           
           
-          <code class="ruby">      </code>
+          <code class="ruby">      all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: 3}, projects: {context_id: context_id, someday: false}})</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="87">
@@ -6725,283 +6725,301 @@
           <code class="ruby">      </code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="88">
+        <li class="never" data-hits="" data-linenumber="88">
+          
+          
+          <code class="ruby">      </code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="89">
           
           
           <code class="ruby">     for chore in all_chores do </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="89">
+        <li class="never" data-hits="" data-linenumber="90">
           
           
           <code class="ruby">       #schedule = IceCube::Schedule.from_yaml(chore[:schedule])</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="90">
+        <li class="missed" data-hits="0" data-linenumber="91">
           
           
           <code class="ruby">       if (chore[:schedule] != {} and chore[:schedule] != nil)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="91">
+        <li class="missed" data-hits="0" data-linenumber="92">
           
           
           <code class="ruby">        schedule = IceCube::Schedule.new(start_time)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="92">
+        <li class="missed" data-hits="0" data-linenumber="93">
           
           
           <code class="ruby">        schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="93">
+        <li class="missed" data-hits="0" data-linenumber="94">
           
           
           <code class="ruby">        for occurence_date in schedule.occurrences_between(start_time, end_time) do</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="94">
+        <li class="missed" data-hits="0" data-linenumber="95">
           
           
           <code class="ruby">           occurrence_hash = {id: chore.id, title: chore.title, start: occurence_date.start_time , end: occurence_date.end_time, url: &quot;/chores/&quot;+chore.id.to_s+&quot;/edit&quot;, allDay: true}</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="95">
+        <li class="missed" data-hits="0" data-linenumber="96">
           
           
           <code class="ruby">          @all_occurrences &lt;&lt; occurrence_hash</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="96">
+        <li class="never" data-hits="" data-linenumber="97">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="97">
+        <li class="never" data-hits="" data-linenumber="98">
           
           
           <code class="ruby">       end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="98">
+        <li class="never" data-hits="" data-linenumber="99">
           
           
           <code class="ruby">       </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="99">
+        <li class="never" data-hits="" data-linenumber="100">
           
           
           <code class="ruby">         </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="100">
+        <li class="never" data-hits="" data-linenumber="101">
           
           
           <code class="ruby">     end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="101">
+        <li class="never" data-hits="" data-linenumber="102">
           
           
           <code class="ruby">     </code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="102">
+        <li class="missed" data-hits="0" data-linenumber="103">
           
           
           <code class="ruby">     return @all_occurrences</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="103">
-          
-          
-          <code class="ruby">  else</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="104">
           
           
-          <code class="ruby">    nil</code>
+          <code class="ruby">  else</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="105">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    nil</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="106">
           
           
-          <code class="ruby"> </code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="107">
           
           
-          <code class="ruby"> end</code>
+          <code class="ruby"> </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="108">
           
           
+          <code class="ruby"> end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="109">
+          
+          
           <code class="ruby"> </code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="109">
+        <li class="covered" data-hits="1" data-linenumber="110">
           <span class="hits">1</span>
           
           <code class="ruby"> def schedule=(new_schedule)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="110">
+        <li class="never" data-hits="" data-linenumber="111">
           
           
           <code class="ruby">   </code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="111">
+        <li class="never" data-hits="" data-linenumber="112">
+          
+          
+          <code class="ruby">     #puts &quot;received schedule &quot;+new_schedule</code>
+        </li>
+      
+        <li class="covered" data-hits="10" data-linenumber="113">
           <span class="hits">10</span>
           
           <code class="ruby">     if new_schedule == nil or new_schedule == &#39;null&#39;</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="112">
+        <li class="covered" data-hits="1" data-linenumber="114">
           <span class="hits">1</span>
           
           <code class="ruby">      write_attribute(:schedule, nil)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="113">
+        <li class="never" data-hits="" data-linenumber="115">
           
           
           <code class="ruby">     else</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="114">
+        <li class="covered" data-hits="9" data-linenumber="116">
           <span class="hits">9</span>
           
           <code class="ruby">      write_attribute(:schedule, RecurringSelect.dirty_hash_to_rule(new_schedule).to_hash)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="115">
+        <li class="never" data-hits="" data-linenumber="117">
+          
+          
+          <code class="ruby">      </code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="118">
           
           
           <code class="ruby">     end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="116">
+        <li class="never" data-hits="" data-linenumber="119">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="117">
+        <li class="never" data-hits="" data-linenumber="120">
           
           
           <code class="ruby"> </code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="118">
+        <li class="covered" data-hits="1" data-linenumber="121">
           <span class="hits">1</span>
           
           <code class="ruby"> def converted_schedule</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="119">
+        <li class="missed" data-hits="0" data-linenumber="122">
           
           
           <code class="ruby">  the_schedule = Schedule.new(self.start_date)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="120">
+        <li class="missed" data-hits="0" data-linenumber="123">
           
           
           <code class="ruby">  the_schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(self.schedule))</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="121">
+        <li class="missed" data-hits="0" data-linenumber="124">
           
           
           <code class="ruby">  the_schedule</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="122">
+        <li class="never" data-hits="" data-linenumber="125">
           
           
           <code class="ruby">end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="123">
+        <li class="never" data-hits="" data-linenumber="126">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="124">
+        <li class="covered" data-hits="1" data-linenumber="127">
           <span class="hits">1</span>
           
           <code class="ruby"> def self.project</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="125">
+        <li class="missed" data-hits="0" data-linenumber="128">
           
           
           <code class="ruby">  if self.project_id</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="126">
+        <li class="missed" data-hits="0" data-linenumber="129">
           
           
           <code class="ruby">    return Project.find(self.project_id)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="127">
+        <li class="never" data-hits="" data-linenumber="130">
           
           
           <code class="ruby">  else</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="128">
+        <li class="never" data-hits="" data-linenumber="131">
           
           
           <code class="ruby">    nil</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="129">
+        <li class="never" data-hits="" data-linenumber="132">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="130">
+        <li class="never" data-hits="" data-linenumber="133">
           
           
           <code class="ruby"> </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="131">
+        <li class="never" data-hits="" data-linenumber="134">
           
           
           <code class="ruby"> end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="132">
+        <li class="never" data-hits="" data-linenumber="135">
           
           
           <code class="ruby"> </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="133">
+        <li class="never" data-hits="" data-linenumber="136">
           
           
           <code class="ruby">end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="134">
+        <li class="never" data-hits="" data-linenumber="137">
           
           
           <code class="ruby"></code>

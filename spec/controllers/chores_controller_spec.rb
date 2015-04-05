@@ -59,8 +59,8 @@ describe ChoresController, :type => :controller do
     it "assigns chores with correct context, type and user as @chores" do
       chore = Chore.create! valid_attributes
       wrong_user_chore = Chore.create!({"title" => "test chore", "user_id" => 2,"email_id" => 1,"choretype_id" => 1,"project_id" => 1, "context_id" => 1})
-     wrong_type_chore = Chore.create!({"title" => "test chore", "user_id" => 1,"email_id" => 1,"choretype_id" => 2,"project_id" => 1, "context_id" => 1})
-    wrong_context_chore = Chore.create!({"title" => "test chore", "user_id" => 1,"email_id" => 1,"choretype_id" => 2,"project_id" => 1,"context_id" => 2})
+      wrong_type_chore = Chore.create!({"title" => "test chore", "user_id" => 1,"email_id" => 1,"choretype_id" => 2,"project_id" => 1, "context_id" => 1})
+      wrong_context_chore = Chore.create!({"title" => "test chore", "user_id" => 1,"email_id" => 1,"choretype_id" => 2,"project_id" => 1,"context_id" => 2})
       get :index, {"user_id" => 1,"choretype_id" => 1, "context_id" => 1}, valid_session
       expect(assigns(:chores)).to eq([chore])
       expect(assigns(:chores).length).to eq(1)
