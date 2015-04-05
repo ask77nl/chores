@@ -63,6 +63,7 @@ before_filter :authenticate_user!
     
       @appointments = Chore.all_today_and_missed_appointments(@active_context,choretype_appointment, current_user.id)
       @projects = Project.all_active_projects(@active_context,current_user.id )
+      @empty_projects = Project.empty_active_projects(@active_context,current_user.id )
     end
     
         respond_to do |format|

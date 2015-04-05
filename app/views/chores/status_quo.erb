@@ -6,14 +6,77 @@ No contexts yet, create one!
 <% else %>
  <% @contexts.each do |context| %>
     <% if context.id.to_s == @active_context.to_s%>
-     <li class="active"><%=link_to context.name, chores_path(:context => context.id, :choretype => @active_choretype.to_s) %></li>
+     <li class="active"><%=link_to context.name, status_quo_chores_path(:context => context.id, :choretype => @active_choretype.to_s) %></li>
     <% else %>
-     <li><%=link_to context.name, chores_path(:context => context.id, :choretype => @active_choretype.to_s) %></li>
+     <li><%=link_to context.name, status_quo_chores_path(:context => context.id, :choretype => @active_choretype.to_s) %></li>
     <% end %>
  <% end %>
   </ul>
 
-<h2>Listing <%= @chores.length  if @chores != nil%> active and ontime chores</h2>
+<h2>Listing <%= @appointments.length  if @appointments != nil%> today <%=Date.today%> and missed appointments</h2>
+
+<table class="table">
+   <tr>
+     <th>Project</th>
+     <th>Title</th>
+     <th>Email</th>
+     <th>Start Date</th>
+     <th>Deadline</th>
+     <th>Schedule</th>
+     <th></th>
+   </tr>
+
+ <% if @appointments != nil%>
+  <% @appointments.each do |chore| %>
+   <tr>
+     <td>
+        <%project_id_iterator = chore.project_id%>
+        <%project_path = ''%>
+        <%while project_id_iterator != nil%>
+          <%project_path =  link_to(@projects.find(project_id_iterator).title, edit_project_path(@projects.find(project_id_iterator))) +' > '+ project_path%>
+          <% project_id_iterator = @projects.find(project_id_iterator).parent_project_id %>
+        <%end%>
+        <%=project_path%>
+     </td>
+     <td><%= link_to chore.title, edit_chore_path(chore)%></td>
+     <td>
+       <%if chore.email == nil %>
+        -
+       <%else %>
+        <%= chore.email.subject %>
+       <%end %>
+     </td>
+     <td>
+       <% if chore.startdate != nil %>
+        <%= chore.startdate.to_s(:due_date) %>
+       <% else %>
+        -
+       <%end%>
+     </td>
+     <td>
+       <% if chore.deadline != nil %>
+        <%= chore.deadline.to_s(:due_date) %>
+       <% else %>
+        -
+       <%end%>
+     </td>
+     <td>
+      <% if(chore.schedule != {} and chore.schedule != nil)%>
+       <%= RecurringSelect.dirty_hash_to_rule(chore.schedule).to_s%>
+      <% else %>
+       -
+      <%end%>  
+     </td>
+     
+     <td><%= link_to "Delete", chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+   </tr>
+  <% end %>
+ <% else %>
+   <tr><td colspan=9>No appointments yet, create one!</td><tr>
+ <% end %>
+ </table>
+
+<h2>Listing <%= @chores.length  if @chores != nil%> active chores</h2>
 
 <table class="table">
    <tr>
@@ -78,66 +141,33 @@ No contexts yet, create one!
 
  <br />
  
- <h2>Listing <%= @appointments.length  if @appointments != nil%> today <%=Date.today%> and missed appointments</h2>
+<h2>Listing <%= @empty_projects.length  if @empty_projects != nil%> empty projects</h2>
 
 <table class="table">
    <tr>
-     <th>Project</th>
      <th>Title</th>
-     <th>Email</th>
-     <th>Start Date</th>
-     <th>Deadline</th>
-     <th>Schedule</th>
      <th></th>
    </tr>
 
- <% if @appointments != nil%>
-  <% @appointments.each do |chore| %>
+ <% if @empty_projects != nil%>
+  <% @empty_projects.each do |project| %>
    <tr>
      <td>
-        <%project_id_iterator = chore.project_id%>
-        <%project_path = ''%>
-        <%while project_id_iterator != nil%>
-          <%project_path =  link_to(@projects.find(project_id_iterator).title, edit_project_path(@projects.find(project_id_iterator))) +' > '+ project_path%>
-          <% project_id_iterator = @projects.find(project_id_iterator).parent_project_id %>
+        <%project_id_iterator = project.id%> 
+        <%project_path = ''%> 
+        <%while project_id_iterator != nil%> 
+          <%project_path =  link_to(Project.find(project_id_iterator).title, edit_project_path(Project.find(project_id_iterator))) +' > '+ project_path%> 
+          <% project_id_iterator = Project.find(project_id_iterator).parent_project_id %> 
         <%end%>
-        <%=project_path%>
+        <%=project_path%> 
      </td>
-     <td><%= link_to chore.title, edit_chore_path(chore)%></td>
-     <td>
-       <%if chore.email == nil %>
-        -
-       <%else %>
-        <%= chore.email.subject %>
-       <%end %>
-     </td>
-     <td>
-       <% if chore.startdate != nil %>
-        <%= chore.startdate.to_s(:due_date) %>
-       <% else %>
-        -
-       <%end%>
-     </td>
-     <td>
-       <% if chore.deadline != nil %>
-        <%= chore.deadline.to_s(:due_date) %>
-       <% else %>
-        -
-       <%end%>
-     </td>
-     <td>
-      <% if(chore.schedule != {} and chore.schedule != nil)%>
-       <%= RecurringSelect.dirty_hash_to_rule(chore.schedule).to_s%>
-      <% else %>
-       -
-      <%end%>  
-     </td>
-     
-     <td><%= link_to "Delete", chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         
+     <td><%= link_to "Delete", project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
    </tr>
-  <% end %>
+
+    <% end %>
  <% else %>
-   <tr><td colspan=9>No appointments yet, create one!</td><tr>
+   <tr><td colspan=2>No empty projects, good!</td><tr>
  <% end %>
  </table>
 

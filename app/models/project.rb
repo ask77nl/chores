@@ -24,6 +24,19 @@ class Project < ActiveRecord::Base
     return @all_projects
   end
   
+  def self.empty_active_projects(context_id,user_id)
+    if context_id == nil
+      context_id = Context.first.id
+    end
+    @empty_projects = Project.nested_set.leaves.joins("LEFT OUTER JOIN chores on projects.id = chores.project_id").where({projects: {context_id: context_id,user_id: user_id, someday: false}, chores: {id: nil}}).order("projects.lft asc")
+    
+    if @empty_projects.length > 0 
+      return @empty_projects
+    else
+      return nil
+    end
+  end
+  
   def self.all_someday_projects(context_id,user_id)
     if context_id == nil
       context_id = Context.first.id

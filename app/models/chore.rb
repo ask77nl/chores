@@ -41,30 +41,41 @@ class Chore < ActiveRecord::Base
   end
   
  def self.all_active_chores(context_id,choretype_id,user_id)
-   return self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id).where("startdate <= ? or startdate is null", Date.today)
+   all_chores = self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)
+   if all_chores
+     return all_chores.where("startdate <= ? or startdate is null", Date.today)
+   else
+     nil
+   end
+   
  end
  
  def self.all_today_and_missed_appointments(context_id,choretype_id,user_id)
    
    all_chores = self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)
    
-   #first get all simple appointments from today and past
-   appointments =  all_chores.where("startdate <= ? and schedule is null", Date.today)
+   if all_chores
+    #first get all simple appointments from today and past
    
-   #then get all active reoccurring events
+    appointments =  all_chores.where("startdate < ? and schedule is null", Date.tomorrow)
    
-   reoccurring_chores = all_chores.where("schedule is not null", Date.today)
+    #then get all active reoccurring events
+   
+    reoccurring_chores = all_chores.where("schedule is not null", Date.today)
       
-   for chore in reoccurring_chores do 
-        schedule = IceCube::Schedule.new()
-        schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))
-        if schedule.occurs_on?(Date.today)
-          appointments << chore
-        end
-    end
-   
-   return appointments
- end
+    for chore in reoccurring_chores do 
+          schedule = IceCube::Schedule.new()
+          schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))
+          if schedule.occurs_on?(Date.today)
+            appointments << chore
+          end
+      end
+      
+    return appointments
+   else
+     nil
+   end
+end
 
  def self.appointment_occurrences(context_id,start_time, end_time,user_id)
    if context_id != nil
@@ -98,7 +109,6 @@ class Chore < ActiveRecord::Base
  def schedule=(new_schedule)
    
      if new_schedule == nil or new_schedule == 'null'
-     
       write_attribute(:schedule, nil)
      else
       write_attribute(:schedule, RecurringSelect.dirty_hash_to_rule(new_schedule).to_hash)
