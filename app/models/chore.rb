@@ -57,11 +57,11 @@ class Chore < ActiveRecord::Base
    if all_chores
     #first get all simple appointments from today and past
    
-    appointments =  all_chores.where("startdate < ? and schedule is null", Date.tomorrow)
+    appointments =  all_chores.where("startdate < ? and schedule is null", Time.zone.now.to_date + 1.day)
    
     #then get all active reoccurring events
    
-    reoccurring_chores = all_chores.where("schedule is not null", Date.today)
+    reoccurring_chores = all_chores.where("schedule is not null", Time.zone.now.to_date)
       
     for chore in reoccurring_chores do 
           schedule = IceCube::Schedule.new()
