@@ -129,7 +129,7 @@ before_filter :authenticate_user!
 
     # we use list of projects and emails on the view, need to prepare them
    
-   @projects = Project.all_active_projects(params[:context_id],current_user.id )
+   @projects = Project.all_active_projects(params[:context],current_user.id )
    @emails = Email.where("user_id = ?",current_user.id)
 
     respond_to do |format|

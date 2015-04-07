@@ -6,9 +6,9 @@ No contexts yet, create one!
 <% else %>
  <% @contexts.each do |context| %>
     <% if context.id.to_s == @active_context.to_s%>
-     <li class="active"><%=link_to context.name, status_quo_chores_path(:context => context.id, :choretype => @active_choretype.to_s) %></li>
+     <li class="active"><%=link_to context.name, status_quo_chores_path(:context => context.id) %></li>
     <% else %>
-     <li><%=link_to context.name, status_quo_chores_path(:context => context.id, :choretype => @active_choretype.to_s) %></li>
+     <li><%=link_to context.name, status_quo_chores_path(:context => context.id) %></li>
     <% end %>
  <% end %>
   </ul>

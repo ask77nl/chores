@@ -15,7 +15,7 @@ load_and_authorize_resource
   # GET /projects.json
   def index
     #by default show only active projects, not someday projects
-    @projects = Project.all_active_projects(params[:context_id],current_user.id )
+    @projects = Project.all_active_projects(params[:context],current_user.id )
 
     respond_to do |format|
       format.html # index.html.erb

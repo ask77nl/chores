@@ -20,7 +20,9 @@ class Project < ActiveRecord::Base
     end
    
     #@all_projects = Project.where(:context_id => context_id, :user_id =>user_id, :someday => false)
-    @all_projects = Project.nested_set.select('*').where(:context_id => context_id, :user_id =>user_id, :someday => false)
+    #temporary show all Projects from all contexts
+    @all_projects = Project.nested_set.select('*').where(:user_id =>user_id, :someday => false)
+    #@all_projects = Project.nested_set.select('*').where(:context_id => context_id, :user_id =>user_id, :someday => false)
     return @all_projects
   end
   
