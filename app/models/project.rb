@@ -59,4 +59,17 @@ class Project < ActiveRecord::Base
       write_attribute(:parent_project_id, parent_project_id)
     end
   end
+  
+  def context_id=(context_id)
+    #if projects was childred, they must all get the same id
+    #puts "launching setter"
+    children_projects = self.descendants
+    
+    children_projects.each do |project|
+      project.update!(context_id: context_id)
+      puts "updating project "+project.id.to_s+" with context"+ context_id.to_s
+    end
+    write_attribute(:context_id, context_id)
+    
+  end
 end
