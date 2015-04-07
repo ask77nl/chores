@@ -53,10 +53,37 @@ describe Project do
       @project = Project.find(@project.id)
       expect(@project.parent_project_id).to eq(nil)
     end
+  end
     
+  describe "When we have projects without chores" do
+    before do
+      @chore = FactoryGirl.create(:chore,project_id: @project.id, user_id: @user.id) 
+      @empty_project = FactoryGirl.create(:project, title: "Empty Title", context_id: @context.id, user_id: @user.id, someday: false)
+    end
+    it "only they should be returned by empty_active_projects" do
+     expect(Project.empty_active_projects(@context.id, @user.id)).to eq([@empty_project])
+    end
  end
-
-
+ 
+  describe "When we update the context on parent project" do
+    before do
+      
+      @child_project = Project.create(:title => "Someday Title",:parent_project_id => @project.id, :context_id => @context.id, :user_id => @user.id)
+      @project.reload
+      @another_context =FactoryGirl.create(:context)
+      #puts "project id is "+@project.id.to_s
+      #puts "child project  id is "+@child_project.id.to_s
+      #puts "child parent project id is "+@child_project.parent_project_id.to_s
+    end
+    it "The children should get the context updated too" do
+      @project.update!(context_id:@another_context.id)
+      
+      @child_project = Project.find(@child_project.id)
+      @project = Project.find(@project.id)
+      #puts "projects context is now "+@project.context_id.to_s
+      expect(@child_project.context_id).to eq(@another_context.id)
+    end
+ end
 
 
 end
