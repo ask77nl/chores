@@ -27,7 +27,6 @@ describe ChoresController, :type => :controller do
     @user = FactoryGirl.create(:user)
     sign_in @user
  
-   # $context = Context.create!({ "name" => "work" , "user_id" => $user.id})
     @context = FactoryGirl.create(:context, user_id: @user.id)
     @choretype = FactoryGirl.create(:choretype)
     @project = FactoryGirl.create(:project,user_id: @user.id,context_id: @context.id)
@@ -56,13 +55,50 @@ describe ChoresController, :type => :controller do
   end
 
   describe "GET index" do
-    it "assigns chores with correct context, type and user as @chores" do
-      chore = Chore.create! valid_attributes
+    it "assigns chores with correct context, type and user as @chores, also fills up all required global variables" do
+      chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
       wrong_user_chore = Chore.create!({"title" => "test chore", "user_id" => 2,"email_id" => 1,"choretype_id" => 1,"project_id" => 1, "context_id" => 1})
       wrong_type_chore = Chore.create!({"title" => "test chore", "user_id" => 1,"email_id" => 1,"choretype_id" => 2,"project_id" => 1, "context_id" => 1})
       wrong_context_chore = Chore.create!({"title" => "test chore", "user_id" => 1,"email_id" => 1,"choretype_id" => 2,"project_id" => 1,"context_id" => 2})
       get :index, {"user_id" => 1,"choretype_id" => 1, "context_id" => 1}, valid_session
       expect(assigns(:chores)).to eq([chore])
+      expect(assigns(:contexts)).to eq([@context])
+      expect(assigns(:choretypes)).to eq([@choretype])
+      expect(assigns(:projects)).to eq([@project])
+      expect(assigns(:chores).length).to eq(1)
+    end
+  end
+  
+  describe "GET status_quo" do
+    it "assigns correct chores and projects" do
+      chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
+      @choretype_appointment = 3
+      todays_appointment = FactoryGirl.create(:chore, choretype_id: @choretype_appointment, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now.to_date, schedule: nil)
+      empty_project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
+      get :status_quo, {"user_id" => 1,"context_id" => 1}, valid_session
+      expect(assigns(:chores)).to eq([chore])
+      expect(assigns(:appointments)).to eq([todays_appointment])
+      expect(assigns(:contexts)).to eq([@context])
+      expect(assigns(:choretypes)).to eq([@choretype])
+      expect(assigns(:projects)).to eq([@project, empty_project])
+      expect(assigns(:empty_projects)).to eq([empty_project])
+      expect(assigns(:chores).length).to eq(1)
+    end
+  end
+  
+  describe "GET occurrences" do
+    it "assigns occurrences from the correct chores" do
+      chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
+      @choretype_appointment = 3
+      todays_appointment = FactoryGirl.create(:chore, choretype_id: @choretype_appointment, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now.to_date, schedule: nil)
+      empty_project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
+      get :status_quo, {"user_id" => 1,"context_id" => 1}, valid_session
+      expect(assigns(:chores)).to eq([chore])
+      expect(assigns(:appointments)).to eq([todays_appointment])
+      expect(assigns(:contexts)).to eq([@context])
+      expect(assigns(:choretypes)).to eq([@choretype])
+      expect(assigns(:projects)).to eq([@project, empty_project])
+      expect(assigns(:empty_projects)).to eq([empty_project])
       expect(assigns(:chores).length).to eq(1)
     end
   end
