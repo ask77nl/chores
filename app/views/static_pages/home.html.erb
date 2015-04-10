@@ -12,28 +12,38 @@
   </div> 
    <h3>List of new features:</h3>
     <ul>
-        <li>Write controller and feature tests for status quo page</li>
+        <li>Write model and controller specs for occurrences and feature tests for status quo page</li>
         <li>Create dated and timed appointments, with end date and start date, display them correctly in the calendar</li>
-        <li>Redo the chores/calendar/project tree navigation, make it more logical</li>
+        <li>make "review" view from projects - projects with all chores</li>
+        <li>Redo the status quo/review/waiting for tree navigation, make it more logical</li>
         <li>Dependencies removal (don't forget the tests)</li>
         <li>separate view for done chores/projects</li>
-        <li>Custom editing of occurrences</li>
+        <li>occurrences removal. First/last occurence removal and in the middle as well</li>
         <li>Projects by context (again context bigger!)
         <li>separate type of chores that are next step</li>
     </ul>
   <h3>List of bugs/improvements:</h3>
     <ul>
+        <li>put new chore button on top of the list</li>
+        <li>if dates are entered - make chore an appointment automatically via JS</li>
+        <li>if choretype = waiting for, clear dates automatically via JS</li>
+        <li>if parent project is changes, context should change automatically via JS</li>
+        <li>make lists of chores more compact</li>
+        <li>let chore creation by clicking by a project in the review window</li>
+        <li>import all appointments from Google Calendar</li>
+        <li>Orphan tasks should be a part of status quo</li>
+        <li>if there is no appointments or empty projects - these parts should not appear at all</li>
+        
         <li>Start date and deadline are always set in update/create controllers with 0:00 time</li>
         <li>Don't forget unit tests for correct context by new and edit controllers (they should have a dropdown with projects of correct context)</li>
         <li>Default calendar should be week and should start from Monday</li>
-        <li>Remove intermediate show view when creating objects</li>
+        <li>Remove intermediate show view when creating objects, make sure it's redirected on the correct listing page (cookies? url update to keep it restful?)</li>
         <li>Projects are not filtered by context</li>
-        <li>Context is not saved, choretype is not saved when clicking on "new"</li> 
-        <li>Chore with dates should become appointment, not todo</li>
+        <li>when clicking on "new", choretype and context should be correctly prefilled, url params should exist in the "new" and "edit buttons</li> 
         <li>Clicking back after update of a someday project moves to the list of active projects</li>
         <li>Projects, chores, emails are always pluralized in the header</li>
         <li>The user creation and devise rights don't have unit tests</li>
-        <li>Refactor rspec tests to test one thing at a time (scenarios)?</li>
+        <li>nice small logo's for choretypes in the review window</li>
     </ul>
  
   <% else %>
