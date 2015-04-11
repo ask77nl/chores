@@ -158,9 +158,25 @@ describe "when there are chores of several contexts and types" do
      expect(page).to have_no_content(wrong_project.title)
      expect(page).to have_no_content(wrong_empty_project.title)
      expect(page).to have_no_content(wrong_todays_appointment.title)
-     
-     
+    end
+  end
+  
+    describe "when there are different types of chores to be done today" do
+    it "all of them should be displayed on calendar view of chores", :js => true do
       
+     @choretype_appointment = 3
+      daily_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id)
+      todays_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id, startdate:Time.zone.now.to_date, deadline: Time.zone.now.to_date)
+      next_year_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id, startdate:Time.zone.now.to_date+365, deadline: Time.zone.now.to_date+365)
+      
+     visit chores_path(:context => @context.id)
+
+     expect(page.find(:css, "fc-title").find(:text,daily_chore.title)).to be_not_nil
+     
+     expect(page).to have_content(daily_chore.title)
+     expect(page).to have_content(todays_chore.title)
+     expect(page).to have_no_content(next_year_chore.title)
+     
     end
   end
   
@@ -183,8 +199,16 @@ describe "when there are chores of several contexts and types" do
      new_title = "new title"
      fill_in('chore_title', :with => new_title)
 
+     find(:css, "#chore_all_day").set(false)
+     
+     select('07 AM', :from => 'start_time_time_4i')
+     select('30', :from => 'start_time_time_5i')
+     
+     select('09 AM', :from => 'end_time_time_4i')
+     select('30', :from => 'end_time_time_5i')
+     
      select(new_project.title,:from => 'chore[project_id]')
-
+     
      click_button("Update Chore")
  
      expect(page).to have_content('Title: '+new_title)
@@ -194,6 +218,21 @@ describe "when there are chores of several contexts and types" do
 
      expect(page).to have_content(new_title)
      expect(page).to have_content(new_project.title)
+     
+     #coming to edit second time, the times should be set up correctly
+     click_link(new_title, :href =>"/chores/"+chore.id.to_s+"/edit")
+     
+     my_box = find('#chore_all_day')
+     expect(my_box).not_to be_checked 
+     
+     puts "selected start time is: "+find(:css, "#start_time_time_4i").find('option[selected]').text
+     
+     expect(page).to have_select('start_time_time_4i', :selected => '07 AM');
+     expect(page).to have_select('start_time_time_5i', :selected => '30');
+     expect(page).to have_select('end_time_time_4i', :selected => '09 AM');
+     expect(page).to have_select('end_time_time_5i', :selected => '30');
+     
+      
    end
    
     it "if the project is marked as Someday, the chore should disappear" do

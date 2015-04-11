@@ -91,13 +91,14 @@ describe ChoresController, :type => :controller do
       @choretype_appointment = 3
       daily_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id)
       
+      todays_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id, startdate:Time.zone.now.to_date, deadline: Time.zone.now.to_date)
       #puts "created schedule "+daily_chore.schedule.to_s
       
-      occurrence = Chore.appointment_occurrences(@context,Time.zone.now.to_date,Time.zone.now.to_date, @user.id)
+      occurrences = Chore.appointment_occurrences(@context,Time.zone.now.to_date,Time.zone.now.to_date, @user.id)
       get :occurrences,  { :format => :json , "context" => @context.id , "start"=> Time.zone.now.strftime("%Y-%m-%d"), "end" => Time.zone.now.strftime("%Y-%m-%d")}, valid_session
       
       expect(assigns(:contexts)).to eq([@context])
-      expect(assigns(:occurrences)).to eq(occurrence)
+      expect(assigns(:occurrences)).to eq(occurrences)
       
     end
   end

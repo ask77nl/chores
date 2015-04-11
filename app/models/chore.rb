@@ -88,15 +88,20 @@ end
       #puts "got chores: "+all_chores.length.to_s
       
      for chore in all_chores do 
-       #schedule = IceCube::Schedule.from_yaml(chore[:schedule])
+       #if a chore has dates but no schedule
+       if (chore[:startdate]!= nil and chore[:deadline] != nil and (chore[:schedule] == nil or chore[:schedule] == {}) )
+         appointment_hash = {id: chore.id, title: chore.title, start: chore.startdate , end: chore.deadline, url: "/chores/"+chore.id.to_s+"/edit", allDay: chore.all_day}
+         @all_occurrences << appointment_hash
+       end
+       
+       #if a chore has a schedule
        if (chore[:schedule] != {} and chore[:schedule] != nil)
-        
-        schedule = IceCube::Schedule.new(start_time)
+                schedule = IceCube::Schedule.new(start_time)
         schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))
         #puts "analyzing schedule : "+schedule.to_s
         
         for occurence_date in schedule.occurrences_between(start_time, end_time) do
-           occurrence_hash = {id: chore.id, title: chore.title, start: occurence_date.start_time , end: occurence_date.end_time, url: "/chores/"+chore.id.to_s+"/edit", allDay: true}
+           occurrence_hash = {id: chore.id, title: chore.title, start: occurence_date.start_time , end: occurence_date.end_time, url: "/chores/"+chore.id.to_s+"/edit", allDay: chore.all_day}
           @all_occurrences << occurrence_hash
         end
        end

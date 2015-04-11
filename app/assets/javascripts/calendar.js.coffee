@@ -7,7 +7,8 @@ $(document).ready ->
       left: 'prev,next today',
       center: 'title',
       right: 'month,agendaWeek,agendaDay'
-    defaultView: 'month',
+    defaultView: 'agendaWeek',
+    firstDay: 1
     height: 500,
     slotMinutes: 30,
 
