@@ -162,21 +162,28 @@ describe "when there are chores of several contexts and types" do
   end
   
     describe "when there are different types of chores to be done today" do
+    
+    self.use_transactional_fixtures = false
+    
     it "all of them should be displayed on calendar view of chores", :js => true do
-      
+     
+
      @choretype_appointment = 3
       daily_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id)
-      todays_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id, startdate:Time.zone.now.to_date, deadline: Time.zone.now.to_date)
-      next_year_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id, startdate:Time.zone.now.to_date+365, deadline: Time.zone.now.to_date+365)
+      todays_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id, startdate:Time.zone.now.to_date, deadline: Time.zone.now.to_date, schedule: nil )
+      next_year_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id, startdate:Time.zone.now.to_date+365, deadline: Time.zone.now.to_date+365, schedule: nil)
       
-     visit chores_path(:context => @context.id)
+     visit chores_path(:context => @context.id, :choretype => @choretype_appointment)
 
-     expect(page.find(:css, "fc-title").find(:text,daily_chore.title)).to be_not_nil
      
-     expect(page).to have_content(daily_chore.title)
-     expect(page).to have_content(todays_chore.title)
-     expect(page).to have_no_content(next_year_chore.title)
+     expect(page).to have_css("span",:text => daily_chore.title, :count =>7)
+     expect(page).to have_css("span",:text => todays_chore.title, :count =>1)
+     expect(page).to have_css("span",:text => next_year_chore.title, :count =>0)
      
+     #expect(page.all(:css, ".fc-title").find(:text => daily_chore.title)).not_to be_nil
+     #expect(page.all(:css, ".fc-title").find(:text => todays_chore.title)).not_to be_nil
+     #expect(page.all(:css, ".fc-title").find(:text => next_year_chore.title)).to be_nil
+          
     end
   end
   

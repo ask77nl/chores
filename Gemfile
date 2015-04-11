@@ -38,7 +38,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara', ' ~> 2.4.1'
+  gem 'capybara'
   gem 'cucumber-rails', :require => false
   gem "factory_girl"
   gem "factory_girl_rails", "~> 4.4.1"
@@ -46,6 +46,7 @@ group :test do
   gem "email_spec"
   gem 'faker', '~> 1.4.2'
   gem 'simplecov'
+  gem 'selenium-webdriver'
 end
 
 # Gems used only for assets and not required
