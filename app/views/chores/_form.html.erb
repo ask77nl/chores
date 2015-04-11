@@ -22,6 +22,10 @@
     <%= f.label :project %><br />
     <%= select_tag :project_id, nested_options(@projects, :selected => @chore.project), class: :nested_options, name: "chore[project_id]", id: "chore[project_id]" %>
   </div>
+ <div class="field">
+    <%= f.label :next_action %><br />
+    <%= f.check_box :next_action %>
+  </div>
   <div class="field">
     <%= f.label :choretype %><br />
     <%= collection_select(:chore, :choretype_id, Choretype.all, :id, :name) %>

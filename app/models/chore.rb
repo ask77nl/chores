@@ -11,7 +11,7 @@ class Chore < ActiveRecord::Base
   
   
   
-  attr_accessible :startdate, :deadline, :email_id, :project_id, :title, :choretype_id, :user_id, :schedule
+  attr_accessible :startdate, :deadline, :email_id, :project_id, :title, :choretype_id, :user_id, :schedule, :all_day, :next_action
   belongs_to :email
   belongs_to :user
   belongs_to :project

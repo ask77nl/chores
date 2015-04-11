@@ -22,6 +22,30 @@
     <%end%>
   </div>
  
+  <div class="field">
+    <%= f.label :all_day %><br />
+    <%= f.check_box :all_day %>
+  </div>
+     
+  <div class="field" >
+    Start time<br />
+    <%=@chore.startdate.strftime('%H')%>
+    <%=@chore.startdate.strftime('%M')%>
+    <% if @chore.startdate != nil %>
+     <%= time_select "start_time", "method",{:ampm=> true}, {:default => {:hour => @chore.startdate.strftime('%H'), :minute => @chore.startdate.strftime('%M')}} %>
+    <% else %>
+      <%= time_select "start_time", "method",{:ampm=> true} %>
+    <%end%>
+  </div> 
+     
+  <div class="field" >
+    End time<br />
+    <% if @chore.deadline != nil %>
+     <%= time_select "end_time", "method",{:ampm=> true}, {:default => {:hour => @chore.deadline.strftime('%H'), :minute => @chore.deadline.strftime('%M')}} %>
+    <% else %>
+     <%= time_select "end_time", "method",{:ampm=> true} %>
+    <%end%>
+  </div>     
  
  </div>
 </div>
