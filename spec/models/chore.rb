@@ -77,6 +77,17 @@ describe "when requesting all active chores " do
   end
 end
 
+describe "when requesting all appointment occurrences for today  " do
+ it "should return an occurrence of a daily appointment" do
+   @choretype_appointment = 3
+   daily_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id)
+   
+   occurrence = {:id=>daily_chore.id,:title=>daily_chore.title,:start=>Time.zone.now.to_date.strftime("%Y-%m-%d 00:00:00 -0400"),:end=>Time.zone.now.to_date.strftime("%Y-%m-%d 00:00:00 -0400"),:url=>"/chores/"+daily_chore.id.to_s+"/edit", :allDay=>true}
+   
+   expect(Chore.appointment_occurrences(@context,Time.zone.now.to_date,Time.zone.now.to_date, @user.id)).to eq([occurrence])   
+  end
+end
+
 describe "when requesting all today and missed appointments" do
   before do
    @choretype_appointment = 3

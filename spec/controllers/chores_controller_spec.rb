@@ -88,18 +88,17 @@ describe ChoresController, :type => :controller do
   
   describe "GET occurrences" do
     it "assigns occurrences from the correct chores" do
-      chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
       @choretype_appointment = 3
-      todays_appointment = FactoryGirl.create(:chore, choretype_id: @choretype_appointment, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now.to_date, schedule: nil)
-      empty_project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
-      get :status_quo, {"user_id" => 1,"context_id" => 1}, valid_session
-      expect(assigns(:chores)).to eq([chore])
-      expect(assigns(:appointments)).to eq([todays_appointment])
+      daily_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id)
+      
+      #puts "created schedule "+daily_chore.schedule.to_s
+      
+      occurrence = Chore.appointment_occurrences(@context,Time.zone.now.to_date,Time.zone.now.to_date, @user.id)
+      get :occurrences,  { :format => :json , "context" => @context.id , "start"=> Time.zone.now.strftime("%Y-%m-%d"), "end" => Time.zone.now.strftime("%Y-%m-%d")}, valid_session
+      
       expect(assigns(:contexts)).to eq([@context])
-      expect(assigns(:choretypes)).to eq([@choretype])
-      expect(assigns(:projects)).to eq([@project, empty_project])
-      expect(assigns(:empty_projects)).to eq([empty_project])
-      expect(assigns(:chores).length).to eq(1)
+      expect(assigns(:occurrences)).to eq(occurrence)
+      
     end
   end
 

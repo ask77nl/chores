@@ -87,6 +87,8 @@ before_filter :authenticate_user!
         @active_context = params[:context].to_s
       end
      
+    #puts "got params  "+params.to_s
+    
     begin
          start_date = Date.parse(params[:start])
       rescue ArgumentError

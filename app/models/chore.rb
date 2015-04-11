@@ -85,12 +85,16 @@ end
       @all_occurrences = []
       all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: 3}, projects: {context_id: context_id, someday: false}})
       
+      #puts "got chores: "+all_chores.length.to_s
       
      for chore in all_chores do 
        #schedule = IceCube::Schedule.from_yaml(chore[:schedule])
        if (chore[:schedule] != {} and chore[:schedule] != nil)
+        
         schedule = IceCube::Schedule.new(start_time)
         schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))
+        #puts "analyzing schedule : "+schedule.to_s
+        
         for occurence_date in schedule.occurrences_between(start_time, end_time) do
            occurrence_hash = {id: chore.id, title: chore.title, start: occurence_date.start_time , end: occurence_date.end_time, url: "/chores/"+chore.id.to_s+"/edit", allDay: true}
           @all_occurrences << occurrence_hash
