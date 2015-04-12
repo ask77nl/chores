@@ -232,7 +232,7 @@ describe "when there are chores of several contexts and types" do
      my_box = find('#chore_all_day')
      expect(my_box).not_to be_checked 
      
-     puts "selected start time is: "+find(:css, "#start_time_time_4i").find('option[selected]').text
+     #puts "selected start time is: "+find(:css, "#start_time_time_4i").find('option[selected]').text
      
      expect(page).to have_select('start_time_time_4i', :selected => '07 AM');
      expect(page).to have_select('start_time_time_5i', :selected => '30');

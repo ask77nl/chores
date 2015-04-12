@@ -14,27 +14,27 @@
       <img src="./assets/0.9.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-12T17:25:36-04:00">2015-04-12T17:25:36-04:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-12T17:29:55-04:00">2015-04-12T17:29:55-04:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">88.4%</span></span>
+    (<span class="covered_percent"><span class="yellow">87.76%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         4.25
+         4.19
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>23</b> files in total.
-    <b>526</b> relevant lines. 
-    <span class="green"><b>465</b> lines covered</span> and
-    <span class="red"><b>61</b> lines missed </span>
+    <b>531</b> relevant lines. 
+    <span class="green"><b>466</b> lines covered</span> and
+    <span class="red"><b>65</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -62,12 +62,12 @@
       
       <tr>
         <td class="strong"><a href="#cd52225959f168f49186ccb0df56a1e605953ba7" class="src_link" title="app/controllers/chores_controller.rb">app/controllers/chores_controller.rb</a></td>
-        <td class="green strong">91.3 %</td>
-        <td>240</td>
-        <td>115</td>
-        <td>105</td>
-        <td>10</td>
-        <td>3.5</td>
+        <td class="yellow strong">88.33 %</td>
+        <td>242</td>
+        <td>120</td>
+        <td>106</td>
+        <td>14</td>
+        <td>3.3</td>
       </tr>
       
       <tr>
@@ -289,20 +289,20 @@
           <div class="file_list_container" id="Controllers">
   <h2>
     <span class="group_name">Controllers</span>
-    (<span class="covered_percent"><span class="yellow">86.44%</span></span>
+    (<span class="covered_percent"><span class="yellow">85.52%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.63
+         2.58
        </span>
     </span> hits/line)
   </h2>
   <a name="Controllers"></a>
   <div>
     <b>8</b> files in total.
-    <b>354</b> relevant lines. 
-    <span class="green"><b>306</b> lines covered</span> and
-    <span class="red"><b>48</b> lines missed </span>
+    <b>359</b> relevant lines. 
+    <span class="green"><b>307</b> lines covered</span> and
+    <span class="red"><b>52</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -330,12 +330,12 @@
       
       <tr>
         <td class="strong"><a href="#cd52225959f168f49186ccb0df56a1e605953ba7" class="src_link" title="app/controllers/chores_controller.rb">app/controllers/chores_controller.rb</a></td>
-        <td class="green strong">91.3 %</td>
-        <td>240</td>
-        <td>115</td>
-        <td>105</td>
-        <td>10</td>
-        <td>3.5</td>
+        <td class="yellow strong">88.33 %</td>
+        <td>242</td>
+        <td>120</td>
+        <td>106</td>
+        <td>14</td>
+        <td>3.3</td>
       </tr>
       
       <tr>
@@ -810,11 +810,11 @@
         <div class="source_table" id="cd52225959f168f49186ccb0df56a1e605953ba7">
   <div class="header">
     <h3>app/controllers/chores_controller.rb</h3>
-    <h4><span class="green">91.3 %</span> covered</h4>
+    <h4><span class="yellow">88.33 %</span> covered</h4>
     <div>
-      <b>115</b> relevant lines. 
-      <span class="green"><b>105</b> lines covered</span> and
-      <span class="red"><b>10</b> lines missed.</span>
+      <b>120</b> relevant lines. 
+      <span class="green"><b>106</b> lines covered</span> and
+      <span class="red"><b>14</b> lines missed.</span>
     </div>
   </div>
   
@@ -1757,238 +1757,238 @@
           <code class="ruby">    if(params[:chore][:deadline] != &#39;&#39; and params[:chore][:deadline] != nil and params[:chore][:deadline] != &quot;not set&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="157">
+        <li class="covered" data-hits="1" data-linenumber="157">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">      </code>
+          <code class="ruby">        end_datetime = DateTime.strptime(params[:chore][:deadline], &quot;%m/%d/%Y&quot;)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="158">
           <span class="hits">1</span>
           
-          <code class="ruby">      start_datetime = DateTime.strptime(params[:chore][:deadline], &quot;%m/%d/%Y&quot;)</code>
+          <code class="ruby">        end_datetime=end_datetime.change(offset:&quot;-0400&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="159">
-          
-          
-          <code class="ruby">      </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="160">
+        <li class="covered" data-hits="1" data-linenumber="159">
           <span class="hits">1</span>
           
-          <code class="ruby">      if(params[:chore][:all_day] == false)</code>
+          <code class="ruby">        if(params[:chore][:all_day] == &#39;0&#39;)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="161">
+        <li class="missed" data-hits="0" data-linenumber="160">
           
           
-          <code class="ruby">        start_datetime+=Time.parse(params[:start_time][:time].values.join(&quot;-&quot;)).seconds_since_midnight.seconds</code>
+          <code class="ruby">          end_datetime=end_datetime.change(hour: params[:end_time][&quot;time(4i)&quot;].to_i, min: params[:end_time][&quot;time(5i)&quot;].to_i )</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="162">
+        <li class="never" data-hits="" data-linenumber="161">
           
           
-          <code class="ruby">      end  </code>
+          <code class="ruby">        end  </code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="162">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        params[:chore][:deadline]=  end_datetime.strftime(&quot;%Y-%m-%d %H:%M %z&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="163">
           
           
-          <code class="ruby">      </code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="164">
-          <span class="hits">1</span>
-          
-          <code class="ruby">      params[:chore][:deadline]=  start_datetime.strftime(&quot;%Y-%m-%d %H:%M %z&quot;)</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="165">
-          
-          
-          <code class="ruby">      </code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="166">
-          
-          
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="167">
+        <li class="covered" data-hits="6" data-linenumber="164">
           <span class="hits">6</span>
           
-          <code class="ruby">    if(params[:chore][:startdate] != &quot;&quot; and params[:chore][:startdate] != nil and params[:chore][:startdate] != &quot;not set&quot;)</code>
+          <code class="ruby">    if(params[:chore][:startdate] != &#39;&#39; and params[:chore][:startdate] != nil and params[:chore][:startdate] != &quot;not set&quot;)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="165">
+          
+          
+          <code class="ruby">        start_datetime = DateTime.strptime(params[:chore][:startdate], &quot;%m/%d/%Y&quot;)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="166">
+          
+          
+          <code class="ruby">        start_datetime=start_datetime.change(offset:&quot;-0400&quot;)</code>
+        </li>
+      
+        <li class="missed" data-hits="0" data-linenumber="167">
+          
+          
+          <code class="ruby">        if(params[:chore][:all_day] == &#39;0&#39;)</code>
         </li>
       
         <li class="missed" data-hits="0" data-linenumber="168">
           
           
-          <code class="ruby">      params[:chore][:startdate]=  DateTime.strptime(params[:chore][:startdate], &quot;%m/%d/%Y&quot;).strftime(&quot;%Y-%m-%d %z&quot;)</code>
+          <code class="ruby">          start_datetime=start_datetime.change(hour: params[:start_time][&quot;time(4i)&quot;].to_i, min: params[:start_time][&quot;time(5i)&quot;].to_i )</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="169">
           
           
-          <code class="ruby">      end </code>
+          <code class="ruby">        end  </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="170">
+        <li class="missed" data-hits="0" data-linenumber="170">
           
           
-          <code class="ruby">   # print &quot;create chores controller launched with &quot;, params,&quot;\n&quot;</code>
+          <code class="ruby">        params[:chore][:startdate]=  start_datetime.strftime(&quot;%Y-%m-%d %H:%M %z&quot;)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="171">
           
           
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="172">
+          
+          
+          <code class="ruby">   # print &quot;create chores controller launched with &quot;, params,&quot;\n&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="173">
+          
+          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="172">
+        <li class="covered" data-hits="6" data-linenumber="174">
           <span class="hits">6</span>
           
           <code class="ruby">    @chore = Chore.new(params[:chore])</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="173">
+        <li class="covered" data-hits="6" data-linenumber="175">
           <span class="hits">6</span>
           
           <code class="ruby">    @chore.user_id = current_user.id</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="174">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="175">
-          
-          
-          <code class="ruby">    #attempt to serialize schedule correctly</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="176">
           
           
-          <code class="ruby">    #@chore.schedule = IceCube::Schedule.from_yaml(params[:chore][:schedule])</code>
+          <code class="ruby"></code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="177">
           
           
+          <code class="ruby">    #attempt to serialize schedule correctly</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="178">
+          
+          
+          <code class="ruby">    #@chore.schedule = IceCube::Schedule.from_yaml(params[:chore][:schedule])</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="179">
+          
+          
           <code class="ruby">    </code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="178">
+        <li class="covered" data-hits="6" data-linenumber="180">
           <span class="hits">6</span>
           
           <code class="ruby">    respond_to do |format|</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="179">
+        <li class="covered" data-hits="6" data-linenumber="181">
           <span class="hits">6</span>
           
           <code class="ruby">      if @chore.save</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="180">
+        <li class="covered" data-hits="8" data-linenumber="182">
           <span class="hits">8</span>
           
           <code class="ruby">        format.html { redirect_to @chore, notice: &#39;Chore was successfully created.&#39; }</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="181">
+        <li class="covered" data-hits="4" data-linenumber="183">
           <span class="hits">4</span>
           
           <code class="ruby">        format.json { render json: @chore, status: :created, location: @chore }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="182">
+        <li class="never" data-hits="" data-linenumber="184">
           
           
           <code class="ruby">      else</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="183">
+        <li class="covered" data-hits="4" data-linenumber="185">
           <span class="hits">4</span>
           
           <code class="ruby">        format.html { render action: &quot;new&quot; }</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="184">
+        <li class="covered" data-hits="2" data-linenumber="186">
           <span class="hits">2</span>
           
           <code class="ruby">        format.json { render json: @chore.errors, status: :unprocessable_entity }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="185">
+        <li class="never" data-hits="" data-linenumber="187">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="186">
+        <li class="never" data-hits="" data-linenumber="188">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="187">
+        <li class="never" data-hits="" data-linenumber="189">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="188">
+        <li class="never" data-hits="" data-linenumber="190">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="189">
+        <li class="never" data-hits="" data-linenumber="191">
           
           
           <code class="ruby">  # PUT /chores/1</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="190">
+        <li class="never" data-hits="" data-linenumber="192">
           
           
           <code class="ruby">  # PUT /chores/1.json</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="191">
+        <li class="covered" data-hits="1" data-linenumber="193">
           <span class="hits">1</span>
           
           <code class="ruby">  def update</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="192">
+        <li class="covered" data-hits="5" data-linenumber="194">
           <span class="hits">5</span>
           
           <code class="ruby">    @chore = Chore.find(params[:id])</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="193">
+        <li class="covered" data-hits="5" data-linenumber="195">
           <span class="hits">5</span>
           
           <code class="ruby">    @chore.user_id = current_user.id</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="194">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="195">
-          
-          
-          <code class="ruby">  #  print &quot;chore update controller received params: &quot;, params,&quot;\n&quot;</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="196">
@@ -1997,265 +1997,277 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="197">
+        <li class="never" data-hits="" data-linenumber="197">
+          
+          
+          <code class="ruby">  #  print &quot;chore update controller received params: &quot;, params,&quot;\n&quot;</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="198">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="5" data-linenumber="199">
           <span class="hits">5</span>
           
           <code class="ruby">    respond_to do |format|</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="198">
+        <li class="covered" data-hits="5" data-linenumber="200">
           <span class="hits">5</span>
           
           <code class="ruby">      if(params[:chore][:deadline] != &#39;&#39; and params[:chore][:deadline] != nil and params[:chore][:deadline] != &quot;not set&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="199">
+        <li class="covered" data-hits="1" data-linenumber="201">
           <span class="hits">1</span>
           
           <code class="ruby">        end_datetime = DateTime.strptime(params[:chore][:deadline], &quot;%m/%d/%Y&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="200">
+        <li class="covered" data-hits="1" data-linenumber="202">
           <span class="hits">1</span>
           
           <code class="ruby">        end_datetime=end_datetime.change(offset:&quot;-0400&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="201">
+        <li class="covered" data-hits="1" data-linenumber="203">
           <span class="hits">1</span>
           
           <code class="ruby">        if(params[:chore][:all_day] == &#39;0&#39;)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="202">
-          <span class="hits">1</span>
-          
-          <code class="ruby">          end_datetime=end_datetime.change(hour: params[:end_time][&quot;time(4i)&quot;].to_i, min: params[:end_time][&quot;time(5i)&quot;].to_i )</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="203">
-          
-          
-          <code class="ruby">        end  </code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="204">
           <span class="hits">1</span>
           
-          <code class="ruby">        params[:chore][:deadline]=  end_datetime.strftime(&quot;%Y-%m-%d %H:%M %z&quot;)</code>
+          <code class="ruby">          end_datetime=end_datetime.change(hour: params[:end_time][&quot;time(4i)&quot;].to_i, min: params[:end_time][&quot;time(5i)&quot;].to_i )</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="205">
           
           
+          <code class="ruby">        end  </code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="206">
+          <span class="hits">1</span>
+          
+          <code class="ruby">        params[:chore][:deadline]=  end_datetime.strftime(&quot;%Y-%m-%d %H:%M %z&quot;)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="207">
+          
+          
           <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="206">
+        <li class="covered" data-hits="5" data-linenumber="208">
           <span class="hits">5</span>
           
           <code class="ruby">    if(params[:chore][:startdate] != &#39;&#39; and params[:chore][:startdate] != nil and params[:chore][:startdate] != &quot;not set&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="207">
+        <li class="covered" data-hits="1" data-linenumber="209">
           <span class="hits">1</span>
           
           <code class="ruby">        start_datetime = DateTime.strptime(params[:chore][:startdate], &quot;%m/%d/%Y&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="208">
+        <li class="covered" data-hits="1" data-linenumber="210">
           <span class="hits">1</span>
           
           <code class="ruby">        start_datetime=start_datetime.change(offset:&quot;-0400&quot;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="209">
+        <li class="covered" data-hits="1" data-linenumber="211">
           <span class="hits">1</span>
           
           <code class="ruby">        if(params[:chore][:all_day] == &#39;0&#39;)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="210">
+        <li class="covered" data-hits="1" data-linenumber="212">
           <span class="hits">1</span>
           
           <code class="ruby">          start_datetime=start_datetime.change(hour: params[:start_time][&quot;time(4i)&quot;].to_i, min: params[:start_time][&quot;time(5i)&quot;].to_i )</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="211">
+        <li class="never" data-hits="" data-linenumber="213">
           
           
           <code class="ruby">        end  </code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="212">
+        <li class="covered" data-hits="1" data-linenumber="214">
           <span class="hits">1</span>
           
           <code class="ruby">        params[:chore][:startdate]=  start_datetime.strftime(&quot;%Y-%m-%d %H:%M %z&quot;)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="213">
-          
-          
-          <code class="ruby">      end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="214">
-          
-          
-          <code class="ruby">    </code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="215">
           
           
-          <code class="ruby">       </code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="216">
           
           
-          <code class="ruby">      #attempt to serialize schedule correctly</code>
+          <code class="ruby">    </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="217">
           
           
-          <code class="ruby">      #@chore.schedule = IceCube::Schedule.from_yaml(params[:chore][:schedule])</code>
+          <code class="ruby">       </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="218">
           
           
+          <code class="ruby">      #attempt to serialize schedule correctly</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="219">
+          
+          
+          <code class="ruby">      #@chore.schedule = IceCube::Schedule.from_yaml(params[:chore][:schedule])</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="220">
+          
+          
           <code class="ruby">      </code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="219">
+        <li class="covered" data-hits="5" data-linenumber="221">
           <span class="hits">5</span>
           
           <code class="ruby">      if @chore.update_attributes(params[:chore])</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="220">
+        <li class="covered" data-hits="6" data-linenumber="222">
           <span class="hits">6</span>
           
           <code class="ruby">        format.html { redirect_to @chore, notice: &#39;Chore was successfully updated.&#39; }</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="221">
+        <li class="covered" data-hits="3" data-linenumber="223">
           <span class="hits">3</span>
           
           <code class="ruby">        format.json { head :no_content }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="222">
+        <li class="never" data-hits="" data-linenumber="224">
           
           
           <code class="ruby">      else</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="223">
+        <li class="covered" data-hits="4" data-linenumber="225">
           <span class="hits">4</span>
           
           <code class="ruby">        format.html { render action: &quot;edit&quot; }</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="224">
+        <li class="covered" data-hits="2" data-linenumber="226">
           <span class="hits">2</span>
           
           <code class="ruby">        format.json { render json: @chore.errors, status: :unprocessable_entity }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="225">
+        <li class="never" data-hits="" data-linenumber="227">
           
           
           <code class="ruby">      end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="226">
-          
-          
-          <code class="ruby">    end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="227">
-          
-          
-          <code class="ruby">  end</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="228">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="229">
           
           
-          <code class="ruby">  # DELETE /chores/1</code>
+          <code class="ruby">  end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="230">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="231">
+          
+          
+          <code class="ruby">  # DELETE /chores/1</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="232">
+          
+          
           <code class="ruby">  # DELETE /chores/1.json</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="231">
+        <li class="covered" data-hits="1" data-linenumber="233">
           <span class="hits">1</span>
           
           <code class="ruby">  def destroy</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="232">
+        <li class="covered" data-hits="3" data-linenumber="234">
           <span class="hits">3</span>
           
           <code class="ruby">    @chore = Chore.find(params[:id])</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="233">
+        <li class="covered" data-hits="3" data-linenumber="235">
           <span class="hits">3</span>
           
           <code class="ruby">    @chore.destroy</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="234">
+        <li class="never" data-hits="" data-linenumber="236">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="235">
+        <li class="covered" data-hits="3" data-linenumber="237">
           <span class="hits">3</span>
           
           <code class="ruby">    respond_to do |format|</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="236">
+        <li class="covered" data-hits="6" data-linenumber="238">
           <span class="hits">6</span>
           
           <code class="ruby">      format.html { redirect_to chores_url }</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="237">
+        <li class="covered" data-hits="3" data-linenumber="239">
           <span class="hits">3</span>
           
           <code class="ruby">      format.json { head :no_content }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="238">
+        <li class="never" data-hits="" data-linenumber="240">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="239">
+        <li class="never" data-hits="" data-linenumber="241">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="240">
+        <li class="never" data-hits="" data-linenumber="242">
           
           
           <code class="ruby">end</code>
