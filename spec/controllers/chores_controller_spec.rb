@@ -90,7 +90,6 @@ describe ChoresController, :type => :controller do
     it "assigns occurrences from the correct chores" do
       @choretype_appointment = 3
       daily_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id)
-      
       todays_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id, startdate:Time.zone.now.to_date, deadline: Time.zone.now.to_date)
       #puts "created schedule "+daily_chore.schedule.to_s
       
