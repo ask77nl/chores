@@ -96,7 +96,7 @@ end
        
        #if a chore has a schedule
        if (chore[:schedule] != {} and chore[:schedule] != nil)
-                schedule = IceCube::Schedule.new(start_time)
+        schedule = IceCube::Schedule.new(start_time)
         schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))
         #puts "analyzing schedule : "+schedule.to_s
         
@@ -116,16 +116,15 @@ end
  
  end
  
- def schedule=(new_schedule)
+ #def schedule=(new_schedule)
    
      #puts "received schedule "+new_schedule
-     if new_schedule == nil or new_schedule == 'null'
-      write_attribute(:schedule, nil)
-     else
-      write_attribute(:schedule, RecurringSelect.dirty_hash_to_rule(new_schedule).to_hash)
-      
-     end
-  end
+ #    if new_schedule == nil or new_schedule == 'null'
+ #     write_attribute(:schedule, nil)
+ #    else
+ #     write_attribute(:schedule, RecurringSelect.dirty_hash_to_rule(new_schedule).to_hash)
+ #    end
+ # end
  
  def converted_schedule
   the_schedule = Schedule.new(self.start_date)

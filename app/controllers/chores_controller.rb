@@ -215,10 +215,22 @@ before_filter :authenticate_user!
       end
     
        
-      #attempt to serialize schedule correctly
-      #@chore.schedule = IceCube::Schedule.from_yaml(params[:chore][:schedule])
+      #update schedule start_time and end_time
+      schedule = IceCube::Schedule.new()
+       if(params[:chore][:startdate] != '' and params[:chore][:startdate] != nil and params[:chore][:startdate] != "not set")
+         schedule.start_time = params[:chore][:startdate]
+       end
       
-      if @chore.update_attributes(params[:chore])
+      if(params[:chore][:deadline] != '' and params[:chore][:deadline] != nil and params[:chore][:deadline] != "not set")
+        schedule.end_time = params[:chore][:deadline]
+      end
+      
+      schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(params[:chore][:schedule]))
+      
+      @chore.update_attribute(:schedule, schedule.to_hash)
+            
+      
+      if @chore.update_attributes(params[:chore].except(:schedule))
         format.html { redirect_to @chore, notice: 'Chore was successfully updated.' }
         format.json { head :no_content }
       else

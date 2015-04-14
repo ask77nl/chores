@@ -45,7 +45,7 @@
 <p>
   <b>Schedule:</b>
    <% if(@chore.schedule!= {} and @chore.schedule != nil)%>
-    <%= RecurringSelect.dirty_hash_to_rule(@chore.schedule).to_s %>
+    <%=IceCube::Schedule.from_hash(@chore.schedule).to_s %>
    <% else %>
     not recurring
   <%end%>

@@ -14,18 +14,18 @@
       <img src="./assets/0.9.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-12T17:29:55-04:00">2015-04-12T17:29:55-04:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-13T19:28:25-04:00">2015-04-13T19:28:25-04:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="yellow">87.76%</span></span>
+    (<span class="covered_percent"><span class="yellow">88.51%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         4.19
+         4.59
        </span>
     </span> hits/line)
   </h2>
@@ -33,8 +33,8 @@
   <div>
     <b>23</b> files in total.
     <b>531</b> relevant lines. 
-    <span class="green"><b>466</b> lines covered</span> and
-    <span class="red"><b>65</b> lines missed </span>
+    <span class="green"><b>470</b> lines covered</span> and
+    <span class="red"><b>61</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -212,12 +212,12 @@
       
       <tr>
         <td class="strong"><a href="#9f63e179f5da7db16c78d9bf26dc7ff1b32bbab0" class="src_link" title="app/models/chore.rb">app/models/chore.rb</a></td>
-        <td class="yellow strong">85.25 %</td>
+        <td class="green strong">91.8 %</td>
         <td>146</td>
         <td>61</td>
-        <td>52</td>
-        <td>9</td>
-        <td>3.7</td>
+        <td>56</td>
+        <td>5</td>
+        <td>6.3</td>
       </tr>
       
       <tr>
@@ -257,7 +257,7 @@
         <td>37</td>
         <td>36</td>
         <td>1</td>
-        <td>12.1</td>
+        <td>13.5</td>
       </tr>
       
       <tr>
@@ -406,11 +406,11 @@
           <div class="file_list_container" id="Models">
   <h2>
     <span class="group_name">Models</span>
-    (<span class="covered_percent"><span class="green">92.03%</span></span>
+    (<span class="covered_percent"><span class="green">94.93%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         7.2
+         8.72
        </span>
     </span> hits/line)
   </h2>
@@ -418,8 +418,8 @@
   <div>
     <b>8</b> files in total.
     <b>138</b> relevant lines. 
-    <span class="green"><b>127</b> lines covered</span> and
-    <span class="red"><b>11</b> lines missed </span>
+    <span class="green"><b>131</b> lines covered</span> and
+    <span class="red"><b>7</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -447,12 +447,12 @@
       
       <tr>
         <td class="strong"><a href="#9f63e179f5da7db16c78d9bf26dc7ff1b32bbab0" class="src_link" title="app/models/chore.rb">app/models/chore.rb</a></td>
-        <td class="yellow strong">85.25 %</td>
+        <td class="green strong">91.8 %</td>
         <td>146</td>
         <td>61</td>
-        <td>52</td>
-        <td>9</td>
-        <td>3.7</td>
+        <td>56</td>
+        <td>5</td>
+        <td>6.3</td>
       </tr>
       
       <tr>
@@ -492,7 +492,7 @@
         <td>37</td>
         <td>36</td>
         <td>1</td>
-        <td>12.1</td>
+        <td>13.5</td>
       </tr>
       
       <tr>
@@ -6372,11 +6372,11 @@
         <div class="source_table" id="9f63e179f5da7db16c78d9bf26dc7ff1b32bbab0">
   <div class="header">
     <h3>app/models/chore.rb</h3>
-    <h4><span class="yellow">85.25 %</span> covered</h4>
+    <h4><span class="green">91.8 %</span> covered</h4>
     <div>
       <b>61</b> relevant lines. 
-      <span class="green"><b>52</b> lines covered</span> and
-      <span class="red"><b>9</b> lines missed.</span>
+      <span class="green"><b>56</b> lines covered</span> and
+      <span class="red"><b>5</b> lines missed.</span>
     </div>
   </div>
   
@@ -6545,8 +6545,8 @@
           <code class="ruby"> def self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="28">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="28" data-linenumber="28">
+          <span class="hits">28</span>
           
           <code class="ruby">   if context_id != nil</code>
         </li>
@@ -6563,8 +6563,8 @@
           <code class="ruby">     #alternative complex join</code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="31">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="28" data-linenumber="31">
+          <span class="hits">28</span>
           
           <code class="ruby">     @all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: choretype_id}, projects: {context_id: context_id, someday: false}}).order(&quot;projects.lft asc&quot;)</code>
         </li>
@@ -6575,8 +6575,8 @@
           <code class="ruby">     </code>
         </li>
       
-        <li class="covered" data-hits="18" data-linenumber="33">
-          <span class="hits">18</span>
+        <li class="covered" data-hits="28" data-linenumber="33">
+          <span class="hits">28</span>
           
           <code class="ruby">     if @all_chores.blank? </code>
         </li>
@@ -6593,8 +6593,8 @@
           <code class="ruby">      else </code>
         </li>
       
-        <li class="covered" data-hits="14" data-linenumber="36">
-          <span class="hits">14</span>
+        <li class="covered" data-hits="24" data-linenumber="36">
+          <span class="hits">24</span>
           
           <code class="ruby">        return @all_chores</code>
         </li>
@@ -6641,20 +6641,20 @@
           <code class="ruby"> def self.all_active_chores(context_id,choretype_id,user_id)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="44">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="44">
+          <span class="hits">3</span>
           
           <code class="ruby">   all_chores = self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="45">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="45">
+          <span class="hits">3</span>
           
           <code class="ruby">   if all_chores</code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="46">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="3" data-linenumber="46">
+          <span class="hits">3</span>
           
           <code class="ruby">     return all_chores.where(&quot;startdate &lt;= ? or startdate is null&quot;, Date.today)</code>
         </li>
@@ -6707,8 +6707,8 @@
           <code class="ruby">   </code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="55">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="7" data-linenumber="55">
+          <span class="hits">7</span>
           
           <code class="ruby">   all_chores = self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)</code>
         </li>
@@ -6719,8 +6719,8 @@
           <code class="ruby">   </code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="57">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="7" data-linenumber="57">
+          <span class="hits">7</span>
           
           <code class="ruby">   if all_chores</code>
         </li>
@@ -6737,8 +6737,8 @@
           <code class="ruby">   </code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="60">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="7" data-linenumber="60">
+          <span class="hits">7</span>
           
           <code class="ruby">    appointments =  all_chores.where(&quot;startdate &lt; ? and schedule is null&quot;, Time.zone.now.to_date + 1.day)</code>
         </li>
@@ -6767,8 +6767,8 @@
           <code class="ruby">   </code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="65">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="7" data-linenumber="65">
+          <span class="hits">7</span>
           
           <code class="ruby">    reoccurring_chores = all_chores.where(&quot;schedule is not null&quot;, Time.zone.now.to_date)</code>
         </li>
@@ -6779,32 +6779,32 @@
           <code class="ruby">      </code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="67">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="7" data-linenumber="67">
+          <span class="hits">7</span>
           
           <code class="ruby">    for chore in reoccurring_chores do </code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="68">
-          
+        <li class="covered" data-hits="2" data-linenumber="68">
+          <span class="hits">2</span>
           
           <code class="ruby">          schedule = IceCube::Schedule.new()</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="69">
-          
+        <li class="covered" data-hits="2" data-linenumber="69">
+          <span class="hits">2</span>
           
           <code class="ruby">          schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="70">
-          
+        <li class="covered" data-hits="2" data-linenumber="70">
+          <span class="hits">2</span>
           
           <code class="ruby">          if schedule.occurs_on?(Time.zone.now.to_date)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="71">
-          
+        <li class="covered" data-hits="1" data-linenumber="71">
+          <span class="hits">1</span>
           
           <code class="ruby">            appointments &lt;&lt; chore</code>
         </li>
@@ -6827,8 +6827,8 @@
           <code class="ruby">      </code>
         </li>
       
-        <li class="covered" data-hits="2" data-linenumber="75">
-          <span class="hits">2</span>
+        <li class="covered" data-hits="7" data-linenumber="75">
+          <span class="hits">7</span>
           
           <code class="ruby">    return appointments</code>
         </li>
@@ -6869,8 +6869,8 @@
           <code class="ruby"> def self.appointment_occurrences(context_id,start_time, end_time,user_id)</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="82">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="82">
+          <span class="hits">4</span>
           
           <code class="ruby">   if context_id != nil</code>
         </li>
@@ -6887,14 +6887,14 @@
           <code class="ruby">      </code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="85">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="85">
+          <span class="hits">4</span>
           
           <code class="ruby">      @all_occurrences = []</code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="86">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="86">
+          <span class="hits">4</span>
           
           <code class="ruby">      all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: 3}, projects: {context_id: context_id, someday: false}})</code>
         </li>
@@ -6917,8 +6917,8 @@
           <code class="ruby">      </code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="90">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="90">
+          <span class="hits">4</span>
           
           <code class="ruby">     for chore in all_chores do </code>
         </li>
@@ -6929,8 +6929,8 @@
           <code class="ruby">       #if a chore has dates but no schedule</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="92">
-          <span class="hits">7</span>
+        <li class="covered" data-hits="9" data-linenumber="92">
+          <span class="hits">9</span>
           
           <code class="ruby">       if (chore[:startdate]!= nil and chore[:deadline] != nil and (chore[:schedule] == nil or chore[:schedule] == {}) )</code>
         </li>
@@ -6965,20 +6965,20 @@
           <code class="ruby">       #if a chore has a schedule</code>
         </li>
       
-        <li class="covered" data-hits="7" data-linenumber="98">
-          <span class="hits">7</span>
+        <li class="covered" data-hits="9" data-linenumber="98">
+          <span class="hits">9</span>
           
           <code class="ruby">       if (chore[:schedule] != {} and chore[:schedule] != nil)</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="99">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="7" data-linenumber="99">
+          <span class="hits">7</span>
           
           <code class="ruby">                schedule = IceCube::Schedule.new(start_time)</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="100">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="7" data-linenumber="100">
+          <span class="hits">7</span>
           
           <code class="ruby">        schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))</code>
         </li>
@@ -6995,20 +6995,20 @@
           <code class="ruby">        </code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="103">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="7" data-linenumber="103">
+          <span class="hits">7</span>
           
           <code class="ruby">        for occurence_date in schedule.occurrences_between(start_time, end_time) do</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="104">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="104">
+          <span class="hits">14</span>
           
           <code class="ruby">           occurrence_hash = {id: chore.id, title: chore.title, start: occurence_date.start_time , end: occurence_date.end_time, url: &quot;/chores/&quot;+chore.id.to_s+&quot;/edit&quot;, allDay: chore.all_day}</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="105">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="14" data-linenumber="105">
+          <span class="hits">14</span>
           
           <code class="ruby">          @all_occurrences &lt;&lt; occurrence_hash</code>
         </li>
@@ -7049,8 +7049,8 @@
           <code class="ruby">     </code>
         </li>
       
-        <li class="covered" data-hits="3" data-linenumber="112">
-          <span class="hits">3</span>
+        <li class="covered" data-hits="4" data-linenumber="112">
+          <span class="hits">4</span>
           
           <code class="ruby">     return @all_occurrences</code>
         </li>
@@ -7109,14 +7109,14 @@
           <code class="ruby">     #puts &quot;received schedule &quot;+new_schedule</code>
         </li>
       
-        <li class="covered" data-hits="23" data-linenumber="122">
-          <span class="hits">23</span>
+        <li class="covered" data-hits="52" data-linenumber="122">
+          <span class="hits">52</span>
           
           <code class="ruby">     if new_schedule == nil or new_schedule == &#39;null&#39;</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="123">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="9" data-linenumber="123">
+          <span class="hits">9</span>
           
           <code class="ruby">      write_attribute(:schedule, nil)</code>
         </li>
@@ -7127,8 +7127,8 @@
           <code class="ruby">     else</code>
         </li>
       
-        <li class="covered" data-hits="17" data-linenumber="125">
-          <span class="hits">17</span>
+        <li class="covered" data-hits="43" data-linenumber="125">
+          <span class="hits">43</span>
           
           <code class="ruby">      write_attribute(:schedule, RecurringSelect.dirty_hash_to_rule(new_schedule).to_hash)</code>
         </li>
@@ -7859,8 +7859,8 @@
           <code class="ruby">    </code>
         </li>
       
-        <li class="covered" data-hits="76" data-linenumber="66">
-          <span class="hits">76</span>
+        <li class="covered" data-hits="94" data-linenumber="66">
+          <span class="hits">94</span>
           
           <code class="ruby">    children_projects = self.descendants</code>
         </li>
@@ -7877,8 +7877,8 @@
           <code class="ruby">    </code>
         </li>
       
-        <li class="covered" data-hits="76" data-linenumber="69">
-          <span class="hits">76</span>
+        <li class="covered" data-hits="94" data-linenumber="69">
+          <span class="hits">94</span>
           
           <code class="ruby">    children_projects.each do |project|</code>
         </li>
@@ -7901,8 +7901,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="76" data-linenumber="73">
-          <span class="hits">76</span>
+        <li class="covered" data-hits="94" data-linenumber="73">
+          <span class="hits">94</span>
           
           <code class="ruby">    write_attribute(:context_id, context_id)</code>
         </li>
