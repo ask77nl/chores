@@ -62,7 +62,7 @@ class Chore < ActiveRecord::Base
     #puts "now appointments length is "+ appointments.length.to_s
     #then get all active reoccurring events
    
-    reoccurring_chores = all_chores.where("schedule is not null", Time.zone.now.to_date)
+    reoccurring_chores = all_chores.where("schedule is not null")
       
     for chore in reoccurring_chores do 
           schedule = IceCube::Schedule.new()
