@@ -224,6 +224,28 @@ before_filter :authenticate_user!
     end
   end
 
+   # PUT /chore_skip/1
+  # PUT /chore_skip/1.json
+  def skip
+    @chore = Chore.find(params[:chore_id])
+    @chore.user_id = current_user.id
+
+  
+
+    respond_to do |format|
+      #skip appointment
+      
+      
+      if @chore.move_start_date_to_next_occurrence
+        format.html { redirect_to chores_url, notice: 'Todays occurrence skipped' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "show" }
+        format.json { render json: @chore.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   # DELETE /chores/1
   # DELETE /chores/1.json
   def destroy

@@ -12,8 +12,8 @@ No contexts yet, create one!
     <% end %>
  <% end %>
   </ul>
-
-<h2>Listing <%= @appointments.length  if @appointments != nil%> today <%=Time.zone.now.to_date%> in zone <%=Time.zone.to_s%> and missed appointments</h2>
+<% if @appointments != nil%>
+<h2>Listing <%= @appointments.length  if @appointments != nil%> today <%=Time.zone.now.to_date%>  and missed appointments</h2>
 
 <table class="table">
    <tr>
@@ -24,9 +24,10 @@ No contexts yet, create one!
      <th>Deadline</th>
      <th>Schedule</th>
      <th></th>
+     <th></th>
    </tr>
 
- <% if @appointments != nil%>
+
   <% @appointments.each do |chore| %>
    <tr>
      <td>
@@ -67,14 +68,13 @@ No contexts yet, create one!
        -
       <%end%>  
      </td>
-     
+     <td><%= link_to "Skip", chore_skip_path(chore), method: :post %></td>
      <td><%= link_to "Delete", chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
    </tr>
+  
   <% end %>
- <% else %>
-   <tr><td colspan=9>No appointments yet, create one!</td><tr>
- <% end %>
  </table>
+ <% end %>
 
 <h2>Listing <%= @chores.length  if @chores != nil%> active chores</h2>
 
@@ -140,7 +140,7 @@ No contexts yet, create one!
  </table>
 
  <br />
- 
+  <% if @empty_projects != nil%>
 <h2>Listing <%= @empty_projects.length  if @empty_projects != nil%> empty projects</h2>
 
 <table class="table">
@@ -149,7 +149,7 @@ No contexts yet, create one!
      <th></th>
    </tr>
 
- <% if @empty_projects != nil%>
+
   <% @empty_projects.each do |project| %>
    <tr>
      <td>
@@ -166,10 +166,9 @@ No contexts yet, create one!
    </tr>
 
     <% end %>
- <% else %>
-   <tr><td colspan=2>No empty projects, good!</td><tr>
- <% end %>
  </table>
+ <% end %>
+
 
  <%= link_to 'New Chore', new_chore_path, {:class => "btn btn-large btn-primary"} %>
  

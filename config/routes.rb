@@ -9,7 +9,6 @@ Chores::Application.routes.draw do
     collection do
       #get :manage - probably don't need
       get :someday
-      
       # required for Sortable GUI server side actions
       post :rebuild
     end
@@ -19,6 +18,7 @@ Chores::Application.routes.draw do
       get :occurrences
       get :status_quo
     end
+    put :skip
   end
   
   resources :emails

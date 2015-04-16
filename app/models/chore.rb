@@ -70,12 +70,14 @@ class Chore < ActiveRecord::Base
     reoccurring_chores = all_chores.where("schedule is not null")
       
     for chore in reoccurring_chores do 
+      if chore.startdate and chore.startdate < Time.zone.now.midnight+ 1.day
           schedule = IceCube::Schedule.new()
           schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))
           if schedule.occurs_on?(Time.zone.now.to_date)
             appointments << chore
           end
       end
+    end
       
     return appointments
    else
@@ -143,11 +145,30 @@ end
      end
   end
  
- def converted_schedule
-  the_schedule = Schedule.new(self.start_date)
-  the_schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(self.schedule))
-  the_schedule
-end
+  def move_start_date_to_next_occurrence
+  if self.schedule != {} and self.startdate < Time.zone.now.midnight+ 1.day
+    schedule = IceCube::Schedule.new()
+    schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(self.schedule))
+    new_startdate =schedule.next_occurrence(Time.zone.now.midnight+ 1.day) 
+    new_deadline =schedule.next_occurrence(Time.zone.now.midnight+ 1.day) 
+    if self.all_day == 0
+      new_startdate= new_startdate.change(hour:self.startdate.strftime('%H').to_i , min: self.startdate.strftime('%M').to_i )
+      new_deadline = new_deadline.change(hour:self.deadline.strftime('%H').to_i , min: self.deadline.strftime('%M').to_i )
+    end
+    self.update_attribute(:startdate, new_startdate)
+    self.update_attribute(:deadline, new_deadline)
+    
+    return new_startdate
+  else
+    nil
+  end
+ end
+ 
+# def converted_schedule
+#  the_schedule = Schedule.new(self.start_date)
+#  the_schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(self.schedule))
+#  the_schedule
+#end
 
  def self.project
   if self.project_id
@@ -157,6 +178,9 @@ end
   end
  
  end
+ 
+
+ 
  
 end
 
