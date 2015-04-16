@@ -59,7 +59,7 @@ class Chore < ActiveRecord::Base
      appointments = []
      
      for chore in all_chores do
-       if chore.startdate and chore.startdate < Time.zone.now.to_date + 1.day and chore.schedule == {}
+       if chore.startdate and chore.startdate < Time.zone.now.midnight+ 1.day and chore.schedule == {}
          appointments << chore
        end
      end
