@@ -83,7 +83,9 @@ end
       #uses http://www.rubydoc.info/github/seejohnrun/ice_cube/IceCube/Schedule#occurrences_between-instance_method to return events
       
       @all_occurrences = []
-      all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: 3}, projects: {context_id: context_id, someday: false}})
+      #temporary ignore context on calendar
+      all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: 3}, projects: {someday: false}})
+      #all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: 3}, projects: {context_id: context_id, someday: false}})
       
       #puts "got chores: "+all_chores.length.to_s
       
@@ -96,12 +98,20 @@ end
        
        #if a chore has a schedule
        if (chore[:schedule] != {} and chore[:schedule] != nil)
-        schedule = IceCube::Schedule.new(start_time)
+        schedule = IceCube::Schedule.new(chore.startdate)
         schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))
         #puts "analyzing schedule : "+schedule.to_s
         
-        for occurence_date in schedule.occurrences_between(start_time, end_time) do
-           occurrence_hash = {id: chore.id, title: chore.title, start: occurence_date.start_time , end: occurence_date.end_time, url: "/chores/"+chore.id.to_s+"/edit", allDay: chore.all_day}
+        for occurrence_date in schedule.occurrences_between(start_time, end_time) do
+           udjusted_start_time = DateTime.parse(occurrence_date.start_time.to_s)
+           if(chore.startdate)
+            udjusted_start_time= udjusted_start_time.change(hour:chore.startdate.strftime('%H').to_i , min: chore.startdate.strftime('%M').to_i )
+           end
+           udjusted_end_time = DateTime.parse(occurrence_date.end_time.to_s)
+           if(chore.deadline)
+            udjusted_end_time= udjusted_end_time.change(hour:chore.deadline.strftime('%H').to_i , min: chore.deadline.strftime('%M').to_i )
+           end
+           occurrence_hash = {id: chore.id, title: chore.title, start: udjusted_start_time , end: udjusted_end_time, url: "/chores/"+chore.id.to_s+"/edit", allDay: chore.all_day}
           @all_occurrences << occurrence_hash
         end
        end
