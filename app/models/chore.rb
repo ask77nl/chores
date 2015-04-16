@@ -56,9 +56,14 @@ class Chore < ActiveRecord::Base
    
    if all_chores
     #first get all simple appointments from today and past
-   
-    appointments =  all_chores.where("startdate < ? and schedule is null", Time.zone.now.to_date + 1.day)
-   
+     appointments = []
+     
+     for chore in all_chores do
+       if chore.startdate and chore.startdate < Time.zone.now.to_date + 1.day and chore.schedule == {}
+         appointments << chore
+       end
+     end
+
     #puts "now appointments length is "+ appointments.length.to_s
     #then get all active reoccurring events
    
