@@ -12,13 +12,17 @@
   </div> 
    <h3>List of new features:</h3>
     <ul>
-        <li>occurrences removal. First/last occurrence removal and in the middle as well</li>
+        <li>skip is broken</li>
+        <li>Status Quo shows 0 appointments instead of hiding the section</li>
+        <li>write unit tests for the skip</li>
         <li>separate type of chores that are next step, only show them on the status quo</li>
         <li>make "review" view from projects - projects with all chores</li>
+        <li>Add list of waiting to Status quo</li>
         <li>Redo the status quo/review/waiting for tree navigation, make it more logical</li>
         <li>Dependencies removal (don't forget the tests)</li>
         <li>separate view for done chores/projects</li>
         <li>Projects by context</li>
+        <li>complicated occurrences removal. First/last occurrence removal and in the middle as well</li>
     </ul>
   <h3>List of bugs/improvements:</h3>
     <ul>
@@ -27,6 +31,9 @@
         <li>if dates are entered - make chore an appointment automatically via JS</li>
         <li>if choretype = waiting for, clear dates automatically via JS</li>
         <li>if parent project is changes, context should change automatically via JS</li>
+        <li>if schedule is added - move start date to the first occurrence in JS</li>
+        <li>if allday is checked - hide time</li>
+        <li>Time should be in 30 min periods</li>
         <li>make lists of chores more compact</li>
         <li>let chore creation by clicking by a project in the review window</li>
         <li>Orphan tasks should be a part of status quo</li>
