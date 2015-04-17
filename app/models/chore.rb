@@ -71,15 +71,18 @@ class Chore < ActiveRecord::Base
       
     for chore in reoccurring_chores do 
       if chore.startdate and chore.startdate < Time.zone.now.midnight+ 1.day
-          schedule = IceCube::Schedule.new()
+          schedule = IceCube::Schedule.new(Time.zone.parse('2015-01-01 00:00'))
           schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(chore[:schedule]))
-          if schedule.occurs_on?(Time.zone.now.to_date)
+          if schedule.occurring_between?(Time.zone.parse('2015-01-01 00:00'),Time.zone.now.midnight+ 1.day)
             appointments << chore
           end
       end
     end
-      
-    return appointments
+    if appointments == [] 
+      nil
+    else
+      return appointments
+    end
    else
      nil
    end
