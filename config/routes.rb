@@ -18,8 +18,9 @@ Chores::Application.routes.draw do
       get :occurrences
       get :status_quo
     end
-    put :skip
+    
   end
+  put 'chore/:id/skip' => "chores#skip", as: 'skip_chore'
   
   resources :emails
 

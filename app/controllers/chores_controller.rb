@@ -227,7 +227,7 @@ before_filter :authenticate_user!
    # PUT /chore_skip/1
   # PUT /chore_skip/1.json
   def skip
-    @chore = Chore.find(params[:chore_id])
+    @chore = Chore.find(params[:id])
     @chore.user_id = current_user.id
 
   

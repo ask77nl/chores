@@ -220,5 +220,15 @@ describe ChoresController, :type => :controller do
       expect(response).to redirect_to(chores_url)
     end
   end
+  
+  describe "PUT skip" do
+    
+    it "redirects to the choretypes list" do
+      @choretype_appointment = 3
+      chore = FactoryGirl.create(:chore, choretype_id: @choretype_appointment, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now, deadline: Time.zone.now, schedule: IceCube::Rule.weekly.day(Time.zone.now.wday).to_json.to_s)
+      put :skip, {:id => chore.id}, valid_session
+      expect(response).to redirect_to(chores_url)
+    end
+  end
 
 end

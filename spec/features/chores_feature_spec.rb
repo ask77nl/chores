@@ -262,17 +262,34 @@ describe "when there are chores of several contexts and types" do
 
    it "should be able to delete it" do
      chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
-
      visit chores_path
      expect(page).to have_content(chore.title)
      click_link("Delete")
-#     click_button("OK")
-
      expect(page).to have_no_content(chore.title)
-
    end
 
-   
+  describe "when we have a chore occurrence today" do
+   it "should be able to skip it from status quo page" do
+     @choretype_appointment = FactoryGirl.create(:choretype, id:3)
+      
+     chore = FactoryGirl.create(:chore, choretype_id: @choretype_appointment.id, email_id: @email.id, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now, deadline: Time.zone.now, schedule: IceCube::Rule.weekly.day(Time.zone.now.wday).to_json.to_s)
+     visit status_quo_chores_path(:context => @context.id)
+     expect(page).to have_content(chore.title)
+     
+     skip_url = "/chore/"+chore.id.to_s+"/skip"
+     skip_anchor = "//a[@href='"+skip_url+"']"
+     #puts body
+     
+     find(:xpath, skip_anchor).click
+     visit status_quo_chores_path(:context => @context.id)
+     expect(page).to have_no_content(chore.title)
+     visit chore_path(:id => chore.id)
+     new_time = Time.zone.now
+     new_time += 1.week
+     expect(page).to have_content(new_time.strftime("%m/%d/%Y at %I:%M%p"))
+   end
+  end
+  
   end
 end
 
