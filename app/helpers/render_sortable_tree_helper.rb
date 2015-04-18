@@ -22,6 +22,10 @@ module RenderSortableTreeHelper
               #{ show_link }
               #{ controls }
             </div>
+            <br>
+             Chore 1
+             Chore 2
+             Chore 3
             #{ children }
           </li>
         "
