@@ -32,18 +32,18 @@
    
     <% if @chore.startdate != nil %>
      
-     <%= time_select "start_time", "time", {:ampm=> true,:default => {:hour => @chore.startdate.strftime('%H'), :minute => @chore.startdate.strftime('%M')}} %>
+     <%= time_select "start_time", "time", {:ampm=> true,:default => {:hour => @chore.startdate.strftime('%H'), :minute => @chore.startdate.strftime('%M')}, :minute_step => 15} %>
     <% else %>
-      <%= time_select "start_time", "time",{:ampm=> true} %>
+      <%= time_select "start_time", "time",{:ampm=> true, :minute_step => 15} %>
     <%end%>
   </div> 
      
   <div class="field" >
     End time<br />
     <% if @chore.deadline != nil %>
-     <%= time_select "end_time", "time",{:ampm=> true, :default => {:hour => @chore.deadline.strftime('%H'), :minute => @chore.deadline.strftime('%M')}} %>
+     <%= time_select "end_time", "time",{:ampm=> true, :default => {:hour => @chore.deadline.strftime('%H'), :minute => @chore.deadline.strftime('%M')}, :minute_step => 15} %>
     <% else %>
-     <%= time_select "end_time", "method",{:ampm=> true} %>
+     <%= time_select "end_time", "time",{:ampm=> true, :minute_step => 15} %>
     <%end%>
   </div>     
  
@@ -59,21 +59,4 @@
   
  </div>
 </div>
-
-<div class="panel panel-primary">
- <div class="panel-heading">Repeat until</div>
- <div class="panel-body">
-
-  <fieldset>
-  <label class="radio">
-   <input type="radio" name="endRadios" id="endRadios1" value="no_end_date" checked>No End Date</label>
-  <label class="radio">
-   <input type="radio" name="endRadios" id="endRadios2" value="end_after_n_repeats">End after <input type="text" class="input-mini" name="end_repeats" id="end_repeats" placeholder="1">  repeats </label>
-  <label class="radio">
-   <input type="radio" name="endRadios" id="endRadios3" value="end_by">End by <input type="text" data-behaviour='datepicker'  value=""  name="end_date" id="end_date"></label>
-</fieldset>
- </div>
- </div>
-
-<!--</div> -->
 

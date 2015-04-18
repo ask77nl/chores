@@ -56,10 +56,12 @@ before_filter :authenticate_user!
         @active_context = params[:context].to_s
       end
      
-      choretype_todo = 1 #always todo only in the status quo. Warning: using undeclared constant!
+      choretype_todo = 1 #Warning: using undeclared constants!
+      choretype_waiting = 2
       choretype_appointment = 3
             
       @chores = Chore.all_active_chores(@active_context,choretype_todo, current_user.id)
+      @waiting_chores = Chore.all_active_chores(@active_context,choretype_waiting, current_user.id)
     
       @appointments = Chore.all_today_and_missed_appointments(@active_context,choretype_appointment, current_user.id)
       @projects = Project.all_active_projects(@active_context,current_user.id )

@@ -24,7 +24,10 @@ No contexts yet, create one!
  <% end %>
   <li><%=link_to 'Projects',projects_path(:context => @active_context) %></li>
  </ul>
-
+ <% if (@active_choretype.to_s == '3') %>
+ <div id='calendar'></div>
+ <% end %>
+ 
  <table class="table">
    <tr>
      <th>Project</th>
@@ -90,8 +93,5 @@ No contexts yet, create one!
 
  <%= link_to 'New Chore', new_chore_path, {:class => "btn btn-large btn-primary"} %>
  
- <% if (@active_choretype.to_s == '3') %>
- <h2>Calendar view</h2>
- <div id='calendar'></div>
- <% end %>
+
 <% end %>

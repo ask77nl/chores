@@ -135,9 +135,13 @@ describe "when there are chores of several contexts and types" do
 
   describe "when there are different types of chores and projects, ready to be displayed on status quo page" do
     it "all of them should be displayed on the status quo page" do
-      
-    chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
+    
+    @choretype_todo = 1
     @choretype_appointment = 3
+    @choretype_waiting = 2
+    
+    chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
+    waiting_chore = FactoryGirl.create(:chore, choretype_id: @choretype_waiting, project_id: @project.id, user_id: @user.id, schedule: nil)
     todays_appointment = FactoryGirl.create(:chore, choretype_id: @choretype_appointment, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now.to_date, schedule: nil)
     empty_project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
    
@@ -150,6 +154,7 @@ describe "when there are chores of several contexts and types" do
     visit status_quo_chores_path(:context => @context.id)
 
      expect(page).to have_content(chore.title)
+     expect(page).to have_content(waiting_chore.title)
      expect(page).to have_content(@project.title)
      expect(page).to have_content(empty_project.title)
      expect(page).to have_content(todays_appointment.title)

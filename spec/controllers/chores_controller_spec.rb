@@ -71,13 +71,18 @@ describe ChoresController, :type => :controller do
   
   describe "GET status_quo" do
     it "assigns correct chores and projects" do
-      chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
+      @choretype_todo = 1
       @choretype_appointment = 3
+      @choretype_waiting = 2
+      
+      chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_todo, user_id: @user.id)
       todays_appointment = FactoryGirl.create(:chore, choretype_id: @choretype_appointment, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now.to_date, schedule: nil)
+      waiting_chore = FactoryGirl.create(:chore, choretype_id: @choretype_waiting, project_id: @project.id, user_id: @user.id, schedule: nil)
       empty_project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
       get :status_quo, {"user_id" => 1,"context_id" => 1}, valid_session
       expect(assigns(:chores)).to eq([chore])
       expect(assigns(:appointments)).to eq([todays_appointment])
+      expect(assigns(:waiting_chores)).to eq([waiting_chore])
       expect(assigns(:contexts)).to eq([@context])
       expect(assigns(:choretypes)).to eq([@choretype])
       expect(assigns(:projects)).to eq([@project, empty_project])

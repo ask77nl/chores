@@ -14,7 +14,6 @@
     <ul>
         <li>separate type of chores that are next step, only show them on the status quo</li>
         <li>make "review" view from projects - projects with all chores</li>
-        <li>Add list of waiting to Status quo</li>
         <li>Redo the status quo/review/waiting for tree navigation, make it more logical</li>
         <li>Dependencies removal (don't forget the tests)</li>
         <li>separate view for done chores/projects</li>
@@ -23,26 +22,22 @@
     </ul>
   <h3>List of bugs/improvements:</h3>
     <ul>
-        <li>chores calendar is not filtering context</li>
-        <li>put new chore button on top of the list</li>
+        <li>unstable unit test for the dates setup</li>
         <li>if dates are entered - make chore an appointment automatically via JS</li>
         <li>if choretype = waiting for, clear dates automatically via JS</li>
         <li>if parent project is changes, context should change automatically via JS</li>
         <li>if schedule is added - move start date to the first occurrence in JS</li>
-        <li>if allday is checked - hide time</li>
+        <li>if allday is checked - hide time via JS</li>
         <li>Time should be in 30 min periods</li>
-        <li>make lists of chores more compact</li>
         <li>let chore creation by clicking by a project in the review window</li>
         <li>Orphan tasks should be a part of status quo</li>
         <li>Don't forget unit tests for correct context by new and edit controllers (they should have a dropdown with projects of correct context)</li>
         <li>Remove intermediate show view when creating objects, make sure it's redirected on the correct listing page (cookies? url update to keep it restful?)</li>
-        <li>Projects are not filtered by context</li>
         <li>when clicking on "new", choretype and context should be correctly prefilled, url params should exist in the "new" and "edit buttons</li> 
         <li>Clicking back after update of a someday project moves to the list of active projects</li>
         <li>Projects, chores, emails are always pluralized in the header</li>
         <li>The user creation and devise rights don't have unit tests</li>
         <li>nice small logo's for choretypes in the review window</li>
-        
     </ul>
  
   <% else %>
