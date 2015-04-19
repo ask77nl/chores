@@ -22,10 +22,7 @@ module RenderSortableTreeHelper
               #{ show_link }
               #{ controls }
             </div>
-            <br>
-             Chore 1
-             Chore 2
-             Chore 3
+            #{ show_chores }
             #{ children }
           </li>
         "
@@ -52,6 +49,46 @@ module RenderSortableTreeHelper
             #{ h.link_to '', destroy_path, :class => :delete, :method => :delete, :data => { :confirm => 'Are you sure?' } }
           </div>
         "
+      end
+      
+      def show_chores
+        project_id = options[:node]
+        chores = options[:locals][:chores]
+        choretypes = options[:locals][:choretypes]
+        current_chores = chores.where("project_id = ?",project_id).order(:choretype_id)
+        
+        if !current_chores.empty?
+          table="<table class='table-condensed'>"
+          current_chores.each do |chore| 
+            edit_path = h.url_for(:controller => :chores, :action => :edit, :id => chore.id)
+            destroy_path = h.url_for(:controller => :chores, :action => :destroy, :id => chore.id)
+            table+="<tr>"
+            table+="<td> #{choretypes.find(chore.choretype_id).name}</td>"
+            table+="<td>#{ h.link_to chore.title, edit_path}</td>"
+            if chore.startdate
+             table+="<td> #{chore.startdate.to_s(:due_date)}</td>"
+            else
+              table+="<td>-</td>"
+            end
+            if chore.deadline
+             table+="<td> #{chore.deadline.to_s(:due_date)}</td>"
+            else
+              table+="<td>-</td>"
+            end
+            if (chore.schedule != {} and chore.schedule != nil)
+             table+="<td> #{RecurringSelect.dirty_hash_to_rule(chore.schedule).to_s}</td>"
+            else
+              table+="<td>-</td>"
+            end
+            
+            table+="<td> #{ h.link_to 'Delete', destroy_path, :method => :delete, :data => { :confirm => 'Are you sure?' } }</td>"
+
+            table+="</tr>"
+          end
+         table+="</table>"
+       end
+       
+        return table
       end
 
       def children

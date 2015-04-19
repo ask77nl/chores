@@ -24,10 +24,13 @@ describe ProjectsController, :type => :controller do
 
    before(:each) do
     @request.env["devise.mapping"] = Devise.mappings[:user]
-    $user = FactoryGirl.create(:user)
-    sign_in $user
- 
-    $context = FactoryGirl.create(:context,user_id: $user.id)
+    @user = FactoryGirl.create(:user)
+    sign_in @user
+  
+    @context = FactoryGirl.create(:context, user_id: @user.id)
+    @choretype = FactoryGirl.create(:choretype)
+    @email = FactoryGirl.create(:email,user_id: @user.id)
+    #$context = FactoryGirl.create(:context,user_id: $user.id)
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -49,11 +52,13 @@ describe ProjectsController, :type => :controller do
 
   describe "GET index" do
     it "assigns only active projects as @projects" do
-      project = Project.create! valid_attributes
-      Project.create!("title" => "test title 1", "context_id" => 1,"user_id" => 1, "someday" => true)
+      project = FactoryGirl.create(:project,user_id: @user.id,context_id: @context.id)
+      chore = FactoryGirl.create(:chore, project_id: project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
       get :index, {"user_id" => 1,"context_id" => 1}, valid_session
       expect(assigns(:projects)).to eq([project])
       expect(assigns(:projects).length).to eq(1)
+      expect(assigns(:chores)).to eq([chore])
+      expect(assigns(:choretypes)).to eq([@choretype])
     end
   end
 
@@ -80,7 +85,7 @@ describe ProjectsController, :type => :controller do
       get :new, {}, valid_session
       expect(assigns(:project)).to  be_a_new(Project)
       #it also needs to prepare the list of emails and project for the select boxex
-      expect(assigns(:contexts)).to eq([$context])
+      expect(assigns(:contexts)).to eq([@context])
       expect(assigns(:projects).length).to eq(0)
     end
   end
@@ -91,7 +96,7 @@ describe ProjectsController, :type => :controller do
       get :edit, {:id => project.to_param}, valid_session
       expect(assigns(:project)).to  eq(project)
      #it also needs to prepare the list of emails and project for the select boxex
-      expect(assigns(:contexts)).to eq([$context])
+      expect(assigns(:contexts)).to eq([@context])
       expect(assigns(:projects)).to eq([project])
 
     end

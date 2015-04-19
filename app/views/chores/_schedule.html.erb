@@ -32,7 +32,7 @@
    
     <% if @chore.startdate != nil %>
      
-     <%= time_select "start_time", "time", {:ampm=> true,:default => {:hour => @chore.startdate.strftime('%H'), :minute => @chore.startdate.strftime('%M')}, :minute_step => 15} %>
+     <%= time_select "start_time", "time", {:ampm=> true,:selected => Time.parse(@chore.startdate.to_s), :minute_step => 15} %>
     <% else %>
       <%= time_select "start_time", "time",{:ampm=> true, :minute_step => 15} %>
     <%end%>
@@ -41,7 +41,7 @@
   <div class="field" >
     End time<br />
     <% if @chore.deadline != nil %>
-     <%= time_select "end_time", "time",{:ampm=> true, :default => {:hour => @chore.deadline.strftime('%H'), :minute => @chore.deadline.strftime('%M')}, :minute_step => 15} %>
+     <%= time_select "end_time", "time",{:ampm=> true, :selected => Time.parse(@chore.deadline.to_s), :minute_step => 15} %>
     <% else %>
      <%= time_select "end_time", "time",{:ampm=> true, :minute_step => 15} %>
     <%end%>

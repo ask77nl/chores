@@ -16,6 +16,8 @@ load_and_authorize_resource
   def index
     #by default show only active projects, not someday projects
     @projects = Project.all_active_projects(params[:context],current_user.id )
+    @chores = Chore.where("user_id = ?",current_user.id)
+    @choretypes = Choretype.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,6 +28,8 @@ load_and_authorize_resource
   def someday
     #similar to main index, but show only someday projects
     @projects = Project.all_someday_projects(params[:context_id],current_user.id )
+    @chores = Chore.where("user_id = ?",current_user.id)
+    @choretypes = Choretype.all
 
     respond_to do |format|
       format.html # someday.html.erb

@@ -7,6 +7,8 @@ describe "Projects", :type => :feature do
   before do
     @user = FactoryGirl.create(:user)
     @context = FactoryGirl.create(:context, user_id: @user.id)
+    @choretype = FactoryGirl.create(:choretype)
+    @email = FactoryGirl.create(:email,user_id: @user.id)
     visit new_user_session_path
     fill_in('user_email', :with => @user.email)
     fill_in('user_password', :with => @user.password)
@@ -93,7 +95,20 @@ describe "Projects", :type => :feature do
      
      expect(page).to have_content('Title: '+project.title)
     end
+    it "its chores should be visible as well on the project view" do
+      project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
+      chore = FactoryGirl.create(:chore, project_id: project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
+
+     visit projects_path
+     expect(page).to have_content(project.title)
+     expect(page).to have_content(chore.title)
+     expect(page).to have_content(@choretype.name)
+     click_link(project.title)
+     
+     expect(page).to have_content('Title: '+project.title)
+    end
    end
+   
    
     it "should be able to edit it" do
      
@@ -142,7 +157,7 @@ describe "Projects", :type => :feature do
     it "should be able to mark it as a someday project, it must become a root project and be visible only in the someday project list" do
       parent_project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
       project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id, parent_project_id: parent_project.id)
-     
+      chore = FactoryGirl.create(:chore, project_id: project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
      visit projects_path
      expect(page).to have_content(project.title)
      
@@ -161,10 +176,12 @@ describe "Projects", :type => :feature do
      visit projects_path
 
      expect(page).not_to have_content(project.title)
+     expect(page).not_to have_content(chore.title)
      
      visit someday_projects_path
      
      expect(page).to have_content(project.title)
+     expect(page).to have_content(chore.title)
    end
   end
   end

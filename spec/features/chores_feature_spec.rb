@@ -244,6 +244,7 @@ describe "when there are chores of several contexts and types" do
      expect(page).to have_select('end_time_time_4i', :selected => '09 AM');
      expect(page).to have_select('end_time_time_5i', :selected => '30');
      
+     
       
    end
    

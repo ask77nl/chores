@@ -3,7 +3,7 @@
 <% if @projects != nil and @projects.count != 0 %>
 
   <%= content_tag "ol", class: "sortable_tree",  data: {rebuild_url: rebuild_projects_url} do %>
-    <%=  sortable_tree @projects %>
+    <%=  sortable_tree @projects, :locals => { :chores => @chores, :choretypes => @choretypes }%>
   <% end%>
 
 <% else %>
