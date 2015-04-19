@@ -41,7 +41,7 @@ class Chore < ActiveRecord::Base
  def self.all_active_chores(context_id,choretype_id,user_id)
    all_chores = self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)
    if all_chores
-     return all_chores.where("startdate <= ? or startdate is null", Date.today)
+     return all_chores.where("startdate < ? or startdate is null", Time.zone.now.midnight+ 1.day).where(:next_action => true)
    else
      nil
    end

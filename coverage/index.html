@@ -14,7 +14,7 @@
       <img src="./assets/0.9.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-19T16:19:57-04:00">2015-04-19T16:19:57-04:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-19T17:15:46-04:00">2015-04-19T17:15:46-04:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -7034,7 +7034,7 @@
         <li class="covered" data-hits="5" data-linenumber="44">
           <span class="hits">5</span>
           
-          <code class="ruby">     return all_chores.where(&quot;startdate &lt;= ? or startdate is null&quot;, Date.today)</code>
+          <code class="ruby">     return all_chores.where(&quot;startdate &lt; ? or startdate is null&quot;, Time.zone.now.midnight+ 1.day).where(:next_action =&gt; true)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="45">
