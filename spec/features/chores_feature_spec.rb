@@ -275,6 +275,21 @@ describe "when there are chores of several contexts and types" do
      click_link("Delete")
      expect(page).to have_no_content(chore.title)
    end
+   
+  describe "when we have next action and a non next action" do
+    it "deleting next action should make the other one next one" do
+     next_action = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id, next_action: true)
+     non_next_action = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id, next_action: false)
+     visit status_quo_chores_path(:context => @context.id)
+     expect(page).to have_content(next_action.title)
+     expect(page).to have_no_content(non_next_action.title)
+     
+     click_link("Delete", :href =>"/chores/"+next_action.id.to_s)
+     
+     expect(page).to have_no_content(next_action.title)
+     expect(page).to have_content(non_next_action.title)
+   end
+  end
 
   describe "when we have a chore occurrence today" do
    it "should be able to skip it from status quo page" do

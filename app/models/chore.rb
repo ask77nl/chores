@@ -174,8 +174,8 @@ end
 before_destroy { |record|
     project_id = self.project_id
     if self.next_action
-      all_chores = Chore.where(:project_id => project_id, :next_action => true)
-      if all_chores.length == 1
+      all_chores = Chore.where(:project_id => project_id)
+      if all_chores.where(:next_action => true).length == 1
         all_chores.update_all(:next_action => true)
       end
     end
