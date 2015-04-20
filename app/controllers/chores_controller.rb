@@ -39,6 +39,16 @@ before_filter :authenticate_user!
     end
   end
   
+   # GET /calendar
+  # GET /calendar.json
+  def calendar
+    #we don't prepare any data, all info is requested by the calendar dynamically    
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @calendar }
+    end
+  end
+  
   # GET /status_quo
   # GET /status_quo.json
   def status_quo

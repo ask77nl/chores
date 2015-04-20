@@ -9,7 +9,7 @@ $(document).ready ->
       right: 'month,agendaWeek,agendaDay'
     defaultView: 'agendaWeek',
     firstDay: 1
-    height: 500,
+    height: 1000,
     slotMinutes: 30,
 
     eventSources: [{

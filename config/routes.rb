@@ -17,6 +17,7 @@ Chores::Application.routes.draw do
     collection do
       get :occurrences
       get :status_quo
+      get :calendar
     end
     
   end
