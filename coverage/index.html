@@ -14,7 +14,7 @@
       <img src="./assets/0.9.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-19T17:15:46-04:00">2015-04-19T17:15:46-04:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-20T09:03:38-04:00">2015-04-20T09:03:38-04:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,7 +25,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         5.03
+         5.06
        </span>
     </span> hits/line)
   </h2>
@@ -217,7 +217,7 @@
         <td>80</td>
         <td>76</td>
         <td>4</td>
-        <td>7.5</td>
+        <td>7.7</td>
       </tr>
       
       <tr>
@@ -410,7 +410,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         9.31
+         9.41
        </span>
     </span> hits/line)
   </h2>
@@ -452,7 +452,7 @@
         <td>80</td>
         <td>76</td>
         <td>4</td>
-        <td>7.5</td>
+        <td>7.7</td>
       </tr>
       
       <tr>
@@ -6935,14 +6935,14 @@
           <code class="ruby"> def self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)</code>
         </li>
       
-        <li class="covered" data-hits="37" data-linenumber="28">
-          <span class="hits">37</span>
+        <li class="covered" data-hits="38" data-linenumber="28">
+          <span class="hits">38</span>
           
           <code class="ruby">   if context_id != nil</code>
         </li>
       
-        <li class="covered" data-hits="37" data-linenumber="29">
-          <span class="hits">37</span>
+        <li class="covered" data-hits="38" data-linenumber="29">
+          <span class="hits">38</span>
           
           <code class="ruby">     @all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: choretype_id}, projects: {context_id: context_id, someday: false}}).order(&quot;projects.lft asc&quot;)</code>
         </li>
@@ -6953,8 +6953,8 @@
           <code class="ruby">     </code>
         </li>
       
-        <li class="covered" data-hits="37" data-linenumber="31">
-          <span class="hits">37</span>
+        <li class="covered" data-hits="38" data-linenumber="31">
+          <span class="hits">38</span>
           
           <code class="ruby">     if @all_chores.blank? </code>
         </li>
@@ -6971,8 +6971,8 @@
           <code class="ruby">      else </code>
         </li>
       
-        <li class="covered" data-hits="28" data-linenumber="34">
-          <span class="hits">28</span>
+        <li class="covered" data-hits="29" data-linenumber="34">
+          <span class="hits">29</span>
           
           <code class="ruby">        return @all_chores</code>
         </li>
@@ -7019,20 +7019,20 @@
           <code class="ruby"> def self.all_active_chores(context_id,choretype_id,user_id)</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="42">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="10" data-linenumber="42">
+          <span class="hits">10</span>
           
           <code class="ruby">   all_chores = self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="43">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="10" data-linenumber="43">
+          <span class="hits">10</span>
           
           <code class="ruby">   if all_chores</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="44">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="6" data-linenumber="44">
+          <span class="hits">6</span>
           
           <code class="ruby">     return all_chores.where(&quot;startdate &lt; ? or startdate is null&quot;, Time.zone.now.midnight+ 1.day).where(:next_action =&gt; true)</code>
         </li>
@@ -7619,8 +7619,8 @@
           <code class="ruby">     #puts &quot;received schedule &quot;+new_schedule</code>
         </li>
       
-        <li class="covered" data-hits="60" data-linenumber="142">
-          <span class="hits">60</span>
+        <li class="covered" data-hits="63" data-linenumber="142">
+          <span class="hits">63</span>
           
           <code class="ruby">     if new_schedule == nil or new_schedule == &#39;null&#39;</code>
         </li>
@@ -7637,8 +7637,8 @@
           <code class="ruby">     else</code>
         </li>
       
-        <li class="covered" data-hits="49" data-linenumber="145">
-          <span class="hits">49</span>
+        <li class="covered" data-hits="52" data-linenumber="145">
+          <span class="hits">52</span>
           
           <code class="ruby">      write_attribute(:schedule, RecurringSelect.dirty_hash_to_rule(new_schedule).to_hash)</code>
         </li>
@@ -8495,8 +8495,8 @@
           <code class="ruby">    </code>
         </li>
       
-        <li class="covered" data-hits="98" data-linenumber="66">
-          <span class="hits">98</span>
+        <li class="covered" data-hits="99" data-linenumber="66">
+          <span class="hits">99</span>
           
           <code class="ruby">    children_projects = self.descendants</code>
         </li>
@@ -8513,8 +8513,8 @@
           <code class="ruby">    </code>
         </li>
       
-        <li class="covered" data-hits="98" data-linenumber="69">
-          <span class="hits">98</span>
+        <li class="covered" data-hits="99" data-linenumber="69">
+          <span class="hits">99</span>
           
           <code class="ruby">    children_projects.each do |project|</code>
         </li>
@@ -8537,8 +8537,8 @@
           <code class="ruby">    end</code>
         </li>
       
-        <li class="covered" data-hits="98" data-linenumber="73">
-          <span class="hits">98</span>
+        <li class="covered" data-hits="99" data-linenumber="73">
+          <span class="hits">99</span>
           
           <code class="ruby">    write_attribute(:context_id, context_id)</code>
         </li>

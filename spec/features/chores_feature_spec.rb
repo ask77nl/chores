@@ -150,6 +150,7 @@ describe "when there are chores of several contexts and types" do
     wrong_chore =  FactoryGirl.create(:chore, project_id: wrong_project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
     wrong_empty_project = FactoryGirl.create(:project, context_id: wrong_context.id, user_id: @user.id)
     wrong_todays_appointment = FactoryGirl.create(:chore, choretype_id: @choretype_appointment, project_id: wrong_project.id, user_id: @user.id, startdate: Time.zone.now.to_date, schedule: nil)
+    not_next_action_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id, next_action: false)
       
     visit status_quo_chores_path(:context => @context.id)
 
@@ -163,6 +164,7 @@ describe "when there are chores of several contexts and types" do
      expect(page).to have_no_content(wrong_project.title)
      expect(page).to have_no_content(wrong_empty_project.title)
      expect(page).to have_no_content(wrong_todays_appointment.title)
+     expect(page).to have_no_content(not_next_action_chore.title)
     end
   end
   

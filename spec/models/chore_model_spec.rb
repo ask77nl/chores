@@ -75,6 +75,10 @@ describe "when requesting all active chores " do
    FactoryGirl.create(:chore, choretype_id: @choretype.id, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now.to_date+2.days)
    expect(Chore.all_active_chores(@context.id,@choretype.id,@user.id)).to eq([@chore]) 
   end
+ it "should not show chores that are not a next action" do
+   FactoryGirl.create(:chore, choretype_id: @choretype.id, project_id: @project.id, user_id: @user.id, next_action: false)
+   expect(Chore.all_active_chores(@context.id,@choretype.id,@user.id)).to eq([@chore]) 
+  end
 end
 
 describe "when requesting all appointment occurrences for today  " do
