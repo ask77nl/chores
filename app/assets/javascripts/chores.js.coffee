@@ -3,3 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ -> $('[data-behaviour~=datepicker]').datepicker({"format": "mm/dd/yyyy", "autoclose": true});
+
+$ ->
+  $("input[data-behaviour~='all_day_checkbox']").click (e) ->
+    alert "checkbox clicked"
