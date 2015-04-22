@@ -2,8 +2,33 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
+
+
 $ -> $('[data-behaviour~=datepicker]').datepicker({"format": "mm/dd/yyyy", "autoclose": true});
 
 $ ->
   $("input[data-behaviour~='all_day_checkbox']").click (e) ->
-    alert "checkbox clicked"
+    toggle_all_day()
+
+$ ->
+  $("select[data-behaviour~='choretype_select']").change ->
+    toggle_dates()
+
+toggle_all_day =  ->
+    if $("#chore_all_day").prop('checked')
+      $("#start_time").hide()
+      $("#end_time").hide()  
+    else
+     $("#start_time").show()
+     $("#end_time").show()
+
+toggle_dates =  ->
+    if $("#chore_choretype_id").prop('value') == '1' or $("#chore_choretype_id").prop('value') == '2' 
+      $("#first_appointment_panel").hide()
+      $("#frequency_panel").hide()  
+    else
+     $("#first_appointment_panel").show()
+     $("#frequency_panel").show()  
+
+$ -> toggle_all_day()
+$ -> toggle_dates()

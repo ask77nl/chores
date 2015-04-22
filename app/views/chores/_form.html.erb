@@ -28,14 +28,14 @@
   </div>
   <div class="field">
     <%= f.label :choretype %><br />
-    <%= collection_select(:chore, :choretype_id, Choretype.all, :id, :name) %>
+    <%= collection_select(:chore, :choretype_id, Choretype.all, :id, :name, {}, {'data-behaviour' => 'choretype_select'})%>
   </div>
   
 <!--</div>-->
 
 <!--<div class="col-md-8">-->
 
-<div class="panel panel-primary">
+<div class="panel panel-primary" id="first_appointment_panel">
  <div class="panel-heading">First appointment</div>
  <div class="panel-body">
     
@@ -62,7 +62,7 @@
     <%= f.check_box :all_day, data: {'behaviour' => 'all_day_checkbox'} %>
   </div>
      
-  <div class="field" >
+  <div class="field" id="start_time">
     Start time<br />
    
     <% if @chore.startdate != nil %>
@@ -73,7 +73,7 @@
     <%end%>
   </div> 
      
-  <div class="field" >
+  <div class="field" id="end_time">
     End time<br />
     <% if @chore.deadline != nil %>
      <%= time_select "end_time", "time",{:ampm=> true, :selected => Time.parse(@chore.deadline.to_s), :minute_step => 15} %>
@@ -86,7 +86,7 @@
 </div>
 
 
-<div class="panel panel-primary">
+<div class="panel panel-primary" id="frequency_panel">
  <div class="panel-heading">Frequency:</div>
  <div class="panel-body">
  
