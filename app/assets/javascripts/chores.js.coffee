@@ -14,6 +14,7 @@ $ ->
   $("select[data-behaviour~='choretype_select']").change ->
     toggle_dates()
 
+
 toggle_all_day =  ->
     if $("#chore_all_day").prop('checked')
       $("#start_time").hide()
