@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.2'
+ruby '2.2.2'
 
 gem 'rails', '4.1.4'
 gem 'bootstrap-sass', '3.3.3'
@@ -20,6 +20,7 @@ gem 'haml-rails'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'jbuilder'
+gem 'gon'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

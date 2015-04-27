@@ -25,7 +25,7 @@
   </div>
   <div class="field">
    <%= f.label :parent_project %><br />
-   <%= collection_select(:project, :parent_project_id, @projects, :id, :title, {include_blank: 'None'}) %>
+   <%= collection_select(:project, :parent_project_id, @projects, :id, :title, {include_blank: 'None'}, {'data-behaviour' => 'parent_project_select'}) %>
   </div>
   <div class="field">
     <%= f.label :comments %><br />

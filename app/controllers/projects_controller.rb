@@ -71,6 +71,7 @@ load_and_authorize_resource
 
      # we use list of projects and contexts on the view, need to prepare them
     @projects = Project.all_active_projects(params[:context_id],current_user.id )
+    gon.projects = @projects
     @contexts = Context.where("user_id = ?",current_user.id)
 
     @project = Project.find(params[:id])
