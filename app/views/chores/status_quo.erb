@@ -74,7 +74,13 @@ No contexts yet, create one!
        -
       <%end%>  
      </td>
-     <td><%= link_to "Skip", skip_chore_path(chore), method: :put %></td>
+     <td>
+       <% if(chore.schedule != {} and chore.schedule != nil)%>
+        <%= link_to "Skip", skip_chore_path(chore), method: :put %>
+       <% else %>
+        -
+       <%end%>
+     </td>
      <td><%= link_to "Delete", chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
    </tr>
   
@@ -82,7 +88,9 @@ No contexts yet, create one!
  </table>
  <% end %>
 
-<h2><%= @chores.length  if @chores != nil%> Chores</h2>
+<% if @chores != nil%>
+
+<h2><%= @chores.length%> Chores</h2>
 
 <table class="table-condensed">
    <tr>
@@ -92,7 +100,6 @@ No contexts yet, create one!
      <th></th>
    </tr>
 
- <% if @chores != nil%>
   <% @chores.each do |chore| %>
    <tr>
      <td>
@@ -115,10 +122,8 @@ No contexts yet, create one!
      <td><%= link_to "Delete", chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
    </tr>
   <% end %>
- <% else %>
-   <tr><td colspan=6>No chores yet, create one!</td><tr>
- <% end %>
  </table>
+<% end %>
 
  <% if @waiting_chores != nil%>
 <h2>Waiting for <%= @waiting_chores.length%> chores</h2>
