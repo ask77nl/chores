@@ -28,10 +28,6 @@ describe Chore do
     it { should_not be_valid }
  end
 
- describe "when project is not present" do
-    before { @chore.project_id = "" }
-    it { should_not be_valid }
- end
 
 describe "when type is not present" do
     before { @chore.choretype_id = "" }
@@ -81,6 +77,14 @@ describe "when requesting all active chores " do
   end
 end
 
+describe "when requesting all orphan chores " do
+ it "should not show only chores where project is nil" do
+   FactoryGirl.create(:chore, choretype_id: @choretype.id, project_id: @project.id, user_id: @user.id)
+   orphan_chore = FactoryGirl.create(:chore, choretype_id: @choretype.id, project_id: nil, user_id: @user.id)
+   expect(Chore.orphan_chores).to eq([orphan_chore])
+  end
+end
+
 describe "when deleting a last next action" do
   it "all other actions become next ones" do
    not_a_next_action = FactoryGirl.create(:chore, choretype_id: @choretype.id, project_id: @project.id, user_id: @user.id, next_action: false) 
@@ -96,13 +100,13 @@ describe "when requesting all appointment occurrences for today  " do
  it "should return an occurrence of a daily appointment" do
    @choretype_appointment = 3
    
-   todays_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id, startdate:Time.zone.now.to_date, deadline: Time.zone.now.to_date)
+   todays_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id, startdate:Date.today.midnight, deadline: Date.today.midnight)
    daily_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id)
    
-   occurrence1 = {:id=>todays_chore.id,:title=>todays_chore.title,:start=>Time.zone.now.to_date.strftime("%Y-%m-%d 00:00:00 -0400"),:end=>Time.zone.now.to_date.strftime("%Y-%m-%d 00:00:00 -0400"),:url=>"/chores/"+todays_chore.id.to_s+"/edit", :allDay=>true}
+   occurrence1 = {:id=>todays_chore.id,:title=>todays_chore.title,:start=>Date.today.midnight,:end=>Date.today.midnight,:url=>"/chores/"+todays_chore.id.to_s+"/edit", :allDay=>true}
    occurrence2 = {:id=>daily_chore.id,:title=>daily_chore.title,:start=>Time.zone.now.to_date.strftime("%Y-%m-%d 00:00:00 -0400"),:end=>Time.zone.now.to_date.strftime("%Y-%m-%d 00:00:00 -0400"),:url=>"/chores/"+daily_chore.id.to_s+"/edit", :allDay=>true}
    
-   expect(Chore.appointment_occurrences(@context,Time.zone.now.to_date,Time.zone.now.to_date, @user.id)).to eq([occurrence1, occurrence2])   
+   expect(Chore.appointment_occurrences(@context,Time.zone.now,Time.zone.now, @user.id)).to eq([occurrence1, occurrence2])   
   end
 end
 

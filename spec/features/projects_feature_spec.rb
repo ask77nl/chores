@@ -185,7 +185,44 @@ describe "Projects", :type => :feature do
    end
   end
   end
-  
+
+ describe "after we kill a medium project" do
+ it "its children projects got promoted and chores got orphaned" do
+      project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
+      medium_project = FactoryGirl.create(:project, :parent_project_id => project.id, :context_id => @context.id, :user_id => @user.id)
+      bottom_project =  FactoryGirl.create(:project, :parent_project_id => medium_project.id, :context_id => @context.id, :user_id => @user.id)
+      project.reload
+      medium_project.reload
+      bottom_project.reload
+      medium_chore = FactoryGirl.create(:chore, :project_id => @medium_project.id)
+
+     visit projects_path
+     expect(page).to have_content(project.title)
+     expect(page).to have_content(medium_project.title)
+     expect(page).to have_content(bottom_project.title)
+     expect(page).to have_content(medium_chore.title)
+
+
+     delete_url = "/projects/"+medium_project.id.to_s
+     delete_filter = "//a[@href='"+delete_url+"' and @class = 'delete']"
+     find(:xpath, delete_filter).click
+
+     expect(page).to have_content(project.title)
+     expect(page).not_to have_content(medium_project.title)
+     expect(page).to have_content(bottom_project.title)
+     expect(page).not_to have_content(medium_chore.title)
+
+     visit project_path(bottom_project.id)
+    
+     expect(page).to have_content(project.title)
+
+     visit status_quo_chores_path
+
+     expect(page).not_to have_content(medium_chore.title)
+
+
+   end
+ end
  
 end
 

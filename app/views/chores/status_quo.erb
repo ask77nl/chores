@@ -125,6 +125,34 @@ No contexts yet, create one!
  </table>
 <% end %>
 
+<% if @orphan_chores.length >0 %>
+
+<h2><%= @orphan_chores.length%>Orphan Chores</h2>
+
+<table class="table-condensed">
+   <tr>
+     <th>Title</th>
+     <th>Email</th>
+     <th></th>
+   </tr>
+
+  <% @orphan_chores.each do |chore| %>
+   <tr>
+     <td><%= link_to chore.title, edit_chore_path(chore)%></td>
+     <td>
+       <%if chore.email == nil %>
+        -
+       <%else %>
+        <%= chore.email.subject %>
+       <%end %>
+     </td>
+     <td class="text-right"><%= link_to "Delete", chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+   </tr>
+  <% end %>
+ </table>
+<% end %>
+
+
  <% if @waiting_chores != nil%>
 <h2>Waiting for <%= @waiting_chores.length%> chores</h2>
 

@@ -73,4 +73,13 @@ class Project < ActiveRecord::Base
     write_attribute(:context_id, context_id)
     
   end
+
+  def delete
+    children_projects = self.descendants
+    children_projects.each do |project|
+      project.update!(parent_project_id: self.parent_project_id)
+    end 
+    Chore.where(:project_id => self.id).update_all(:project_id => nil)
+    self.destroy
+  end
 end

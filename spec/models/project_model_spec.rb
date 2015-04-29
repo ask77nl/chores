@@ -85,5 +85,27 @@ describe Project do
     end
  end
 
+ describe "When we delete a project" do
+    before do
+      @medium_project = FactoryGirl.create(:project, :parent_project_id => @project.id, :context_id => @context.id, :user_id => @user.id)
+      @bottom_project =  FactoryGirl.create(:project, :parent_project_id => @medium_project.id, :context_id => @context.id, :user_id => @user.id)
+      @project.reload
+      @medium_project.reload
+      @bottom_project.reload
+   
+      @medium_chore = FactoryGirl.create(:chore, :project_id => @medium_project.id)
+
+    end
+    it "The children projects should be promoted and chores became orphan" do
+      @medium_project.delete
+
+      @bottom_project = Project.find(@bottom_project.id)
+      @medium_chore = Chore.find(@medium_chore.id)
+
+      expect(@bottom_project.parent_project_id).to eq(@project.id)
+      expect(@medium_chore.project_id).to eq(nil)
+    end
+ end
+
 
 end

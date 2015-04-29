@@ -18,7 +18,7 @@ class Chore < ActiveRecord::Base
   belongs_to :choretype
 
   validates( :title, presence: true)
-  validates( :project_id, presence: true)
+  validates( :project_id, presence: true, :allow_nil => true)
   validates( :choretype_id, presence: true)
   validates( :user_id, presence: true)
 
@@ -45,8 +45,12 @@ class Chore < ActiveRecord::Base
    else
      nil
    end
-   
  end
+
+ def self.orphan_chores()
+     return Chore.where(:project_id => nil)
+ end
+
  
  def self.all_today_and_missed_appointments(context_id,choretype_id,user_id)
    

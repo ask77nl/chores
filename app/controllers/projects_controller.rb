@@ -118,7 +118,7 @@ load_and_authorize_resource
   # DELETE /projects/1.json
   def destroy
     @project = Project.find(params[:id])
-    @project.destroy
+    @project.delete
 
     respond_to do |format|
       format.html { redirect_to projects_url }
