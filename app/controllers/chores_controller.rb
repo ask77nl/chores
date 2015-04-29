@@ -172,7 +172,7 @@ before_filter :authenticate_user!
         params[:chore][:all_day] = '1'
       else
         #if schedule is present - update startdate and deadline to the first occurrence
-        if(params[:chore][:schedule] != '' and params[:chore][:schedule] != nil)
+        if(params[:chore][:schedule] != '' and params[:chore][:schedule] != nil and params[:chore][:schedule] != 'null')
           schedule = IceCube::Schedule.new(Time.zone.parse('2015-01-01 00:00'))
           schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(params[:chore][:schedule]))
           params[:chore][:startdate]=schedule.first.strftime("%Y-%m-%d")
@@ -237,7 +237,7 @@ before_filter :authenticate_user!
         params[:chore][:all_day] = '1'
       else
         #if schedule is present - update startdate and deadline to the first occurrence
-        if(params[:chore][:schedule] != ''and params[:chore][:schedule] != nil)
+        if(params[:chore][:schedule] != '' and params[:chore][:schedule] != nil and params[:chore][:schedule] != 'null')
           schedule = IceCube::Schedule.new(Time.zone.parse('2015-01-01 00:00'))
           schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(params[:chore][:schedule]))
           params[:chore][:startdate]=schedule.first.strftime("%m/%d/%Y")

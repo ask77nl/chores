@@ -214,7 +214,7 @@ describe "when there are chores of several contexts and types" do
      expect(my_box).not_to be_checked 
      
      chore = Chore.find(chore.id)
-     puts "saved start time is: "+chore.startdate.to_s
+     #puts "saved start time is: "+chore.startdate.to_s
      
      expect(page).to have_select('start_time_time_4i', :selected => '07 AM');
      expect(page).to have_select('start_time_time_5i', :selected => '30');
