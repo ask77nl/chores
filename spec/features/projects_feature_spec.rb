@@ -40,7 +40,7 @@ describe "Projects", :type => :feature do
       click_button('Create Project')
 
       expect(page).to have_content('Project was successfully created.')
-      expect(page).to have_content('Title: '+project.title)
+      expect(page).to have_content(project.title)
       
       visit projects_path
      
@@ -132,11 +132,6 @@ describe "Projects", :type => :feature do
 
      click_button("Update Project")
  
-     expect(page).to have_content('Title: '+new_title)
-     expect(page).to have_content('Parent project: '+parent_project.title)
-
-     visit projects_path
-
      expect(page).to have_content(new_title)
      expect(page).to have_content(parent_project.title)
    end
@@ -184,7 +179,6 @@ describe "Projects", :type => :feature do
      expect(page).to have_content(chore.title)
    end
   end
-  end
 
  describe "after we kill a medium project" do
  it "its children projects got promoted and chores got orphaned" do
@@ -194,7 +188,7 @@ describe "Projects", :type => :feature do
       project.reload
       medium_project.reload
       bottom_project.reload
-      medium_chore = FactoryGirl.create(:chore, :project_id => @medium_project.id)
+      medium_chore = FactoryGirl.create(:chore, :project_id => medium_project.id, :user_id => @user.id, :choretype_id => @choretype.id)
 
      visit projects_path
      expect(page).to have_content(project.title)
@@ -218,11 +212,12 @@ describe "Projects", :type => :feature do
 
      visit status_quo_chores_path
 
-     expect(page).not_to have_content(medium_chore.title)
+     expect(page).to have_content(medium_chore.title)
 
 
    end
  end
  
+end 
 end
 
