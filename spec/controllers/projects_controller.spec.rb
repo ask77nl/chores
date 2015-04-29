@@ -47,7 +47,7 @@ describe ProjectsController, :type => :controller do
   # in order to pass any filters (e.g. authentication) defined in
   # ProjecttypesController. Be sure to keep this updated too.
   def valid_session
-    {}
+   {"return_to" => "/"}
   end
 
   describe "GET index" do
@@ -118,7 +118,7 @@ describe ProjectsController, :type => :controller do
 
       it "redirects to the created project" do
         post :create, {:project => valid_attributes}, valid_session
-        expect(response).to redirect_to(Project.last)
+        expect(response).to redirect_to('/')
       end
     end
 
@@ -157,7 +157,7 @@ describe ProjectsController, :type => :controller do
       it "redirects to the project" do
         project = Project.create! valid_attributes
         put :update, {:id => project.to_param, :project => valid_attributes}, valid_session
-        expect(response).to redirect_to(project)
+        expect(response).to redirect_to('/')
       end
     end
 

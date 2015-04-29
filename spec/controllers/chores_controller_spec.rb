@@ -32,6 +32,7 @@ describe ChoresController, :type => :controller do
     @project = FactoryGirl.create(:project,user_id: @user.id,context_id: @context.id)
     @email = FactoryGirl.create(:email,user_id: @user.id)
 
+#    request.env['HTTP_REFERER'] = "/"   
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -51,7 +52,7 @@ describe ChoresController, :type => :controller do
   # in order to pass any filters (e.g. authentication) defined in
   # ChoretypesController. Be sure to keep this updated too.
   def valid_session
-    {}
+    {"return_to" => "/"}
   end
 
   describe "GET index" do
@@ -148,14 +149,16 @@ describe ChoresController, :type => :controller do
       end
 
       it "assigns a newly created chore as @chore" do
+        #puts "referer is "+request.env['HTTP_REFERER']
         post :create, {:chore => valid_attributes}, valid_session
         expect(assigns(:chore)).to  be_a(Chore)
         expect(assigns(:chore)).to  be_persisted
       end
 
       it "redirects to the created chore" do
+       #puts "referer is "+request.env['HTTP_REFERER']
         post :create, {:chore => valid_attributes}, valid_session
-        expect(response).to redirect_to(Chore.last)
+        expect(response).to redirect_to('/')
       end
     end
 
@@ -188,7 +191,7 @@ describe ChoresController, :type => :controller do
       it "redirects to the chore" do
         chore = Chore.create! valid_attributes
         put :update, {:id => chore.to_param, :chore => valid_attributes}, valid_session
-        expect(response).to redirect_to(chore)
+        expect(response).to redirect_to('/')
       end
     end
 
@@ -231,8 +234,9 @@ describe ChoresController, :type => :controller do
     it "redirects to the choretypes list" do
       @choretype_appointment = 3
       chore = FactoryGirl.create(:chore, choretype_id: @choretype_appointment, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now, deadline: Time.zone.now, schedule: IceCube::Rule.weekly.day(Time.zone.now.wday).to_json.to_s)
+      request.env['HTTP_REFERER'] = '/'
       put :skip, {:id => chore.id}, valid_session
-      expect(response).to redirect_to(chores_url)
+      expect(response).to redirect_to('/')
     end
   end
 

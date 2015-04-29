@@ -51,6 +51,7 @@ load_and_authorize_resource
   # GET /projects/new
   # GET /projects/new.json
   def new
+    session[:return_to] ||= request.referer
     @project = Project.new
     @project.user_id = current_user.id
 
@@ -68,7 +69,7 @@ load_and_authorize_resource
 
   # GET /projects/1/edit
   def edit
-
+    session[:return_to] ||= request.referer
      # we use list of projects and contexts on the view, need to prepare them
     @projects = Project.all_active_projects(params[:context_id],current_user.id )
     gon.projects = @projects
@@ -86,7 +87,7 @@ load_and_authorize_resource
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
         format.html { render action: "new" }
@@ -104,7 +105,7 @@ load_and_authorize_resource
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Project was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -138,6 +138,7 @@ before_filter :authenticate_user!
   # GET /chores/new
   # GET /chores/new.json
   def new
+    session[:return_to] ||= request.referer 
     @chore = Chore.new
     @chore.user_id = current_user.id
 
@@ -154,7 +155,7 @@ before_filter :authenticate_user!
 
   # GET /chores/1/edit
   def edit
-   
+    session[:return_to] ||= request.referer 
     #@projects = Project.where({user_id: current_user.id, someday: false})
     @projects = Project.all_active_projects(params[:context_id],current_user.id )
     @emails = Email.where("user_id = ?",current_user.id)
@@ -173,10 +174,10 @@ before_filter :authenticate_user!
       else
         #if schedule is present - update startdate and deadline to the first occurrence
         if(params[:chore][:schedule] != '' and params[:chore][:schedule] != nil and params[:chore][:schedule] != 'null')
-          schedule = IceCube::Schedule.new(Time.zone.parse('2015-01-01 00:00'))
+          schedule = IceCube::Schedule.new(Time.zone.now)
           schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(params[:chore][:schedule]))
-          params[:chore][:startdate]=schedule.first.strftime("%Y-%m-%d")
-          params[:chore][:deadline]=schedule.first.strftime("%Y-%m-%d")
+          params[:chore][:startdate]=schedule.first.strftime("%m/%d/%Y")
+          params[:chore][:deadline]=schedule.first.strftime("%m/%d/%Y")
           #puts "New date is "+params[:chore][:deadline]
         end
         #form correct deadline parameter
@@ -209,7 +210,7 @@ before_filter :authenticate_user!
     
     respond_to do |format|
       if @chore.save
-        format.html { redirect_to @chore, notice: 'Chore was successfully created.' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Chore was successfully created.' }
         format.json { render json: @chore, status: :created, location: @chore }
       else
         format.html { render action: "new" }
@@ -238,7 +239,7 @@ before_filter :authenticate_user!
       else
         #if schedule is present - update startdate and deadline to the first occurrence
         if(params[:chore][:schedule] != '' and params[:chore][:schedule] != nil and params[:chore][:schedule] != 'null')
-          schedule = IceCube::Schedule.new(Time.zone.parse('2015-01-01 00:00'))
+          schedule = IceCube::Schedule.new(Time.zone.now)
           schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(params[:chore][:schedule]))
           params[:chore][:startdate]=schedule.first.strftime("%m/%d/%Y")
           params[:chore][:deadline]=schedule.first.strftime("%m/%d/%Y")
@@ -266,7 +267,7 @@ before_filter :authenticate_user!
       end
        
       if @chore.update_attributes(params[:chore])
-        format.html { redirect_to @chore, notice: 'Chore was successfully updated.' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Chore was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -281,14 +282,12 @@ before_filter :authenticate_user!
     @chore = Chore.find(params[:id])
     @chore.user_id = current_user.id
 
-  
-
     respond_to do |format|
       #skip appointment
       
       
       if @chore.move_start_date_to_next_occurrence
-        format.html { redirect_to chores_url, notice: 'Todays occurrence skipped' }
+        format.html { redirect_to request.referer, notice: 'Todays occurrence skipped' }
         format.json { head :no_content }
       else
         format.html { render action: "show" }

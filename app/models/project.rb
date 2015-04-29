@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
   
   def self.all_active_projects(context_id,user_id)
     if context_id == nil
-      context_id = Context.first.id
+      context_id = Context.first.id if Context.first
     end
    
     #@all_projects = Project.where(:context_id => context_id, :user_id =>user_id, :someday => false)
