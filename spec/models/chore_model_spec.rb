@@ -125,7 +125,7 @@ describe "when requesting all today and missed appointments" do
   
   it "should not show future appointments" do
    FactoryGirl.create(:chore, choretype_id: @choretype_appointment, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now + 3.days,deadline:Time.zone.now + 3.days, schedule: nil)
-   expect(Chore.all_today_and_missed_appointments(@context.id,@choretype_appointment,@user.id)).to eq(nil) 
+   expect(Chore.all_today_and_missed_appointments(@context.id,@choretype_appointment,@user.id)).to eq([]) 
   end
   
   it "should show appointments, that occur today" do
@@ -139,7 +139,7 @@ describe "when requesting all today and missed appointments" do
    schedule_today = IceCube::Schedule.new(Time.zone.now)
    schedule_today.add_recurrence_rule IceCube::Rule.weekly.day((Time.zone.now.wday+1)%7)
    appointment_occurs_today = FactoryGirl.create(:chore, choretype_id: @choretype_appointment, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now+1.day, deadline: Time.zone.now+1.day, schedule: IceCube::Rule.weekly.day((Time.zone.now.wday+1)%7).to_json.to_s)
-   expect(Chore.all_today_and_missed_appointments(@context.id,@choretype_appointment,@user.id)).to eq(nil) 
+   expect(Chore.all_today_and_missed_appointments(@context.id,@choretype_appointment,@user.id)).to eq([]) 
   end
 end
 

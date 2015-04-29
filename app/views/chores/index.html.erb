@@ -1,4 +1,4 @@
-<h1>Listing <%= @chores.length  if @chores != nil%> active chores</h1>
+<h1>Listing <%= @chores.length%> active chores</h1>
 
  <ul class="nav nav-tabs">
 <% if @contexts.length == 0 %>
@@ -39,7 +39,7 @@ No contexts yet, create one!
      <th></th>
    </tr>
 
- <% if @chores != nil%>
+ <% if @chores.length >0%>
   <% @chores.each do |chore| %>
    <tr>
      <td>

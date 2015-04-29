@@ -25,26 +25,12 @@ class Chore < ActiveRecord::Base
 
 
  def self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)
-   if context_id != nil
-     @all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: choretype_id}, projects: {context_id: context_id, someday: false}}).order("projects.lft asc")
-     
-     if @all_chores.blank? 
-        return nil
-      else 
-        return @all_chores
-      end
-   else
-    nil
-   end
-  end
+   Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: choretype_id}, projects: {context_id: context_id, someday: false}}).order("projects.lft asc")
+ end
   
  def self.all_active_chores(context_id,choretype_id,user_id)
    all_chores = self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)
-   if all_chores
-     return all_chores.where("startdate < ? or startdate is null", Time.zone.now.midnight+ 1.day).where(:next_action => true)
-   else
-     nil
-   end
+   return all_chores.where("startdate < ? or startdate is null", Time.zone.now.midnight+ 1.day).where(:next_action => true)
  end
 
  def self.orphan_chores()
@@ -55,11 +41,10 @@ class Chore < ActiveRecord::Base
  def self.all_today_and_missed_appointments(context_id,choretype_id,user_id)
    
    all_chores = self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)
+   appointments = []
    
    if all_chores
     #first get all simple appointments from today and past
-     appointments = []
-     
      for chore in all_chores do
        if chore.startdate and chore.startdate < Time.zone.now.midnight+ 1.day and chore.schedule == {}
          appointments << chore
@@ -80,14 +65,8 @@ class Chore < ActiveRecord::Base
           end
       end
     end
-    if appointments == [] 
-      nil
-    else
-      return appointments
-    end
-   else
-     nil
    end
+   return appointments
 end
 
  def self.appointment_occurrences(context_id,start_time, end_time,user_id)
@@ -127,15 +106,9 @@ end
           @all_occurrences << occurrence_hash
         end
        end
-       
-         
      end
-     
-     return @all_occurrences
-  else
-    nil
   end
- 
+  return @all_occurrences
  end
  
 

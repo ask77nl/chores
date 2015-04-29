@@ -15,7 +15,7 @@ No contexts yet, create one!
     <% end %>
  <% end %>
   </ul>
-<% if @appointments != nil%>
+<% if @appointments.length > 0%>
 <h2><%= @appointments.length%> appointments</h2>
 
 <table class="table-condensed">
@@ -85,7 +85,7 @@ No contexts yet, create one!
  </table>
  <% end %>
 
-<% if @chores != nil%>
+<% if @chores.length > 0%>
 
 <h2><%= @chores.length%> Chores</h2>
 
@@ -150,7 +150,7 @@ No contexts yet, create one!
 <% end %>
 
 
- <% if @waiting_chores != nil%>
+ <% if @waiting_chores.length > 0 %>
 <h2>Waiting for <%= @waiting_chores.length%> chores</h2>
 
 <table class="table-condensed">
@@ -189,7 +189,7 @@ No contexts yet, create one!
 
 
  
-  <% if @empty_projects != nil%>
+  <% if @empty_projects.length >0 %>
 <h2>Listing <%= @empty_projects.length  if @empty_projects != nil%> empty projects</h2>
 
 <table class="table-condensed">

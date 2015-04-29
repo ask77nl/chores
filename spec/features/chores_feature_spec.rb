@@ -52,14 +52,6 @@ describe "Chores", :type => :feature do
       
         click_button('Create Chore')
   
-
-
-      expect(page).to have_content('Chore was successfully created.')
-      expect(page).to have_content('Title: '+chore.title)
-      expect(page).to have_content('Email: '+@email.subject)
-      expect(page).to have_content('Type: '+@choretype.name)
-      expect(page).to have_content('Project: '+@project.title)
-      
       
       visit chores_path
      
@@ -199,9 +191,6 @@ describe "when there are chores of several contexts and types" do
      
      click_button("Update Chore")
  
-     expect(page).to have_content('Title: '+new_title)
-     expect(page).to have_content('Project: '+new_project.title)
-
      visit chores_path(:choretype =>3)
 
      expect(page).to have_content(new_title)
