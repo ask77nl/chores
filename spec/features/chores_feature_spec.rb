@@ -169,17 +169,18 @@ describe "when there are chores of several contexts and types" do
   end
   
     it "should be able to edit it" do
-     chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
+     choretype_applointment = FactoryGirl.create(:choretype, id: 3)
+     chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: choretype_applointment.id, user_id: @user.id)
 
      new_project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
 
-     visit chores_path
+     visit chores_path(:choretype =>3)
      expect(page).to have_content(chore.title)
      click_link(chore.title, :href =>"/chores/"+chore.id.to_s+"/edit")
    
      expect(find_field('chore_title').value).to  eq chore.title
      expect(page).to have_select('chore[email_id]', :selected => @email.subject);
-     expect(page).to have_select('chore[choretype_id]', :selected => @choretype.name);
+     expect(page).to have_select('chore[choretype_id]', :selected => choretype_applointment.name);
      expect(page).to have_select('chore[project_id]', :options => [@project.title, new_project.title]);
      expect(page).to have_select('chore[project_id]', :selected => @project.title);
 
@@ -201,7 +202,7 @@ describe "when there are chores of several contexts and types" do
      expect(page).to have_content('Title: '+new_title)
      expect(page).to have_content('Project: '+new_project.title)
 
-     visit chores_path
+     visit chores_path(:choretype =>3)
 
      expect(page).to have_content(new_title)
      expect(page).to have_content(new_project.title)
@@ -212,7 +213,8 @@ describe "when there are chores of several contexts and types" do
      my_box = find('#chore_all_day')
      expect(my_box).not_to be_checked 
      
-     #puts "selected start time is: "+find(:css, "#start_time_time_4i").find('option[selected]').text
+     chore = Chore.find(chore.id)
+     puts "saved start time is: "+chore.startdate.to_s
      
      expect(page).to have_select('start_time_time_4i', :selected => '07 AM');
      expect(page).to have_select('start_time_time_5i', :selected => '30');
@@ -284,6 +286,34 @@ describe "when there are chores of several contexts and types" do
      new_time += 1.week
      expect(page).to have_content(new_time.strftime("%m/%d/%Y at %I:%M%p"))
    end
+  end
+  
+  describe "when we have an appointment and convert it to a todo" do
+    it "it should lose all dates, times and schedule" do
+    
+        
+    #choretype_todo = FactoryGirl.create(:choretype, id: 1)
+    #choretype_waiting = FactoryGirl.create(:choretype, id: 2)
+    choretype_appointment = FactoryGirl.create(:choretype, id: 3)
+
+    todays_appointment = FactoryGirl.create(:chore, choretype_id: choretype_appointment.id, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now.to_date, schedule: nil)
+    visit chores_path(:choretype =>choretype_appointment.id )
+    expect(page).to have_content(todays_appointment.title)
+    click_link(todays_appointment.title, :href =>"/chores/"+todays_appointment.id.to_s+"/edit")
+    
+    select(@choretype.name, :from => 'chore_choretype_id')
+    click_button("Update Chore")
+    
+    visit chores_path(:choretype =>@choretype.id )
+    expect(page).to have_content(todays_appointment.title)
+    click_link(todays_appointment.title, :href =>"/chores/"+todays_appointment.id.to_s+"/edit")
+    
+    expect(page).to have_css('input[type="text"][name*="chore[startdate]"][value="not set"]')
+    expect(page).to have_css('input[type="text"][name*="chore[deadline]"][value="not set"]')
+    expect(page).to have_select('chore[schedule]', :text => '- not recurring - Set schedule...');
+
+    
+    end
   end
   
   end

@@ -172,7 +172,7 @@ before_filter :authenticate_user!
         params[:chore][:all_day] = '1'
       else
         #if schedule is present - update startdate and deadline to the first occurrence
-        if(params[:chore][:schedule] != '')
+        if(params[:chore][:schedule] != '' and params[:chore][:schedule] != nil)
           schedule = IceCube::Schedule.new(Time.zone.parse('2015-01-01 00:00'))
           schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(params[:chore][:schedule]))
           params[:chore][:startdate]=schedule.first.strftime("%Y-%m-%d")
@@ -182,7 +182,7 @@ before_filter :authenticate_user!
         #form correct deadline parameter
         if(params[:chore][:deadline] != '' and params[:chore][:deadline] != nil and params[:chore][:deadline] != "not set")
           end_datetime = DateTime.strptime(params[:chore][:deadline], "%m/%d/%Y")
-          end_datetime=end_datetime.change(offset:"-0400")
+          end_datetime=end_datetime.change(offset:"-0500")
           if(params[:chore][:all_day] == '0')
             end_datetime=end_datetime.change(hour: params[:end_time]["time(4i)"].to_i, min: params[:end_time]["time(5i)"].to_i )
           end
@@ -191,7 +191,7 @@ before_filter :authenticate_user!
          #form correct startdate parameter
         if(params[:chore][:startdate] != '' and params[:chore][:startdate] != nil and params[:chore][:startdate] != "not set")
           start_datetime = DateTime.strptime(params[:chore][:startdate], "%m/%d/%Y")
-          start_datetime=start_datetime.change(offset:"-0400")
+          start_datetime=start_datetime.change(offset:"-0500")
           if(params[:chore][:all_day] == '0')
             start_datetime=start_datetime.change(hour: params[:start_time]["time(4i)"].to_i, min: params[:start_time]["time(5i)"].to_i )
           end
@@ -225,7 +225,8 @@ before_filter :authenticate_user!
     @chore.user_id = current_user.id
 
   #  print "chore update controller received params: ", params,"\n"
-
+    
+    
     respond_to do |format|
       
       if(params[:chore][:choretype_id] == '1' or params[:chore][:choretype_id] == '2')
@@ -236,17 +237,16 @@ before_filter :authenticate_user!
         params[:chore][:all_day] = '1'
       else
         #if schedule is present - update startdate and deadline to the first occurrence
-        if(params[:chore][:schedule] != '')
-	  schedule = IceCube::Schedule.new(Time.zone.parse('2015-01-01 00:00'))
+        if(params[:chore][:schedule] != ''and params[:chore][:schedule] != nil)
+          schedule = IceCube::Schedule.new(Time.zone.parse('2015-01-01 00:00'))
           schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(params[:chore][:schedule]))
           params[:chore][:startdate]=schedule.first.strftime("%m/%d/%Y")
           params[:chore][:deadline]=schedule.first.strftime("%m/%d/%Y")
-	  puts "New date is "+params[:chore][:deadline]
         end	 
         #form correct deadline parameter
         if(params[:chore][:deadline] != '' and params[:chore][:deadline] != nil and params[:chore][:deadline] != "not set")
           end_datetime = DateTime.strptime(params[:chore][:deadline], "%m/%d/%Y")
-          end_datetime=end_datetime.change(offset:"-0400")
+          end_datetime=end_datetime.change(offset:"-0500")
           if(params[:chore][:all_day] == '0')
             end_datetime=end_datetime.change(hour: params[:end_time]["time(4i)"].to_i, min: params[:end_time]["time(5i)"].to_i )
           end  
@@ -255,12 +255,14 @@ before_filter :authenticate_user!
 	 #form correct startdate parameter
         if(params[:chore][:startdate] != '' and params[:chore][:startdate] != nil and params[:chore][:startdate] != "not set")
           start_datetime = DateTime.strptime(params[:chore][:startdate], "%m/%d/%Y")
-          start_datetime=start_datetime.change(offset:"-0400")
+          start_datetime=start_datetime.change(offset:"-0500")
           if(params[:chore][:all_day] == '0')
             start_datetime=start_datetime.change(hour: params[:start_time]["time(4i)"].to_i, min: params[:start_time]["time(5i)"].to_i )
           end  
           params[:chore][:startdate]=  start_datetime.strftime("%Y-%m-%d %H:%M %z")
         end
+        #puts "New start time is "+params[:chore][:startdate]
+        #puts "Timezone is "+Time.zone.to_s
       end
        
       if @chore.update_attributes(params[:chore])
