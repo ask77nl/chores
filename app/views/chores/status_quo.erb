@@ -1,10 +1,7 @@
 <h1>Status Quo <%=Time.zone.now.to_date%></h1>
 <p><%= link_to 'New Chore', new_chore_path, {:class => "btn btn-large btn-primary"} %> </p>
 
-<div id="daily_calendar_container">
-<div id='daily_calendar'></div>
-</div>
-
+<div class="col-lg-8">
  <ul class="nav nav-tabs">
      
 <% if @contexts.length == 0 %>
@@ -127,7 +124,7 @@ No contexts yet, create one!
 
 <% if @orphan_chores.length >0 %>
 
-<h2><%= @orphan_chores.length%>Orphan Chores</h2>
+<h2><%= @orphan_chores.length%> Orphan Chores</h2>
 
 <table class="table-condensed">
    <tr>
@@ -221,11 +218,15 @@ No contexts yet, create one!
  </table>
  <% end %>
 
-
-
- 
- <% if (@active_choretype.to_s == '3') %>
- <h2>Calendar view</h2>
- <div id='calendar'></div>
- <% end %>
 <% end %>
+
+</div>
+
+<div class="col-lg-4">
+
+<div id="daily_calendar_container">
+ <div id='daily_calendar'></div>
+</div>
+
+</div>
+

@@ -106,7 +106,7 @@ describe "when requesting all appointment occurrences for today  " do
    occurrence1 = {:id=>todays_chore.id,:title=>todays_chore.title,:start=>Date.today.midnight,:end=>Date.today.midnight,:url=>"/chores/"+todays_chore.id.to_s+"/edit", :allDay=>true}
    occurrence2 = {:id=>daily_chore.id,:title=>daily_chore.title,:start=>Time.zone.now.to_date.strftime("%Y-%m-%d 00:00:00 -0400"),:end=>Time.zone.now.to_date.strftime("%Y-%m-%d 00:00:00 -0400"),:url=>"/chores/"+daily_chore.id.to_s+"/edit", :allDay=>true}
    
-   expect(Chore.appointment_occurrences(@context,Time.zone.now,Time.zone.now, @user.id)).to eq([occurrence1, occurrence2])   
+   expect(Chore.appointment_occurrences(@context,Date.today.midnight,Date.today.midnight, @user.id)).to eq([occurrence1, occurrence2])   
   end
 end
 

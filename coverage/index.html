@@ -14,18 +14,18 @@
       <img src="./assets/0.9.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-29T20:04:49+00:00">2015-04-29T20:04:49+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2015-04-29T20:17:14+00:00">2015-04-29T20:17:14+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="red">72.65%</span></span>
+    (<span class="covered_percent"><span class="red">76.23%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         2.3
+         2.38
        </span>
     </span> hits/line)
   </h2>
@@ -33,8 +33,8 @@
   <div>
     <b>14</b> files in total.
     <b>223</b> relevant lines. 
-    <span class="green"><b>162</b> lines covered</span> and
-    <span class="red"><b>61</b> lines missed </span>
+    <span class="green"><b>170</b> lines covered</span> and
+    <span class="red"><b>53</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -122,12 +122,12 @@
       
       <tr>
         <td class="strong"><a href="#82190a1d0fb038fd36f723998cc78b4553b7528a" class="src_link" title="app/models/chore.rb">app/models/chore.rb</a></td>
-        <td class="yellow strong">84.27 %</td>
+        <td class="green strong">93.26 %</td>
         <td>203</td>
         <td>89</td>
-        <td>75</td>
-        <td>14</td>
-        <td>2.8</td>
+        <td>83</td>
+        <td>6</td>
+        <td>3.0</td>
       </tr>
       
       <tr>
@@ -236,11 +236,11 @@
           <div class="file_list_container" id="Models">
   <h2>
     <span class="group_name">Models</span>
-    (<span class="covered_percent"><span class="yellow">89.57%</span></span>
+    (<span class="covered_percent"><span class="green">94.48%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         3.04
+         3.15
        </span>
     </span> hits/line)
   </h2>
@@ -248,8 +248,8 @@
   <div>
     <b>7</b> files in total.
     <b>163</b> relevant lines. 
-    <span class="green"><b>146</b> lines covered</span> and
-    <span class="red"><b>17</b> lines missed </span>
+    <span class="green"><b>154</b> lines covered</span> and
+    <span class="red"><b>9</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -267,12 +267,12 @@
       
       <tr>
         <td class="strong"><a href="#82190a1d0fb038fd36f723998cc78b4553b7528a" class="src_link" title="app/models/chore.rb">app/models/chore.rb</a></td>
-        <td class="yellow strong">84.27 %</td>
+        <td class="green strong">93.26 %</td>
         <td>203</td>
         <td>89</td>
-        <td>75</td>
-        <td>14</td>
-        <td>2.8</td>
+        <td>83</td>
+        <td>6</td>
+        <td>3.0</td>
       </tr>
       
       <tr>
@@ -1410,11 +1410,11 @@
         <div class="source_table" id="82190a1d0fb038fd36f723998cc78b4553b7528a">
   <div class="header">
     <h3>app/models/chore.rb</h3>
-    <h4><span class="yellow">84.27 %</span> covered</h4>
+    <h4><span class="green">93.26 %</span> covered</h4>
     <div>
       <b>89</b> relevant lines. 
-      <span class="green"><b>75</b> lines covered</span> and
-      <span class="red"><b>14</b> lines missed.</span>
+      <span class="green"><b>83</b> lines covered</span> and
+      <span class="red"><b>6</b> lines missed.</span>
     </div>
   </div>
   
@@ -2123,20 +2123,20 @@
           <code class="ruby">        for occurrence_date in schedule.occurrences_between(start_time, end_time) do</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="118">
-          
+        <li class="covered" data-hits="2" data-linenumber="118">
+          <span class="hits">2</span>
           
           <code class="ruby">           udjusted_start_time = DateTime.parse(occurrence_date.start_time.to_s)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="119">
-          
+        <li class="covered" data-hits="2" data-linenumber="119">
+          <span class="hits">2</span>
           
           <code class="ruby">           if(chore.startdate)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="120">
-          
+        <li class="covered" data-hits="2" data-linenumber="120">
+          <span class="hits">2</span>
           
           <code class="ruby">            udjusted_start_time= udjusted_start_time.change(hour:chore.startdate.strftime(&#39;%H&#39;).to_i , min: chore.startdate.strftime(&#39;%M&#39;).to_i )</code>
         </li>
@@ -2147,20 +2147,20 @@
           <code class="ruby">           end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="122">
-          
+        <li class="covered" data-hits="2" data-linenumber="122">
+          <span class="hits">2</span>
           
           <code class="ruby">           udjusted_end_time = DateTime.parse(occurrence_date.end_time.to_s)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="123">
-          
+        <li class="covered" data-hits="2" data-linenumber="123">
+          <span class="hits">2</span>
           
           <code class="ruby">           if(chore.deadline)</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="124">
-          
+        <li class="covered" data-hits="2" data-linenumber="124">
+          <span class="hits">2</span>
           
           <code class="ruby">            udjusted_end_time= udjusted_end_time.change(hour:chore.deadline.strftime(&#39;%H&#39;).to_i , min: chore.deadline.strftime(&#39;%M&#39;).to_i )</code>
         </li>
@@ -2171,14 +2171,14 @@
           <code class="ruby">           end</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="126">
-          
+        <li class="covered" data-hits="2" data-linenumber="126">
+          <span class="hits">2</span>
           
           <code class="ruby">           occurrence_hash = {id: chore.id, title: chore.title, start: udjusted_start_time , end: udjusted_end_time, url: &quot;/chores/&quot;+chore.id.to_s+&quot;/edit&quot;, allDay: chore.all_day}</code>
         </li>
       
-        <li class="missed" data-hits="0" data-linenumber="127">
-          
+        <li class="covered" data-hits="2" data-linenumber="127">
+          <span class="hits">2</span>
           
           <code class="ruby">          @all_occurrences &lt;&lt; occurrence_hash</code>
         </li>
