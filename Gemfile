@@ -35,6 +35,7 @@ group :development, :test do
   gem 'sqlite3' 
   gem 'rspec-rails', '3.0.1'
   gem 'ruby-debug-ide'
+  gem "byebug"
   gem 'debase'
 end
 

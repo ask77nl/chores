@@ -121,7 +121,7 @@ load_and_authorize_resource
     @project.delete
 
     respond_to do |format|
-      format.html { redirect_to projects_url }
+      format.html { redirect_to request.referer }
       format.json { head :no_content }
     end
   end

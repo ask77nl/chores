@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/ask/chores/app/models/role.rb": [
+      "/home/ubuntu/workspace/app/models/role.rb": [
         1,
         1,
         1,
@@ -9,7 +9,7 @@
         1,
         null
       ],
-      "/home/ask/chores/app/models/user.rb": [
+      "/home/ubuntu/workspace/app/models/user.rb": [
         1,
         1,
         null,
@@ -33,7 +33,7 @@
         null,
         null
       ],
-      "/home/ask/chores/app/helpers/application_helper.rb": [
+      "/home/ubuntu/workspace/app/helpers/application_helper.rb": [
         1,
         null,
         null,
@@ -48,19 +48,19 @@
         null,
         null
       ],
-      "/home/ask/chores/app/helpers/chores_helper.rb": [
+      "/home/ubuntu/workspace/app/helpers/chores_helper.rb": [
         1,
         null
       ],
-      "/home/ask/chores/app/helpers/emails_helper.rb": [
+      "/home/ubuntu/workspace/app/helpers/emails_helper.rb": [
         1,
         null
       ],
-      "/home/ask/chores/app/helpers/projects_helper.rb": [
+      "/home/ubuntu/workspace/app/helpers/projects_helper.rb": [
         1,
         null
       ],
-      "/home/ask/chores/app/helpers/render_sortable_tree_helper.rb": [
+      "/home/ubuntu/workspace/app/helpers/render_sortable_tree_helper.rb": [
         null,
         null,
         null,
@@ -164,15 +164,15 @@
         null,
         null
       ],
-      "/home/ask/chores/app/helpers/static_pages_helper.rb": [
+      "/home/ubuntu/workspace/app/helpers/static_pages_helper.rb": [
         1,
         null
       ],
-      "/home/ask/chores/app/helpers/users_helper.rb": [
+      "/home/ubuntu/workspace/app/helpers/users_helper.rb": [
         1,
         null
       ],
-      "/home/ask/chores/app/controllers/chores_controller.rb": [
+      "/home/ubuntu/workspace/app/controllers/chores_controller.rb": [
         1,
         1,
         1,
@@ -482,7 +482,7 @@
         null,
         null
       ],
-      "/home/ask/chores/app/controllers/application_controller.rb": [
+      "/home/ubuntu/workspace/app/controllers/application_controller.rb": [
         1,
         1,
         1,
@@ -497,7 +497,7 @@
         null,
         null
       ],
-      "/home/ask/chores/app/controllers/choretypes_controller.rb": [
+      "/home/ubuntu/workspace/app/controllers/choretypes_controller.rb": [
         1,
         null,
         null,
@@ -582,7 +582,7 @@
         null,
         null
       ],
-      "/home/ask/chores/app/controllers/contexts_controller.rb": [
+      "/home/ubuntu/workspace/app/controllers/contexts_controller.rb": [
         1,
         null,
         1,
@@ -674,7 +674,7 @@
         null,
         null
       ],
-      "/home/ask/chores/app/controllers/static_pages_controller.rb": [
+      "/home/ubuntu/workspace/app/controllers/static_pages_controller.rb": [
         1,
         1,
         null,
@@ -686,7 +686,7 @@
         null,
         null
       ],
-      "/home/ask/chores/app/controllers/users_controller.rb": [
+      "/home/ubuntu/workspace/app/controllers/users_controller.rb": [
         1,
         null,
         1,
@@ -754,7 +754,7 @@
         null,
         null
       ],
-      "/home/ask/chores/app/models/chore.rb": [
+      "/home/ubuntu/workspace/app/models/chore.rb": [
         1,
         null,
         null,
@@ -851,16 +851,16 @@
         null,
         null,
         7,
-        14,
-        14,
-        14,
+        9,
+        9,
+        9,
         null,
-        14,
-        14,
-        14,
+        9,
+        9,
+        9,
         null,
-        14,
-        14,
+        9,
+        9,
         null,
         null,
         null,
@@ -932,7 +932,7 @@
         null,
         null
       ],
-      "/home/ask/chores/app/models/choretype.rb": [
+      "/home/ubuntu/workspace/app/models/choretype.rb": [
         1,
         null,
         1,
@@ -941,17 +941,7 @@
         1,
         null
       ],
-      "/home/ask/chores/app/models/context.rb": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        null,
-        null
-      ],
-      "/home/ask/chores/app/models/email.rb": [
+      "/home/ubuntu/workspace/app/models/context.rb": [
         1,
         1,
         1,
@@ -961,7 +951,17 @@
         null,
         null
       ],
-      "/home/ask/chores/app/models/project.rb": [
+      "/home/ubuntu/workspace/app/models/email.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/home/ubuntu/workspace/app/models/project.rb": [
         1,
         1,
         1,
@@ -1042,7 +1042,7 @@
         null,
         null
       ],
-      "/home/ask/chores/app/controllers/projects_controller.rb": [
+      "/home/ubuntu/workspace/app/controllers/projects_controller.rb": [
         1,
         null,
         1,
@@ -1183,7 +1183,7 @@
         null,
         null
       ],
-      "/home/ask/chores/app/models/ability.rb": [
+      "/home/ubuntu/workspace/app/models/ability.rb": [
         1,
         1,
         null,
@@ -1244,7 +1244,7 @@
         null,
         null
       ],
-      "/home/ask/chores/app/controllers/emails_controller.rb": [
+      "/home/ubuntu/workspace/app/controllers/emails_controller.rb": [
         1,
         null,
         1,
@@ -1362,6 +1362,6 @@
         null
       ]
     },
-    "timestamp": 1430346288
+    "timestamp": 1430435927
   }
 }
