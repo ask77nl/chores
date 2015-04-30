@@ -15,3 +15,4 @@
 /tmp
 /nbproject/private/
 coverage/
+webdriver-profile*
