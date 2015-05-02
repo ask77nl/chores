@@ -301,7 +301,7 @@ before_filter :authenticate_user!
     @chore.destroy
 
     respond_to do |format|
-      format.html { redirect_to chores_url }
+      format.html { redirect_to request.referer}
       format.json { head :no_content }
     end
   end

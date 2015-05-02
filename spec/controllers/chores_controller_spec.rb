@@ -217,6 +217,7 @@ describe ChoresController, :type => :controller do
   describe "DELETE destroy" do
     it "destroys the requested choretype" do
       chore = Chore.create! valid_attributes
+      request.env['HTTP_REFERER'] = '/'
       expect {
         delete :destroy, {:id => chore.to_param}, valid_session
       }.to change(Chore, :count).by(-1)
@@ -224,8 +225,9 @@ describe ChoresController, :type => :controller do
 
     it "redirects to the choretypes list" do
       chore = Chore.create! valid_attributes
+      request.env['HTTP_REFERER'] = '/'
       delete :destroy, {:id => chore.to_param}, valid_session
-      expect(response).to redirect_to(chores_url)
+      expect(response).to redirect_to('/')
     end
   end
   
