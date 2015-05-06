@@ -23,7 +23,12 @@ Chores::Application.routes.draw do
   end
   put 'chore/:id/skip' => "chores#skip", as: 'skip_chore'
   
-  resources :emails
+  resources :emails do
+  collection do
+      get :login
+      get :login_callback
+    end
+  end
 
   devise_for :users
   resources :users

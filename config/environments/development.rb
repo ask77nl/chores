@@ -38,4 +38,7 @@ Chores::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  
+  config.inbox_app_id = '3wefk3jqyzrrtjeaycp3c6naf'
+  config.inbox_app_secret = 'ecpv5sbuyxhr4yi2r7byssick'
 end

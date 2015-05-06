@@ -37,5 +37,7 @@ Chores::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
   
+  config.inbox_app_id = '3wefk3jqyzrrtjeaycp3c6naf'
+  config.inbox_app_secret = 'ecpv5sbuyxhr4yi2r7byssick'
 
 end
