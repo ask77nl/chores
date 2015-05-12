@@ -9,11 +9,7 @@ class EmailsController < ApplicationController
     if config.inbox_app_id == 'YOUR_APP_ID'
         raise "error, you need to configure your app secrets in config/environments"
     end
-    if config.inbox_api_server
-        @inbox = Inbox::API.new(config.inbox_app_id, config.inbox_app_secret, session[:inbox_token], config.inbox_api_server, config.inbox_auth_domain)
-    else
         @inbox = Inbox::API.new(config.inbox_app_id, config.inbox_app_secret, session[:inbox_token])
-    end
   end
 
   def login
