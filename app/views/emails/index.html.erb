@@ -1,35 +1,28 @@
-<h1>Listing <%= @emails.length  if @emails != nil%> emails</h1>
+<h1>Listing <%= @email_threads.count%> emails</h1>
 
-<h2><%= @test_text %></h2>
 
 <table class="table">
   <tr>
     <th>From</th>
-    <th>To</th>
-    <th>Received</th>
+    <th>Messages</th>
     <th>Subject</th>
     <th>Body</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
-<% if @emails.length != 0%>
+<% if @email_threads.count != 0%>
 
-<% @emails.each do |email| %>
+<% @email_threads.each do |thread| %>
   <tr>
-    <td><%= email.from %></td>
-    <td><%= email.to %></td>
-    <% if email.datetime != nil %>
-     <td><%= email.datetime.to_s(:due_date) %></td>
-    <% else %>
-     <td>-</td>
-    <%end%>
-    <td><%= email.subject %></td>
-    <td><%= email.body %></td>
-    <td><%= link_to 'Show', email,{:class => "btn btn-info"}  %></td>
-    <td><%= link_to 'Edit', edit_email_path(email),{:class => "btn btn-primary"}  %></td>
-    <td><%= link_to 'Destroy', email, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger"  %></td>
+    <td>
+      <% thread.participants.each do |participant| %>
+       <%if participant['email'] != @my_email%>
+        <%=participant['email'] %><br>
+       <% end %>
+      <% end %>
+    </td>
+    <td><%= thread.messages.count %></td>
+    <td><%= thread.subject %></td>
+    <td><%= thread.snippet %></td>
   </tr>
 <% end %>
  <% else %>

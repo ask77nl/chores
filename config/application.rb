@@ -78,5 +78,9 @@ module Chores
    config.time_zone = 'Eastern Time (US & Canada)'
    config.active_record.default_timezone = :utc
    #config.active_record.default_timezone = 'Eastern Time (US & Canada)'
+   
+   #my modules
+   #config.autoload_paths << Rails.root.join('lib')
+   config.autoload_paths += Dir["#{config.root}/lib/**/"]
   end
 end

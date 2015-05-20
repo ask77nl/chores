@@ -1,4 +1,6 @@
 class EmailsController < ApplicationController
+  
+ include InboxConverter
 
  before_filter :authenticate_user!
 # load_and_authorize_resource
@@ -28,25 +30,10 @@ class EmailsController < ApplicationController
   # GET /emails.json
   def index
     return redirect_to action: 'login' unless @inbox.access_token
-    namespace = @inbox.namespaces.first
-
-    # Wait til the sync has successfully started
-    thread = namespace.threads.first
-    while thread == nil do
-      puts "Sync not started yet. Checking again in 2 seconds."
-      sleep 2
-      thread = namespace.threads.first
-    end
-
-    # Print out the first five threads in the namespace
-    @test_text = ""
-    namespace.threads.range(0,4).each do |thread|
-        @test_text += "#{thread.subject} - #{thread.id}<br>";
-    end
     
+    @email_threads = EmailsController.new.inbox_threads(@inbox)
+    @my_email = EmailsController.new.my_email(@inbox) 
     
-    @emails = Email.where("user_id = ?",current_user.id)
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @emails }
