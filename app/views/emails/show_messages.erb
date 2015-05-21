@@ -1,0 +1,34 @@
+<h1>Listing <%= @messages.count%> emails</h1>
+
+
+<table class="table">
+  <tr>
+    <th>Date</th>
+    <th>From</th>
+    <th>To</th>
+    <th>Subject</th>
+    <th>Body</th>
+    <th></th>
+  </tr>
+
+<% if @messages.count != 0%>
+
+<% @messages.each do |message| %>
+  <tr>
+    <td><%= Date.strptime(message.date.to_s, '%s') %></td>
+    <td><%= message.from[0]['name'] %> <%= message.from[0]['email'] %></td>
+    <td><%= message.to[0]['name'] %> <%= message.to[0]['email'] %></td>
+    <td><%= message.subject %></td>
+    <td><%=raw message.body %></td>
+    <td><%= link_to 'Convert to chore', convert_to_chore_emails_path(:message_id => message.id),{:class => "btn btn-primary"}  %></td>
+  </tr>
+<% end %>
+ <% else %>
+   <tr><td colspan=8>No emails yet, create one!</td><tr>
+
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Email', new_email_path,{:class => "btn btn-large btn-primary"}  %>

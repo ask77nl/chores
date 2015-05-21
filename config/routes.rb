@@ -27,6 +27,9 @@ Chores::Application.routes.draw do
   collection do
       get :login
       get :login_callback
+      get :show_messages
+      delete :delete_thread
+      get :convert_to_chore
     end
   end
 

@@ -7,6 +7,8 @@
     <th>Messages</th>
     <th>Subject</th>
     <th>Body</th>
+    <th></th>
+    <th></th>
   </tr>
 
 <% if @email_threads.count != 0%>
@@ -23,6 +25,8 @@
     <td><%= thread.messages.count %></td>
     <td><%= thread.subject %></td>
     <td><%= thread.snippet %></td>
+    <td><%= link_to 'Show Messages', show_messages_emails_path(:thread_id => thread.id),{:class => "btn btn-primary"}  %></td>
+    <td><%= link_to 'Delete', delete_thread_emails_path(:thread_id =>thread.id), method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger"  %></td>
   </tr>
 <% end %>
  <% else %>

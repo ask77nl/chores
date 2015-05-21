@@ -39,6 +39,34 @@ class EmailsController < ApplicationController
       format.json { render json: @emails }
     end
   end
+  
+  def delete_thread
+    return redirect_to action: 'login' unless @inbox.access_token
+    
+    if params['thread_id'] then
+      EmailsController.new.archive_thread(@inbox,params['thread_id'])
+    end
+    
+    respond_to do |format|
+      format.html { redirect_to request.referer}
+      format.json { head :no_content }
+    end
+  end
+  
+  
+  def show_messages
+   
+   @messages = []
+   if params['thread_id'] then
+     @messages = EmailsController.new.get_messages(@inbox,params['thread_id'])
+   end
+     
+    respond_to do |format|
+      format.html # show_messages.html.erb
+      format.json { render json: @email }
+    end
+  end
+  
 
   # GET /emails/1
   # GET /emails/1.json
@@ -78,9 +106,9 @@ class EmailsController < ApplicationController
     # print "create controller received date:",params[:email][:datetime],"\n"
      params[:email][:datetime]=  DateTime.strptime(params[:email][:datetime], "%m/%d/%Y").strftime("%Y-%m-%d %z")
    #   print "and converted it to:",params[:email][:datetime],"\n"
-     else
+    else
    #   puts "got no date params in create email controller!"
-     end
+    end
 
     @email = Email.new(params[:email])
     @email.user_id = current_user.id

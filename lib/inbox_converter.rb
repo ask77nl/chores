@@ -22,4 +22,17 @@ module InboxConverter
    namespace.email_address
  end
  
+ def archive_thread(inbox, thread_id)
+   namespace = inbox.namespaces.first
+   thread = namespace.threads.find(thread_id)
+   thread.archive!
+ end
+ 
+ def get_messages(inbox, thread_id)
+   namespace = inbox.namespaces.first
+   thread = namespace.threads.find(thread_id)
+   
+   thread.messages
+ end
+
 end
