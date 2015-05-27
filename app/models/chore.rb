@@ -121,18 +121,27 @@ end
      else
       write_attribute(:schedule, RecurringSelect.dirty_hash_to_rule(new_schedule).to_hash)
      end
-  end
+ end
  
-  def move_start_date_to_next_occurrence
+ def move_start_date_to_next_occurrence
   if self.schedule != {} and self.startdate < Time.zone.now.midnight+ 1.day
     schedule = IceCube::Schedule.new()
     schedule.add_recurrence_rule(RecurringSelect.dirty_hash_to_rule(self.schedule))
-    new_startdate =schedule.next_occurrence(Time.zone.now.midnight+ 1.day) 
-    new_deadline =schedule.next_occurrence(Time.zone.now.midnight+ 1.day) 
-    if self.all_day == 0
-      new_startdate= new_startdate.change(hour:self.startdate.strftime('%H').to_i , min: self.startdate.strftime('%M').to_i )
-      new_deadline = new_deadline.change(hour:self.deadline.strftime('%H').to_i , min: self.deadline.strftime('%M').to_i )
+ 
+    new_startdate = schedule.next_occurrence(Time.zone.now.midnight+ 1.day)
+    new_deadline = schedule.next_occurrence(Time.zone.now.midnight+ 1.day)
+    
+    if self.all_day == false
+      new_startdate_string = new_startdate.strftime("%Y-%m-%d")
+      new_deadline_string = new_deadline.strftime("%Y-%m-%d") 
+
+      new_startdate_string += " "+self.startdate.strftime('%H')+":"+self.startdate.strftime('%M')+" -0400"
+      new_deadline_string += " "+self.deadline.strftime('%H')+":"+self.deadline.strftime('%M')+" -0400"
+      
+      new_startdate = DateTime.strptime(new_startdate_string, "%Y-%m-%d %H:%M %z")
+      new_deadline = DateTime.strptime(new_deadline_string, "%Y-%m-%d %H:%M %z")
     end
+
     self.update_attribute(:startdate, new_startdate)
     self.update_attribute(:deadline, new_deadline)
     
