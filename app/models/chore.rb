@@ -115,7 +115,7 @@ end
  
  def schedule=(new_schedule)
    
-     #puts "received schedule "+new_schedule
+     
      if new_schedule == nil or new_schedule == 'null'
       write_attribute(:schedule, nil)
      else
