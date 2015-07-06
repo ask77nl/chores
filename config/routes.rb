@@ -29,7 +29,7 @@ Chores::Application.routes.draw do
       get :login_callback
       get :show_messages
       delete :delete_thread
-      get :convert_to_chore
+      get :convert_to_project
     end
   end
 

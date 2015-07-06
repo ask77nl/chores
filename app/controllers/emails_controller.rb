@@ -53,6 +53,19 @@ class EmailsController < ApplicationController
     end
   end
   
+  def convert_to_project
+    return redirect_to action: 'login' unless @inbox.access_token
+    
+    if params['thread_id'] then
+      
+    end
+    
+    respond_to do |format|
+      format.html { redirect_to request.referer}
+      format.json { head :no_content }
+    end
+  end
+  
   
   def show_messages
    
