@@ -29,6 +29,11 @@ toggle_dates =  ->
       $("#frequency_panel").hide()  
     else
      $("#first_appointment_panel").show()
+     today = new Date();
+     if($("#chore_startdate").val() == 'not set')
+      $("#chore_startdate").val(today.getMonth()+1+'/'+today.getDate()+'/'+today.getFullYear())
+     if($("#chore_deadline").val() == 'not set')
+      $("#chore_deadline").val(today.getMonth()+1+'/'+today.getDate()+'/'+today.getFullYear())
      $("#frequency_panel").show()  
 
 $ -> toggle_all_day()
