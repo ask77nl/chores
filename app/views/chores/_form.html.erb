@@ -11,9 +11,6 @@
     </div>
   <% end %>
 
-<div class="row">
- <!--<div class = "col-md-4"> -->
-  
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title, :size => "90" %>
@@ -31,10 +28,6 @@
     <%= collection_select(:chore, :choretype_id, Choretype.all, :id, :name, {}, {'data-behaviour' => 'choretype_select'})%>
   </div>
   
-<!--</div>-->
-
-<!--<div class="col-md-8">-->
-
 <div class="panel panel-primary" id="first_appointment_panel">
  <div class="panel-heading">First appointment</div>
  <div class="panel-body">
@@ -95,9 +88,6 @@
  </div>
 </div>
 
-
-
-</div>
   <div class="field">
     <%= f.label :email %><br />
     <%= collection_select(:chore, :email_id, @emails, :id, :subject, {include_blank: 'None'}) %>
