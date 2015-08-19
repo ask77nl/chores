@@ -39,10 +39,12 @@ describe "Chores", :type => :feature do
      
      select(choretype_appointment.name, :from => 'chore_choretype_id')   
      
-     puts page.body  
-    
-     expect(page).to have_css('input[type="text"][name*="chore[startdate]"][value*="'+Time.now.strftime("%m/%d/%Y")+'"]', visible: true)
-     expect(page).to have_css('input[type="text"][name*="chore[deadline]"][value*="'+Time.now.strftime("%m/%d/%Y")+'"]', visible: true)
+     expect(page).to have_css('input[type="text"][name*="chore[startdate]"]', visible: true)
+     expect(page).to have_css('input[type="text"][name*="chore[deadline]"]', visible: true)
+
+     expect(find_field('chore[startdate]').value).to eq(Time.now.strftime("%m/%d/%Y"))
+     expect(find_field('chore[deadline]').value).to eq(Time.now.strftime("%m/%d/%Y"))
+
      
      all_day_box = find('#chore_all_day')
      expect(all_day_box).to be_checked 

@@ -30,10 +30,18 @@ toggle_dates =  ->
     else
      $("#first_appointment_panel").show()
      today = new Date();
+     dd=today.getDate()
+     mm=today.getMonth()+1
+     yyyy=today.getFullYear()
+     if(dd<10)
+      dd='0'+dd
+     if(mm<10)
+      mm='0'+mm
+     today_string = mm+'/'+dd+'/'+yyyy;
      if($("#chore_startdate").val() == 'not set')
-      $("#chore_startdate").val(today.getMonth()+1+'/'+today.getDate()+'/'+today.getFullYear())
+      $("#chore_startdate").val(today_string)
      if($("#chore_deadline").val() == 'not set')
-      $("#chore_deadline").val(today.getMonth()+1+'/'+today.getDate()+'/'+today.getFullYear())
+      $("#chore_deadline").val(today_string)
      $("#frequency_panel").show()  
 
 $ -> toggle_all_day()
