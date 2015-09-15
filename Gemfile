@@ -21,7 +21,7 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'jbuilder'
 gem 'gon'
-gem 'inbox'
+gem 'nylas'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

@@ -22,7 +22,8 @@
        <% end %>
       <% end %>
     </td>
-    <td><%= thread.messages.count %></td>
+   
+    <td><%= thread.message_ids.length%></td> 
     <td><%= thread.subject %></td>
     <td><%= thread.snippet %></td>
     <td><%= link_to 'Show Messages', show_messages_emails_path(:thread_id => thread.id),{:class => "btn btn-primary"}  %></td>
