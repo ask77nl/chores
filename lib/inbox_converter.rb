@@ -23,8 +23,11 @@ module InboxConverter
  end
  
  def get_messages(inbox, thread_id)
-   thread = inbox.threads.find(thread_id)
-   thread.messages
+   inbox.messages.where(:thread_id => thread_id).all
+ end
+ 
+  def get_thread(inbox, thread_id)
+   inbox.threads.find(thread_id)
  end
 
 end

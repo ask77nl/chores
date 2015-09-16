@@ -54,15 +54,23 @@ class EmailsController < ApplicationController
   end
   
   def convert_to_project
+    session[:return_to] ||= request.referer
     return redirect_to action: 'login' unless @inbox.access_token
+    return redirect_to action: 'show_messages' unless params['thread_id']
     
-    if params['thread_id'] then
-      
-    end
+    @thread = EmailsController.new.get_thread(@inbox,params['thread_id'])
+    return redirect_to action: 'show_messages' unless  @threads != []
+    
+    @project = Project.new
+    @project.user_id = current_user.id
+    # we use list of projects and contexts on the view, need to prepare them
+    
+    @projects = Project.all_active_projects(params[:context_id],current_user.id )
+    @contexts = Context.where("user_id = ?",current_user.id)
     
     respond_to do |format|
-      format.html { redirect_to request.referer}
-      format.json { head :no_content }
+      format.html 
+      format.json { render json: @thread }
     end
   end
   
@@ -72,6 +80,7 @@ class EmailsController < ApplicationController
    @messages = []
    if params['thread_id'] then
      @messages = EmailsController.new.get_messages(@inbox,params['thread_id'])
+     @thread_id = params['thread_id']
    end
      
     respond_to do |format|

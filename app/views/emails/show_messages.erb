@@ -20,15 +20,11 @@
     <td><%= message.to[0]['name'] %> <%= message.to[0]['email'] %></td>
     <td><%= message.subject %></td>
     <td><%=raw message.body %></td>
-    <td><%= link_to 'Convert to project', convert_to_project_emails_path(:message_id => message.id),{:class => "btn btn-primary"}  %></td>
+    <td><%= link_to 'Convert to project', convert_to_project_emails_path(:thread_id => @thread_id),{:class => "btn btn-primary"}  %></td>
   </tr>
 <% end %>
  <% else %>
-   <tr><td colspan=8>No emails yet, create one!</td><tr>
+   <tr><td colspan=8>No emails in this thread, which is weird!</td><tr>
 
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Email', new_email_path,{:class => "btn btn-large btn-primary"}  %>

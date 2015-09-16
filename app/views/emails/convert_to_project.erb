@@ -1,0 +1,41 @@
+<h1>Create project for the thread <%= @thread.subject %></h1>
+
+<%= form_for(@project) do |f| %>
+  <% if @project.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+  <%= f.label :context %><br />  
+  <%= collection_select(:project, :context_id, @contexts, :id, :name) %>
+  </div>
+  <div class="field">
+    <%= f.label :someday %><br />
+    <%= f.check_box :someday %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+   <%= f.label :parent_project %><br />
+   <%= collection_select(:project, :parent_project_id, @projects, :id, :title, {include_blank: 'None'}, {'data-behaviour' => 'parent_project_select'}) %>
+  </div>
+  <div class="field">
+    <%= f.label :comments %><br />
+    <%= f.text_area :comments, cols: 60, rows: 20 %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>
+
