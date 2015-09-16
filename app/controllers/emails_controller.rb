@@ -54,7 +54,7 @@ class EmailsController < ApplicationController
   end
   
   def convert_to_project
-    session[:return_to] ||= request.referer
+    session[:return_to] ||= Rails.application.routes.url_helpers.projects_path
     return redirect_to action: 'login' unless @inbox.access_token
     return redirect_to action: 'show_messages' unless params['thread_id']
     
@@ -63,6 +63,7 @@ class EmailsController < ApplicationController
     
     @project = Project.new
     @project.user_id = current_user.id
+    @project.title = @thread.subject
     # we use list of projects and contexts on the view, need to prepare them
     
     @projects = Project.all_active_projects(params[:context_id],current_user.id )

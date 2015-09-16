@@ -32,7 +32,10 @@
   <%= @project.comments %>
 </p>
 
-
+<p>
+  <b>Emails:</b>
+  <%= link_to 'Show Messages', show_messages_emails_path(:thread_id => @project.thread_id)  %>
+</p>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
