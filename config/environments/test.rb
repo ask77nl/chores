@@ -39,5 +39,6 @@ Chores::Application.configure do
   
   config.inbox_app_id = '3wefk3jqyzrrtjeaycp3c6naf'
   config.inbox_app_secret = 'ecpv5sbuyxhr4yi2r7byssick'
+  config.inbox_api_server = 'https://api.nilas.com'
 
 end
