@@ -181,7 +181,7 @@ before_filter :authenticate_user!
         #form correct deadline parameter
         if(params[:chore][:deadline] != '' and params[:chore][:deadline] != nil and params[:chore][:deadline] != "not set")
           end_datetime = DateTime.strptime(params[:chore][:deadline], "%m/%d/%Y")
-          end_datetime=end_datetime.change(offset:"-0400")
+          end_datetime=end_datetime.change(offset:"-0500")
           if(params[:chore][:all_day] == '0')
             end_datetime=end_datetime.change(hour: params[:end_time]["time(4i)"].to_i, min: params[:end_time]["time(5i)"].to_i )
           end
@@ -190,7 +190,7 @@ before_filter :authenticate_user!
          #form correct startdate parameter
         if(params[:chore][:startdate] != '' and params[:chore][:startdate] != nil and params[:chore][:startdate] != "not set")
           start_datetime = DateTime.strptime(params[:chore][:startdate], "%m/%d/%Y")
-          start_datetime=start_datetime.change(offset:"-0400")
+          start_datetime=start_datetime.change(offset:"-0500")
           if(params[:chore][:all_day] == '0')
             start_datetime=start_datetime.change(hour: params[:start_time]["time(4i)"].to_i, min: params[:start_time]["time(5i)"].to_i )
           end
@@ -245,7 +245,7 @@ before_filter :authenticate_user!
         #form correct deadline parameter
         if(params[:chore][:deadline] != '' and params[:chore][:deadline] != nil and params[:chore][:deadline] != "not set")
           end_datetime = DateTime.strptime(params[:chore][:deadline], "%m/%d/%Y")
-          end_datetime=end_datetime.change(offset:"-0400")
+          end_datetime=end_datetime.change(offset:"-0500")
           if(params[:chore][:all_day] == '0')
             end_datetime=end_datetime.change(hour: params[:end_time]["time(4i)"].to_i, min: params[:end_time]["time(5i)"].to_i )
           end  
@@ -254,7 +254,7 @@ before_filter :authenticate_user!
 	 #form correct startdate parameter
         if(params[:chore][:startdate] != '' and params[:chore][:startdate] != nil and params[:chore][:startdate] != "not set")
           start_datetime = DateTime.strptime(params[:chore][:startdate], "%m/%d/%Y")
-          start_datetime=start_datetime.change(offset:"-0400")
+          start_datetime=start_datetime.change(offset:"-0500")
           if(params[:chore][:all_day] == '0')
             start_datetime=start_datetime.change(hour: params[:start_time]["time(4i)"].to_i, min: params[:start_time]["time(5i)"].to_i )
           end  
