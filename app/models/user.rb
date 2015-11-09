@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :projects
   has_many :contexts
   has_many :emails
+  has_many :emailaccounts
 
   # attr_accessible :title, :body
 end

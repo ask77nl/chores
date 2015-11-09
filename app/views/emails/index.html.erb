@@ -1,6 +1,6 @@
 <% content_for :subtitle, "Inbox with emails" %>
 <h1>Listing <%= @email_threads.count%> email threads from <%= @my_provider%> email <%= @my_email%></h1>
-
+<p>Access token <%= @inbox.access_token%></p>
 
 <table class="table">
   <tr>

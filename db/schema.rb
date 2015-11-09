@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916200615) do
+ActiveRecord::Schema.define(version: 20151109175736) do
 
   create_table "chores", force: true do |t|
     t.integer  "email_id"
@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(version: 20150916200615) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+  end
+
+  create_table "emailaccounts", force: true do |t|
+    t.string  "email_address"
+    t.text    "authentication_token"
+    t.integer "user_id"
   end
 
   create_table "emails", force: true do |t|

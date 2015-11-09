@@ -7,11 +7,11 @@ class EmailsController < ApplicationController
 
  before_action :setup_inbox
   def setup_inbox
-    config = Rails.configuration
-    if config.inbox_app_id == 'YOUR_APP_ID'
-        raise "error, you need to configure your app secrets in config/environments"
+    @inboxes = Array.new
+    email_accounts = Emailaccount.all_accounts(current_user.id)
+    for email_account in email_accounts do
+      @inboxes.push Inbox::API.new(Rails.configuration.inbox_app_id, Rails.configuration.inbox_app_secret, email_account.authentication_token)  
     end
-        @inbox = Inbox::API.new(config.inbox_app_id, config.inbox_app_secret, session[:inbox_token])
   end
 
   def login
@@ -29,8 +29,10 @@ class EmailsController < ApplicationController
   # GET /emails
   # GET /emails.json
   def index
-    return redirect_to action: 'login' unless @inbox.access_token
-    
+    for inbox in @inboxes do
+      return redirect_to action: 'login' unless inbox.access_token.length > 0
+    end
+
     @email_threads = EmailsController.new.inbox_threads(@inbox)
     @my_email = EmailsController.new.my_email(@inbox) 
     @my_provider = EmailsController.new.my_provider(@inbox) 
