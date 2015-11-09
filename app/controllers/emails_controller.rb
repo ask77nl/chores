@@ -17,7 +17,7 @@ class EmailsController < ApplicationController
   def login
     # This URL must be registered with your application in the developer portal
     callback_url = url_for(:action => 'login_callback')
-    redirect_to @inbox.url_for_authentication(callback_url, '')
+    redirect_to @inbox.url_for_authentication(callback_url, 'ask@alleko.com')
   end
 
   def login_callback
@@ -33,6 +33,7 @@ class EmailsController < ApplicationController
     
     @email_threads = EmailsController.new.inbox_threads(@inbox)
     @my_email = EmailsController.new.my_email(@inbox) 
+    @my_provider = EmailsController.new.my_provider(@inbox) 
     
     respond_to do |format|
       format.html # index.html.erb

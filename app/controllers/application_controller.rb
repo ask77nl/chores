@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
   redirect_to root_path, :alert => exception.message
   
-  before_filter :set_timezone
+  before_filter :set_app_variables
 
- def set_timezone
+ def set_app_variables
    Time.zone = 'Eastern Time (US & Canada)'
  end
     

@@ -17,6 +17,10 @@ module InboxConverter
    inbox.account.email_address
  end
  
+  def my_provider(inbox)
+   inbox.account.provider
+ end
+ 
  def archive_thread(inbox, thread_id)
    thread = inbox.threads.find(thread_id)
    thread.archive!

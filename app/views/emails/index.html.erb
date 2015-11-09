@@ -1,4 +1,5 @@
-<h1>Listing <%= @email_threads.count%> email threads</h1>
+<% content_for :subtitle, "Inbox with emails" %>
+<h1>Listing <%= @email_threads.count%> email threads from <%= @my_provider%> email <%= @my_email%></h1>
 
 
 <table class="table">
