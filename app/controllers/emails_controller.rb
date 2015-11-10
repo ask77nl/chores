@@ -7,35 +7,39 @@ class EmailsController < ApplicationController
 
  before_action :setup_inbox
   def setup_inbox
-    @inboxes = Array.new
+    @inboxes = {}
     email_accounts = Emailaccount.all_accounts(current_user.id)
     for email_account in email_accounts do
-      @inboxes.push Inbox::API.new(Rails.configuration.inbox_app_id, Rails.configuration.inbox_app_secret, email_account.authentication_token)  
+      @inboxes[email_account.email_address]=Inbox::API.new(Rails.configuration.inbox_app_id, Rails.configuration.inbox_app_secret, email_account.authentication_token)
     end
   end
 
   def login
     # This URL must be registered with your application in the developer portal
     callback_url = url_for(:action => 'login_callback')
-    redirect_to @inbox.url_for_authentication(callback_url, 'ask@alleko.com')
+    inbox = @inboxes[params["inbox_email_address"]]
+    puts "inbox is ", inbox
+    redirect_to inbox.url_for_authentication(callback_url+"&state="+params["inbox_email_address"], params["inbox_email_address"])
   end
 
   def login_callback
-    # Store the Inbox API token in the session
-    session[:inbox_token] = @inbox.token_for_code(params[:code])
+    authentication_token = @inboxes[params["state"]].token_for_code(params[:code])
+    Emailaccount.save_token(current_user.id, params["state"], authentication_token)
     redirect_to action: 'index'
   end
   
   # GET /emails
   # GET /emails.json
   def index
-    for inbox in @inboxes do
-      return redirect_to action: 'login' unless inbox.access_token.length > 0
+  
+    @inboxes.each do |email_address, inbox|
+      return redirect_to action: 'login', inbox_email_address: email_address unless inbox.access_token != nil
+      @email_threads ||= EmailsController.new.inbox_threads(inbox)
+      @my_email = EmailsController.new.my_email(inbox) 
+      @my_provider = EmailsController.new.my_provider(inbox) 
     end
 
-    @email_threads = EmailsController.new.inbox_threads(@inbox)
-    @my_email = EmailsController.new.my_email(@inbox) 
-    @my_provider = EmailsController.new.my_provider(@inbox) 
+    
     
     respond_to do |format|
       format.html # index.html.erb
