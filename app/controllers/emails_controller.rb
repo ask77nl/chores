@@ -31,12 +31,13 @@ class EmailsController < ApplicationController
   # GET /emails
   # GET /emails.json
   def index
-  
+    @email_threads = {}
+    @my_provider = {}
     @inboxes.each do |email_address, inbox|
       return redirect_to action: 'login', inbox_email_address: email_address unless inbox.access_token != nil
-      @email_threads ||= EmailsController.new.inbox_threads(inbox)
-      @my_email = EmailsController.new.my_email(inbox) 
-      @my_provider = EmailsController.new.my_provider(inbox) 
+      @email_threads[email_address] = EmailsController.new.inbox_threads(inbox)
+      #try to figure out what to do with different my_emails and my_providers, probably display threads in groups
+      @my_provider[email_address] = EmailsController.new.my_provider(inbox) 
     end
 
     
@@ -48,10 +49,12 @@ class EmailsController < ApplicationController
   end
   
   def delete_thread
-    return redirect_to action: 'login' unless @inbox.access_token
+    @inboxes.each do |email_address, inbox|
+      return redirect_to action: 'login', inbox_email_address: email_address unless inbox.access_token != nil
+    end
     
     if params['thread_id'] then
-      EmailsController.new.archive_thread(@inbox,params['thread_id'])
+      EmailsController.new.archive_thread(@inboxes[params['email_address']],params['thread_id'])
     end
     
     respond_to do |format|
@@ -62,7 +65,11 @@ class EmailsController < ApplicationController
   
   def convert_to_project
     session[:return_to] ||= Rails.application.routes.url_helpers.projects_path
-    return redirect_to action: 'login' unless @inbox.access_token
+    
+    @inboxes.each do |email_address, inbox|
+      return redirect_to action: 'login', inbox_email_address: email_address unless inbox.access_token != nil
+    end
+    
     return redirect_to action: 'show_messages' unless params['thread_id']
     
     @thread = EmailsController.new.get_thread(@inbox,params['thread_id'])
@@ -85,9 +92,13 @@ class EmailsController < ApplicationController
   
   def show_messages
    
+   @inboxes.each do |email_address, inbox|
+      return redirect_to action: 'login', inbox_email_address: email_address unless inbox.access_token != nil
+    end
+    
    @messages = []
    if params['thread_id'] then
-     @messages = EmailsController.new.get_messages(@inbox,params['thread_id'])
+     @messages = EmailsController.new.get_messages(@inboxes[params['email_address']],params['thread_id'])
      @thread_id = params['thread_id']
    end
      

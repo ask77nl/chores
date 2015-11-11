@@ -1,6 +1,7 @@
 <% content_for :subtitle, "Inbox with emails" %>
-<h1>Listing <%= @email_threads.count%> email threads from <%= @my_provider%> email <%= @my_email%></h1>
 
+<% @inboxes.each do |email_address, inbox| %>
+<h1>Listing <%= @email_threads[email_address].count%> email threads from <%= @my_provider[email_address] %> email <%= email_address %></h1>
 
 <table class="table">
   <tr>
@@ -12,13 +13,13 @@
     <th></th>
   </tr>
 
-<% if @email_threads.count != 0%>
+<% if @email_threads[email_address].count != 0%>
 
-<% @email_threads.each do |thread| %>
+<% @email_threads[email_address].each do |thread| %>
   <tr>
     <td>
       <% thread.participants.each do |participant| %>
-       <%if participant['email'] != @my_email%>
+       <%if participant['email'] != email_address%>
         <%=participant['email'] %><br>
        <% end %>
       <% end %>
@@ -27,8 +28,8 @@
     <td><%= thread.message_ids.length%></td> 
     <td><%= thread.subject %></td>
     <td><%= thread.snippet %></td>
-    <td><%= link_to 'Show Messages', show_messages_emails_path(:thread_id => thread.id),{:class => "btn btn-primary"}  %></td>
-    <td><%= link_to 'Delete', delete_thread_emails_path(:thread_id =>thread.id), method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger"  %></td>
+    <td><%= link_to 'Show Messages', show_messages_emails_path(:thread_id => thread.id, :email_address => email_address),{:class => "btn btn-primary"}  %></td>
+    <td><%= link_to 'Delete', delete_thread_emails_path(:thread_id =>thread.id, :email_address => email_address), method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-danger"  %></td>
   </tr>
 <% end %>
  <% else %>
@@ -36,6 +37,9 @@
 
 <% end %>
 </table>
+
+<%end %>
+
 
 <br />
 
