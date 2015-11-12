@@ -72,7 +72,8 @@ class EmailsController < ApplicationController
     
     return redirect_to action: 'show_messages' unless params['thread_id']
     
-    @thread = EmailsController.new.get_thread(@inbox,params['thread_id'])
+    @thread = EmailsController.new.get_thread(@inboxes[params['email_address']],params['thread_id'])
+    @email_address = params['email_address']
     return redirect_to action: 'show_messages' unless  @threads != []
     
     @project = Project.new
@@ -100,6 +101,7 @@ class EmailsController < ApplicationController
    if params['thread_id'] then
      @messages = EmailsController.new.get_messages(@inboxes[params['email_address']],params['thread_id'])
      @thread_id = params['thread_id']
+     @email_address = params['email_address']
    end
      
     respond_to do |format|

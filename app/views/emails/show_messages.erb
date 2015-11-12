@@ -20,7 +20,7 @@
     <td><%= message.to[0]['name'] %> <%= message.to[0]['email'] %></td>
     <td><%= message.subject %></td>
     <td><%=raw message.body %></td>
-    <td><%= link_to 'Convert to project', convert_to_project_emails_path(:thread_id => @thread_id),{:class => "btn btn-primary"}  %></td>
+    <td><%= link_to 'Convert to project', convert_to_project_emails_path(:email_address => @email_address, :thread_id => @thread_id),{:class => "btn btn-primary"}  %></td>
   </tr>
 <% end %>
  <% else %>
