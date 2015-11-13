@@ -43,6 +43,10 @@ load_and_authorize_resource
   def show
     @project = Project.find(params[:id])
     
+    email_account = Emailaccount.where(email_address: @project.email_address).first
+    inbox = Inbox::API.new(Rails.configuration.inbox_app_id, Rails.configuration.inbox_app_secret, email_account.authentication_token)
+    @messages = EmailsController.new.get_messages(inbox,@project.thread_id)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
@@ -88,6 +92,7 @@ load_and_authorize_resource
 #if the project was created with a thread id, archive the thread
     if params[:project][:thread_id] then
       config = Rails.configuration
+      #search for the email account is probably shitty here
       email_account = Emailaccount.where(email_address: params[:project][:email_address]).first
       inbox = Inbox::API.new(Rails.configuration.inbox_app_id, Rails.configuration.inbox_app_secret, email_account.authentication_token)
       EmailsController.new.archive_thread(inbox,params[:project][:thread_id])

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109175736) do
+ActiveRecord::Schema.define(version: 20151113183453) do
 
   create_table "chores", force: true do |t|
     t.integer  "email_id"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20151109175736) do
     t.text     "comments"
     t.boolean  "someday",           default: false, null: false
     t.text     "thread_id"
+    t.text     "email_address"
   end
 
   create_table "roles", force: true do |t|
