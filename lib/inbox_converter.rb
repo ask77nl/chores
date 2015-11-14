@@ -11,6 +11,7 @@ module InboxConverter
       thread = inbox.threads.first
     end
     inbox.threads.where(:tag => 'inbox')
+   
  end
 
  def my_email(inbox)

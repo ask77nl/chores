@@ -36,6 +36,7 @@ class EmailsController < ApplicationController
     @inboxes.each do |email_address, inbox|
       return redirect_to action: 'login', inbox_email_address: email_address unless inbox.access_token != nil
       @email_threads[email_address] = EmailsController.new.inbox_threads(inbox)
+
       #try to figure out what to do with different my_emails and my_providers, probably display threads in groups
       @my_provider[email_address] = EmailsController.new.my_provider(inbox) 
     end

@@ -42,10 +42,12 @@ load_and_authorize_resource
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-    
-    email_account = Emailaccount.where(email_address: @project.email_address).first
-    inbox = Inbox::API.new(Rails.configuration.inbox_app_id, Rails.configuration.inbox_app_secret, email_account.authentication_token)
-    @messages = EmailsController.new.get_messages(inbox,@project.thread_id)
+
+    if(@project.thread_id)
+      email_account = Emailaccount.where(email_address: @project.email_address).first
+      inbox = Inbox::API.new(Rails.configuration.inbox_app_id, Rails.configuration.inbox_app_secret, email_account.authentication_token)
+      @messages = EmailsController.new.get_messages(inbox,@project.thread_id)
+    end
 
     respond_to do |format|
       format.html # show.html.erb
