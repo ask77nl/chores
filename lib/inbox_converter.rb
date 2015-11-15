@@ -10,8 +10,15 @@ module InboxConverter
       sleep 2
       thread = inbox.threads.first
     end
-    inbox.threads.where(:tag => 'inbox')
-   
+    threads_array = inbox.threads.where(:tag => 'inbox').all
+    threads_array.each do |thread|
+      thread.tags.each do |tag|
+        if tag['name'] == 'trash'
+          threads_array.delete(thread)
+        end
+      end
+    end
+   threads_array
  end
 
  def my_email(inbox)
