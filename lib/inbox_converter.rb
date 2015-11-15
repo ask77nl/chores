@@ -11,13 +11,15 @@ module InboxConverter
       thread = inbox.threads.first
     end
     threads_array = inbox.threads.where(:tag => 'inbox').all
-    threads_array.each do |thread|
-      thread.tags.each do |tag|
-        if tag['name'] == 'trash'
-          threads_array.delete(thread)
-        end
-      end
-    end
+
+    #turn off again if there are trash treads in the inbox
+    #threads_array.each do |thread|
+    #  thread.tags.each do |tag|
+    #    if tag['name'] == 'trash'
+    #      threads_array.delete(thread)
+    #    end
+    #  end
+    #end
    threads_array
  end
 
