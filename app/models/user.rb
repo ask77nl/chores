@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role_ids
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :role_ids,
+         :unread_inbox_emails, :total_inbox_emails, :unread_project_emails
 
   validates :password,  presence: true
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -20,4 +21,12 @@ class User < ActiveRecord::Base
   has_many :emailaccounts
 
   # attr_accessible :title, :body
+  
+  def set_total_inbox_flag(total_inbox_emails)
+   update_attribute(:total_inbox_emails, total_inbox_emails)
+  end
+  
+  def set_unread_inbox_flag(unread_inbox_emails)
+   update_attribute(:unread_inbox_emails, unread_inbox_emails)
+  end
 end

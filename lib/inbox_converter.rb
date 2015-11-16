@@ -22,6 +22,10 @@ module InboxConverter
     #end
    threads_array
  end
+ 
+ def unread_count(inbox)
+   inbox.threads.where(:tag => 'unread').count
+ end
 
  def my_email(inbox)
    inbox.account.email_address

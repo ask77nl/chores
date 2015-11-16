@@ -33,14 +33,17 @@ class EmailsController < ApplicationController
   def index
     @email_threads = {}
     @my_provider = {}
+    unread_inbox_emails = false
+    total_inbox_emails = false
     @inboxes.each do |email_address, inbox|
       return redirect_to action: 'login', inbox_email_address: email_address unless inbox.access_token != nil
       @email_threads[email_address] = EmailsController.new.inbox_threads(inbox)
-
-      #try to figure out what to do with different my_emails and my_providers, probably display threads in groups
       @my_provider[email_address] = EmailsController.new.my_provider(inbox) 
+      total_inbox_emails = true if @email_threads[email_address].count >0 
+      unread_inbox_emails = true if EmailsController.new.unread_count(inbox) > 0
     end
-
+   current_user.set_unread_inbox_flag(unread_inbox_emails) 
+   current_user.set_total_inbox_flag(total_inbox_emails )
     
     
     respond_to do |format|

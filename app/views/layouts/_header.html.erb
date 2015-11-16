@@ -7,10 +7,20 @@
       <div class="navbar-left">
           <% if user_signed_in? %>
           <%= link_to "Home", '/', id: "logo" %>
-          <%= link_to "Emails", emails_path, id: "logo" %>    
+          <%= link_to "Emails", emails_path, id: "logo" %> 
+          <%if current_user.unread_inbox_emails %>
+            <%= image_tag("unread_email.png", :alt => "unread emails", :class => "style_email_flag") %>
+          <% else %>
+            <%if current_user.total_inbox_emails %>
+              <%= image_tag("read_email.png", :alt => "unread emails", :class => "style_email_flag") %>
+            <% end %>
+          <% end %>
           <%= link_to "Status Quo", status_quo_chores_path, id: "logo" %>
           <%= link_to "Calendar", calendar_chores_path, id: "logo" %>
           <%= link_to "Projects", projects_path, id: "logo" %>
+          <%if current_user.unread_project_emails %>
+            <%= image_tag("unread_email.png", :alt => "unread emails", :class => "style_email_flag") %>
+          <% end %>
           <%= link_to "Contexts", contexts_path, id: "logo" %>
           <% else %>
           <%= link_to "Chores", '/', id: "logo" %>
