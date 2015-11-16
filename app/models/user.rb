@@ -24,9 +24,11 @@ class User < ActiveRecord::Base
   
   def set_total_inbox_flag(total_inbox_emails)
    update_attribute(:total_inbox_emails, total_inbox_emails)
+   save
   end
   
   def set_unread_inbox_flag(unread_inbox_emails)
    update_attribute(:unread_inbox_emails, unread_inbox_emails)
+   save
   end
 end
