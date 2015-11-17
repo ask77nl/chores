@@ -5,6 +5,7 @@
 
 <table class="table">
   <tr>
+    <th></th>
     <th>From</th>
     <th>Messages</th>
     <th>Subject</th>
@@ -17,6 +18,11 @@
 
 <% @email_threads[email_address].each do |thread| %>
   <tr>
+    <td>
+      <% if thread.raw_json["unread"] %>
+       <%= image_tag("unread_email.png", :alt => "unread emails", :class => "style_email_flag") %>
+      <% end %>
+    </td>
     <td>
       <% thread.participants.each do |participant| %>
        <%if participant['email'] != email_address%>

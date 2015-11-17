@@ -38,6 +38,12 @@ module InboxConverter
  def archive_thread(inbox, thread_id)
    thread = inbox.threads.find(thread_id)
    thread.archive!
+   thread.update_tags!(['trash'], ['inbox'])
+ end
+ 
+ def mark_thread_as_read(inbox, thread_id)
+   thread = inbox.threads.find(thread_id)
+   thread.mark_as_read!
  end
  
  def get_messages(inbox, thread_id)

@@ -33,8 +33,21 @@ module RenderSortableTreeHelper
         ns   = options[:namespace]
         url = h.url_for(:controller => options[:klass].pluralize, :action => :show, :id => node)
         title_field = options[:title]
-
-        "<h4>#{ h.link_to(node.send(title_field), url) }</h4>"
+        
+        projects = options[:locals][:projects]
+        current_project = projects.find(node)
+        
+        if current_project.thread_id
+          "<h4>#{ h.link_to(node.send(title_field), url) } <b>unread emails!</b></h4>"
+        else
+          "<h4>#{ h.link_to(node.send(title_field), url) }</h4>"
+        end
+      #  if current_project.thread_id 
+        
+        #   "emails"
+        #   "<%= image_tag('read_email.png', :alt => 'unread emails', :class => 'style_email_flag') %>" 
+        # end
+        
       end
 
       def controls

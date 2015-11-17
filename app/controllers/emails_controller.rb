@@ -43,7 +43,7 @@ class EmailsController < ApplicationController
       unread_inbox_emails = true if EmailsController.new.unread_count(inbox) > 0
     end
    current_user.set_unread_inbox_flag(unread_inbox_emails) 
-   current_user.set_total_inbox_flag(total_inbox_emails )
+   current_user.set_total_inbox_flag(total_inbox_emails)
     
     
     respond_to do |format|
@@ -106,6 +106,7 @@ class EmailsController < ApplicationController
      @messages = EmailsController.new.get_messages(@inboxes[params['email_address']],params['thread_id'])
      @thread_id = params['thread_id']
      @email_address = params['email_address']
+     EmailsController.new.mark_thread_as_read(@inboxes[params['email_address']],params['thread_id'])
    end
      
     respond_to do |format|
