@@ -16,3 +16,5 @@
 /nbproject/private/
 /coverage
 webdriver-profile*
+
+# ignore ruby mine files on home PC
