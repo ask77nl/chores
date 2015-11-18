@@ -24,7 +24,13 @@ module InboxConverter
  end
  
  def unread_count(inbox)
-   inbox.threads.where(:tag => 'unread').count
+   unread_count =0
+   inbox.threads.where(:tag => 'inbox').each do |thread|
+     if thread.raw_json['unread'] == true
+       unread_count=unread_count+1
+     end
+   end
+   unread_count
  end
 
  def my_email(inbox)
