@@ -54,12 +54,13 @@ module RenderSortableTreeHelper
         node = options[:node]
 
         edit_path = h.url_for(:controller => options[:klass].pluralize, :action => :edit, :id => node)
-        destroy_path = h.url_for(:controller => options[:klass].pluralize, :action => :destroy, :id => node)
+       # archive_path = h.url_for(:controller => options[:klass].pluralize, :action => :archive, :id => node.id)
+       archive_path = '/project/'+node.id.to_s+"/archive"
 
         "
           <div class='controls'>
             #{ h.link_to '', edit_path, :class => :edit }
-            #{ h.link_to '', destroy_path, :class => :delete, :method => :delete, :data => { :confirm => 'Are you sure?' } }
+            #{ h.link_to '', archive_path, :class => :delete, :method => :put, :data => { :confirm => 'Are you sure?' } }
           </div>
         "
       end

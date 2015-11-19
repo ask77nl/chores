@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116191801) do
+ActiveRecord::Schema.define(version: 20151119184626) do
 
   create_table "chores", force: true do |t|
     t.integer  "email_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20151116191801) do
     t.datetime "startdate"
     t.boolean  "all_day",      default: true
     t.boolean  "next_action",  default: true
+    t.boolean  "archived",     default: false
   end
 
   create_table "choretypes", force: true do |t|
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 20151116191801) do
     t.boolean  "someday",           default: false, null: false
     t.text     "thread_id"
     t.text     "email_address"
+    t.boolean  "archived",          default: false
   end
 
   create_table "roles", force: true do |t|

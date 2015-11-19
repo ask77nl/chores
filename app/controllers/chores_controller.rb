@@ -305,4 +305,17 @@ before_filter :authenticate_user!
       format.json { head :no_content }
     end
   end
+  
+  # PUT archive/chores/1
+  # PUT archive/chores/1.json
+  def archive
+    @chore = Chore.find(params[:id])
+    @chore.archive
+
+    respond_to do |format|
+      format.html { redirect_to request.referer}
+      format.json { head :no_content }
+    end
+  end
+  
 end

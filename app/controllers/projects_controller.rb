@@ -141,6 +141,19 @@ load_and_authorize_resource
     end
   end
   
+  # PUT archive/project/1
+  # PUT archive/project/1.json
+  def archive
+    @project = Project.find(params[:id])
+    @project.archive
+
+    respond_to do |format|
+      format.html { redirect_to request.referer}
+      format.json { head :no_content }
+    end
+  end
+  
+  
  protected
 
   def sortable_model

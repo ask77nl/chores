@@ -13,15 +13,17 @@ Chores::Application.routes.draw do
       post :rebuild
     end
   end
+  put 'project/:id/archive' => "projects#archive", as: 'archive_project'
+  
   resources :chores do
     collection do
       get :occurrences
       get :status_quo
       get :calendar
     end
-    
   end
   put 'chore/:id/skip' => "chores#skip", as: 'skip_chore'
+  put 'chore/:id/archive' => "chores#archive", as: 'archive_chore'
   
   resources :emails do
   collection do

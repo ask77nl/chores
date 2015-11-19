@@ -11,7 +11,7 @@ class Chore < ActiveRecord::Base
   
   
   
-  attr_accessible :startdate, :deadline, :email_id, :project_id, :title, :choretype_id, :user_id, :schedule, :all_day, :next_action
+  attr_accessible :startdate, :deadline, :email_id, :project_id, :title, :choretype_id, :user_id, :schedule, :all_day, :next_action, :archived
   belongs_to :email
   belongs_to :user
   belongs_to :project
@@ -25,7 +25,7 @@ class Chore < ActiveRecord::Base
 
 
  def self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)
-   Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: choretype_id}, projects: {context_id: context_id, someday: false}}).order("projects.lft asc")
+   Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: choretype_id, archived: false}, projects: {context_id: context_id, someday: false}}).order("projects.lft asc")
  end
   
  def self.all_active_chores(context_id,choretype_id,user_id)
@@ -34,7 +34,7 @@ class Chore < ActiveRecord::Base
  end
 
  def self.orphan_chores()
-     return Chore.where(:project_id => nil)
+     return Chore.where({:project_id => nil, :archived => false})
  end
 
  
@@ -157,18 +157,20 @@ end
 #  the_schedule
 #end
 
-before_destroy { |record|
-    project_id = self.project_id
-    if self.next_action
+def archive
+   project_id = self.project_id
+   if self.next_action
       all_chores = Chore.where(:project_id => project_id)
       if all_chores.where(:next_action => true).length == 1
         all_chores.update_all(:next_action => true)
       end
     end
-    true
-}
-  
-  
+   self.archived = true
+   self.save!
+end
+
+
+
  def self.project
   if self.project_id
     return Project.find(self.project_id)
@@ -177,9 +179,6 @@ before_destroy { |record|
   end
  
  end
- 
-
- 
  
 end
 
