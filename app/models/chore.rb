@@ -165,8 +165,8 @@ def archive
         all_chores.update_all(:next_action => true)
       end
     end
-   self.archived = true
-   self.save!
+   self.update_attribute(:archived, true)
+   #self.save!
 end
 
 
