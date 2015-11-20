@@ -20,6 +20,7 @@ Chores::Application.routes.draw do
       get :occurrences
       get :status_quo
       get :calendar
+      get :show_archived
     end
   end
   put 'chore/:id/skip' => "chores#skip", as: 'skip_chore'

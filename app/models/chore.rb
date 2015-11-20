@@ -27,6 +27,10 @@ class Chore < ActiveRecord::Base
  def self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)
    Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: choretype_id, archived: false}, projects: {context_id: context_id, someday: false}}).order("projects.lft asc")
  end
+ 
+  def self.all_archived_chores(user_id)
+   return Chore.where({:user_id => user_id, :archived => true})
+ end
   
  def self.all_active_chores(context_id,choretype_id,user_id)
    all_chores = self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)

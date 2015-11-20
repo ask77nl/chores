@@ -132,6 +132,36 @@ before_filter :authenticate_user!
       format.json { render json: @chore }
     end
   end
+  
+   def show_archived
+    @contexts = Context.where("user_id = ?",current_user.id)
+    @choretypes = Choretype.all
+
+
+    if @contexts.empty?
+      @active_context = nil
+      @chores = nil
+    else
+      if params[:context] == nil
+        @active_context = @contexts.first.id
+      else
+        @active_context = params[:context].to_s
+      end
+     
+      if params[:choretype] == nil
+        @active_choretype = @choretypes.first.id
+      else
+        @active_choretype = params[:choretype].to_s
+      end
+
+      @chores = Chore.all_archived_chores(current_user.id)
+      @projects = Project.all_active_projects(@active_context,current_user.id )
+    end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @chore }
+    end
+  end
 
   # GET /chores/new
   # GET /chores/new.json
