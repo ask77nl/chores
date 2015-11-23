@@ -69,7 +69,7 @@ module RenderSortableTreeHelper
         project_id = options[:node]
         chores = options[:locals][:chores]
         choretypes = options[:locals][:choretypes]
-        current_chores = chores.where("project_id = ?",project_id).order(:choretype_id)
+        current_chores = chores.where({project_id: project_id, archived: false}).order(:choretype_id)
         
         if !current_chores.empty?
           table="<table class='table-condensed'>"
