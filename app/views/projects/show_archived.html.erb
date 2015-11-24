@@ -1,0 +1,53 @@
+<h1>Listing <%= @projects.length%> archived projects</h1>
+
+
+ <table class="table">
+   <tr>
+     <th>Context</th>
+     <th>Parent Project</th>
+     <th>Title</th>
+     <th>Some day</th>
+     <th>email thread</th>
+   </tr>
+
+ <% if @projects.length >0%>
+  <% @projects.each do |project| %>
+   <tr>
+     <td>
+       <% if project.context_id != nil %>
+        <%= project.context.name %>
+       <% else %>
+        -
+       <%end%>
+     </td>
+     <td>
+        <% if project.parent_project_id != nil %>
+        <%= @projects.find(project.parent_project_id).title %>
+       <% else %>
+        -
+       <%end%>
+     </td>
+    
+     <td><%= link_to project.title, edit_project_path(project)%></td>
+     
+     <td>
+       <% if project.someday %>
+        yes
+       <% else %>
+        no
+       <%end%>
+     </td>
+     <td>
+       <% if project.thread_id != nil %>
+         <%= project.thread_subject %>     
+       <% else %>
+        -
+       <%end%>
+     </td>
+
+   </tr>
+  <% end %>
+ <% else %>
+   <tr><td colspan=5>No projects archived yet</td><tr>
+ <% end %>
+ </table>

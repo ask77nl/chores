@@ -14,15 +14,30 @@ class Project < ActiveRecord::Base
   validates(:context_id, presence: true)
   validates(:user_id, presence: true)
   
+ 
+  def thread_subject
+      if(self.thread_id)
+        email_account = Emailaccount.where(email_address: self.email_address).first
+       inbox = Inbox::API.new(Rails.configuration.inbox_app_id, Rails.configuration.inbox_app_secret, email_account.authentication_token)
+       thread = EmailsController.new.get_thread(inbox,self.thread_id)
+       if thread
+        thread.subject
+      else
+        "email not found"
+      end
+    end
+    
+  end
+ 
   def self.all_active_projects(context_id,user_id)
     if context_id == nil
       context_id = Context.first.id if Context.first
     end
    
-    #@all_projects = Project.where(:context_id => context_id, :user_id =>user_id, :someday => false)
     #temporary show all Projects from all contexts
-    @all_projects = Project.nested_set.select('*').where(:user_id =>user_id, :someday => false, :archived => false)
     #@all_projects = Project.nested_set.select('*').where(:context_id => context_id, :user_id =>user_id, :someday => false)
+    
+    @all_projects = Project.nested_set.select('*').where(:user_id =>user_id, :someday => false, :archived => false)
     return @all_projects
   end
   

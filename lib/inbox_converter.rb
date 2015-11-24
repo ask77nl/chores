@@ -57,7 +57,11 @@ module InboxConverter
  end
  
   def get_thread(inbox, thread_id)
-   inbox.threads.find(thread_id)
+   begin
+    inbox.threads.find(thread_id)
+   rescue Inbox::ResourceNotFound
+    nil
+   end
  end
 
 end

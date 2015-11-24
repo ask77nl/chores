@@ -9,6 +9,7 @@ Chores::Application.routes.draw do
     collection do
       #get :manage - probably don't need
       get :someday
+      get :show_archived
       # required for Sortable GUI server side actions
       post :rebuild
     end

@@ -1,47 +1,27 @@
 <h1>Listing <%= @chores.length%> active chores</h1>
 
- <ul class="nav nav-tabs">
-<% if @contexts.length == 0 %>
-No contexts yet, create one!
-<% else %>
- <% @contexts.each do |context| %>
-    <% if context.id.to_s == @active_context.to_s%>
-     <li class="active"><%=link_to context.name, chores_path(:context => context.id, :choretype => @active_choretype.to_s) %></li>
-    <% else %>
-     <li><%=link_to context.name, chores_path(:context => context.id, :choretype => @active_choretype.to_s) %></li>
-    <% end %>
- <% end %>
-  </ul>
 
- <ul class="nav nav-pills">
-
- <% @choretypes.each do |choretype| %>
-    <% if choretype.id.to_s == @active_choretype.to_s%>
-     <li class="active"><%=link_to choretype.name, chores_path(:context => @active_context, :choretype => choretype) %></li>
-    <% else %>
-     <li><%=link_to choretype.name, chores_path(:context => @active_context, :choretype => choretype) %></li>
-    <% end %>
- <% end %>
-  <li><%=link_to 'Projects',projects_path(:context => @active_context) %></li>
- </ul>
- <% if (@active_choretype.to_s == '3') %>
- <div id='calendar'></div>
- <% end %>
- 
  <table class="table">
    <tr>
+     <th>Context</th>
      <th>Project</th>
+     <th>Type</th>
      <th>Title</th>
-     <th>Email</th>
      <th>Start Date</th>
      <th>Deadline</th>
      <th>Schedule</th>
-     <th></th>
    </tr>
 
  <% if @chores.length >0%>
   <% @chores.each do |chore| %>
    <tr>
+     <td>
+       <% if chore.project_id != nil %>
+        <%= chore.project.context.name %>
+       <% else %>
+        -
+       <%end%>
+     </td>
      <td>
         <%project_id_iterator = chore.project_id%>
         <%project_path = ''%>
@@ -51,14 +31,17 @@ No contexts yet, create one!
         <%end%>
         <%=project_path%>
      </td>
-     <td><%= link_to chore.title, edit_chore_path(chore)%></td>
-     <td>
-       <%if chore.email == nil %>
+     
+      <td>
+       <% if chore.choretype_id != nil %>
+        <%= chore.choretype.name %>
+       <% else %>
         -
-       <%else %>
-        <%= chore.email.subject %>
-       <%end %>
+       <%end%>
      </td>
+     
+     <td><%= link_to chore.title, edit_chore_path(chore)%></td>
+     
      <td>
        <% if chore.startdate != nil %>
         <%= chore.startdate.to_s(:due_date) %>
@@ -80,18 +63,10 @@ No contexts yet, create one!
        -
       <%end%>  
      </td>
-     
-     <td><%= link_to "Delete", chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    
    </tr>
   <% end %>
  <% else %>
-   <tr><td colspan=9>No chores yet, create one!</td><tr>
+   <tr><td colspan=9>No chores archived yet</td><tr>
  <% end %>
  </table>
-
- <br />
-
- <%= link_to 'New Chore', new_chore_path, {:class => "btn btn-large btn-primary"} %>
- 
-
-<% end %>

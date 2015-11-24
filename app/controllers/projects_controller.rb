@@ -37,6 +37,15 @@ load_and_authorize_resource
       format.json { render json: @projects }
     end
   end
+  
+   def show_archived
+    @projects = Project.all_active_projects(nil, current_user.id )
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @chore }
+    end
+  end
+  
 
   # GET /projects/1
   # GET /projects/1.json
