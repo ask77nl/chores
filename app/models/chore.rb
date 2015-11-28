@@ -79,7 +79,7 @@ end
       
       @all_occurrences = []
       #temporary ignore context on calendar
-      all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: 3}, projects: {someday: false}})
+      all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: 3, archived: false}, projects: {someday: false}})
       #all_chores = Chore.joins(:project).where({chores: {user_id: user_id, choretype_id: 3}, projects: {context_id: context_id, someday: false}})
       
       #puts "got chores: "+all_chores.length.to_s
