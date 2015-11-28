@@ -43,8 +43,44 @@ module InboxConverter
  
  def archive_thread(inbox, thread_id)
    thread = inbox.threads.find(thread_id)
-   thread.archive!
-   thread.update_tags!(['trash'], ['inbox'])
+   chores_archive_label = nil
+   inbox_label = nil
+   chores_label = nil
+   inbox.labels.each do |label|
+     if label.display_name == 'Chores'
+       chores_label = label
+     end
+     if label.display_name == 'Chores/Archived'
+       chores_archive_label = label
+     end
+     if label.display_name == 'Inbox'
+       inbox_label = label
+     end
+   end
+   thread.labels.push(chores_archive_label)
+   thread.labels.delete(inbox_label)
+   thread.labels.delete(chores_label)
+   thread.save!
+ end
+
+ def move_thread_to_chores(inbox, thread_id)
+   thread = inbox.threads.find(thread_id)
+
+   chores_label = nil
+   inbox_label = nil
+   inbox.labels.each do |label|
+     if label.display_name == 'Chores'
+       chores_label = label
+     end
+     if label.display_name == 'Inbox'
+       inbox_label = label
+     end
+   end
+   thread.labels.push(chores_label)
+   thread.labels.delete(inbox_label)
+   thread.save!
+
+
  end
  
  def mark_thread_as_read(inbox, thread_id)
