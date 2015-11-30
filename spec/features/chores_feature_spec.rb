@@ -248,10 +248,13 @@ describe "when there are chores of several contexts and types" do
      expect(page).to have_content(next_action.title)
      expect(page).to have_no_content(non_next_action.title)
      
-     click_link("Delete", :href =>"/chores/"+next_action.id.to_s)
+     click_link("Archive", :href =>"/chore/"+next_action.id.to_s+"/archive")
      
      expect(page).to have_no_content(next_action.title)
      expect(page).to have_content(non_next_action.title)
+
+     visit show_archived_chores_path
+     expect(page).to have_content(next_action.title)
    end
   end
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1329170753">
+  <component name="DataSourceManagerImpl" format="xml" hash="417220941">
     <data-source source="LOCAL" name="Rails chores: test" uuid="4bd0cc49-b9a3-4f69-bcd3-0c61c0f7006f">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>

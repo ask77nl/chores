@@ -99,8 +99,9 @@ class Project < ActiveRecord::Base
       project.update!(parent_project_id: self.parent_project_id)
     end 
     Chore.where(:project_id => self.id).update_all(:project_id => nil)
-    self.archived = true
-    self.save
+    self.update_attribute(:archived, true)
+    #self.archived = true
+    #self.save
   end
   
 end
