@@ -136,16 +136,19 @@ describe "Projects", :type => :feature do
      expect(page).to have_content(parent_project.title)
    end
    
-   it "should be able to delete it" do
+   it "should be able to archive it" do
       project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
 
      visit projects_path
      expect(page).to have_content(project.title)
-     delete_url = "/projects/"+project.id.to_s
+     delete_url = "/project/"+project.id.to_s+'/archive'
      delete_filter = "//a[@href='"+delete_url+"' and @class = 'delete']"
      find(:xpath, delete_filter).click
 
      expect(page).to have_no_content(project.title)
+     
+     visit show_archived_projects_path
+     expect(page).to have_content(project.title)
 
    end
    describe "after an active project already exist" do
@@ -197,7 +200,7 @@ describe "Projects", :type => :feature do
      expect(page).to have_content(medium_chore.title)
 
 
-     delete_url = "/projects/"+medium_project.id.to_s
+     delete_url = "/project/"+medium_project.id.to_s+'/archive'
      delete_filter = "//a[@href='"+delete_url+"' and @class = 'delete']"
      find(:xpath, delete_filter).click
 

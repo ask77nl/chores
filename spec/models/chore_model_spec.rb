@@ -89,7 +89,8 @@ describe "when deleting a last next action" do
   it "all other actions become next ones" do
    not_a_next_action = FactoryGirl.create(:chore, choretype_id: @choretype.id, project_id: @project.id, user_id: @user.id, next_action: false) 
    expect(Chore.all_active_chores(@context.id,@choretype.id,@user.id)).to eq([@chore]) 
-   Chore.destroy(@chore.id)
+   @chore.archive
+   expect(Chore.all_archived_chores(@user.id)).to eq([@chore]) 
    not_a_next_action = Chore.find(not_a_next_action.id)
    expect(not_a_next_action.next_action).to eq(true)
    expect(Chore.all_active_chores(@context.id,@choretype.id,@user.id)).to eq([not_a_next_action]) 
