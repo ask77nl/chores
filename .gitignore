@@ -14,7 +14,10 @@
 /log/*.log
 /tmp
 /nbproject/private/
+/coverage/*
 /coverage
+/.idea/*
+/.idea
 webdriver-profile*
 
 # ignore ruby mine files on home PC
