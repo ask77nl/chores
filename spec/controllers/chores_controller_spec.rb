@@ -79,6 +79,7 @@ describe ChoresController, :type => :controller do
       chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_todo, user_id: @user.id)
       todays_appointment = FactoryGirl.create(:chore, choretype_id: @choretype_appointment, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now.to_date, schedule: nil)
       waiting_chore = FactoryGirl.create(:chore, choretype_id: @choretype_waiting, project_id: @project.id, user_id: @user.id, schedule: nil)
+      archived_chore = FactoryGirl.create(:chore, choretype_id: @choretype_todo, project_id: @project.id, user_id: @user.id, schedule: nil, archived: true)
       empty_project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
       get :status_quo, {"user_id" => 1,"context_id" => 1}, valid_session
       expect(assigns(:chores)).to eq([chore])
@@ -91,6 +92,21 @@ describe ChoresController, :type => :controller do
       expect(assigns(:chores).length).to eq(1)
     end
   end
+
+   describe "GET show_archived_chores" do
+     it "assigns correct chores" do
+       @choretype_todo = 1
+       @choretype_appointment = 3
+       @choretype_waiting = 2
+
+       chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_todo, user_id: @user.id)
+       archived_chore = FactoryGirl.create(:chore, choretype_id: @choretype_todo, project_id: @project.id, user_id: @user.id, schedule: nil, archived: true)
+       empty_project = FactoryGirl.create(:project, context_id: @context.id, user_id: @user.id)
+       get :show_archived, {"user_id" => 1}, valid_session
+       expect(assigns(:chores)).to eq([archived_chore])
+       expect(assigns(:projects)).to eq([@project, empty_project])
+       end
+   end
   
   describe "GET occurrences" do
     it "assigns occurrences from the correct chores" do
@@ -230,9 +246,18 @@ describe ChoresController, :type => :controller do
       expect(response).to redirect_to('/')
     end
   end
-  
+
+   describe "archive" do
+     it "redirects to the choretypes list" do
+       chore = Chore.create! valid_attributes
+       request.env['HTTP_REFERER'] = '/'
+       put :archive, {:id => chore.to_param}, valid_session
+       expect(response).to redirect_to('/')
+     end
+   end
+
+
   describe "PUT skip" do
-    
     it "redirects to the choretypes list" do
       @choretype_appointment = 3
       chore = FactoryGirl.create(:chore, choretype_id: @choretype_appointment, project_id: @project.id, user_id: @user.id, startdate: Time.zone.now, deadline: Time.zone.now, schedule: IceCube::Rule.weekly.day(Time.zone.now.wday).to_json.to_s)

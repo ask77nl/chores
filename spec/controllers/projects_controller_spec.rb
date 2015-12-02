@@ -53,6 +53,7 @@ describe ProjectsController, :type => :controller do
   describe "GET index" do
     it "assigns only active projects as @projects" do
       project = FactoryGirl.create(:project,user_id: @user.id,context_id: @context.id)
+      archived_project = FactoryGirl.create(:project,user_id: @user.id,context_id: @context.id, archived: true)
       chore = FactoryGirl.create(:chore, project_id: project.id, email_id: @email.id, choretype_id: @choretype.id, user_id: @user.id)
       get :index, {"user_id" => 1,"context_id" => 1}, valid_session
       expect(assigns(:projects)).to eq([project])
@@ -71,6 +72,16 @@ describe ProjectsController, :type => :controller do
       expect(assigns(:projects).length).to eq(1)
     end
   end
+
+   describe "GET archived" do
+     it "assigns only someday projects as @projects" do
+       Project.create! valid_attributes
+       archived_project = Project.create!("title" => "test title 1", "context_id" => 1,"user_id" => 1, "archived" => true)
+       get :show_archived, {"user_id" => 1}, valid_session
+       expect(assigns(:projects)).to eq([archived_project])
+       expect(assigns(:projects).length).to eq(1)
+     end
+   end
   
   describe "GET show" do
     it "assigns the requested project as @project" do
@@ -181,18 +192,30 @@ describe ProjectsController, :type => :controller do
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested projecttype" do
+    it "destroys the requested project" do
       project = Project.create! valid_attributes
+      request.env['HTTP_REFERER'] = projects_url
       expect {
         delete :destroy, {:id => project.to_param}, valid_session
       }.to change(Project, :count).by(-1)
     end
 
-    it "redirects to the projecttypes list" do
+    it "redirects to the projects list" do
+      request.env['HTTP_REFERER'] = projects_url
       project = Project.create! valid_attributes
       delete :destroy, {:id => project.to_param}, valid_session
       expect(response).to redirect_to(projects_url)
     end
   end
+
+   describe "archive" do
+
+     it "redirects to the projecttypes list" do
+       request.env['HTTP_REFERER'] = projects_url
+       project = Project.create! valid_attributes
+       put :archive, {:id => project.to_param}, valid_session
+       expect(response).to redirect_to(projects_url)
+     end
+   end
 
 end
