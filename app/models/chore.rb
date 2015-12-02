@@ -34,7 +34,7 @@ class Chore < ActiveRecord::Base
   
  def self.all_active_chores(context_id,choretype_id,user_id)
    all_chores = self.all_chores_by_context_type_and_user(context_id,choretype_id,user_id)
-   return all_chores.where("startdate < ? or startdate is null", Time.zone.now.midnight+ 1.day).where(:next_action => true)
+   return all_chores.where("startdate < ? or startdate is null", Time.zone.now.midnight+ 1.day).where({:next_action => true, :archived => false})
  end
 
  def self.orphan_chores()

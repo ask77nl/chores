@@ -21,6 +21,9 @@ describe Chore do
   should respond_to(:email_id)
   should respond_to(:user_id)
   should respond_to(:schedule)
+  should respond_to(:all_day)
+  should respond_to(:next_action)
+  should respond_to(:archived)
 }
 
  describe "when title  is not present" do
@@ -64,7 +67,21 @@ describe "when requesting all chores by context and user" do
    FactoryGirl.create(:chore,choretype_id: @choretype.id, project_id: someday_project.id ,user_id: @user.id)
    expect(Chore.all_chores_by_context_type_and_user(@context.id,@choretype.id,@user.id)).to eq([@chore]) 
   end
+ it "should not show archived chores" do
+   FactoryGirl.create(:chore, project_id: @project.id ,user_id: @user.id, archived: true)
+   expect(Chore.all_chores_by_context_type_and_user(@context.id,@choretype.id,@user.id)).to eq([@chore])
+ end
 end
+
+ describe "when archiving chore" do
+   it "it should not move it from the list of all chores to archived ones" do
+     expect(Chore.all_chores_by_context_type_and_user(@context.id,@choretype.id,@user.id)).to eq([@chore])
+     expect(Chore.all_archived_chores(@user.id)).to eq([])
+     @chore.archive
+     expect(Chore.all_chores_by_context_type_and_user(@context.id,@choretype.id,@user.id)).to eq([])
+     expect(Chore.all_archived_chores(@user.id)).to eq([@chore])
+   end
+ end
 
 describe "when requesting all active chores " do
  it "should not show chores with start date in the future" do
@@ -84,6 +101,14 @@ describe "when requesting all orphan chores " do
    expect(Chore.orphan_chores).to eq([orphan_chore])
   end
 end
+
+ describe "when requesting all archived chores " do
+   it "should not show only archived chores" do
+     FactoryGirl.create(:chore, choretype_id: @choretype.id, project_id: @project.id, user_id: @user.id)
+     archived_chore = FactoryGirl.create(:chore, choretype_id: @choretype.id, user_id: @user.id, archived: true)
+     expect(Chore.all_archived_chores(@user.id)).to eq([archived_chore])
+   end
+ end
 
 describe "when deleting a last next action" do
   it "all other actions become next ones" do
@@ -108,7 +133,17 @@ describe "when requesting all appointment occurrences for today  " do
    occurrence2 = {:id=>daily_chore.id,:title=>daily_chore.title,:start=>Time.zone.now.to_date.strftime("%Y-%m-%d 00:00:00 -0500"),:end=>Time.zone.now.to_date.strftime("%Y-%m-%d 00:00:00 -0500"),:url=>"/chores/"+daily_chore.id.to_s+"/edit", :allDay=>true}
    
    expect(Chore.appointment_occurrences(@context,Date.today.midnight,Date.today.midnight, @user.id)).to eq([occurrence1, occurrence2])   
-  end
+ end
+
+ it "should not return an occurrence of an archived daily appointment" do
+   @choretype_appointment = 3
+
+
+   daily_chore = FactoryGirl.create(:chore, project_id: @project.id, email_id: @email.id, choretype_id: @choretype_appointment, user_id: @user.id, archived: true)
+   occurrence = {:id=>daily_chore.id,:title=>daily_chore.title,:start=>Time.zone.now.to_date.strftime("%Y-%m-%d 00:00:00 -0500"),:end=>Time.zone.now.to_date.strftime("%Y-%m-%d 00:00:00 -0500"),:url=>"/chores/"+daily_chore.id.to_s+"/edit", :allDay=>true}
+
+   expect(Chore.appointment_occurrences(@context,Date.today.midnight,Date.today.midnight, @user.id)).to eq([])
+ end
 end
 
 describe "when requesting all today and missed appointments" do

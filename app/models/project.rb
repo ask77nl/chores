@@ -40,6 +40,10 @@ class Project < ActiveRecord::Base
     @all_projects = Project.nested_set.select('*').where(:user_id =>user_id, :someday => false, :archived => false)
     return @all_projects
   end
+
+  def self.all_archived_projects(user_id)
+    @all_projects = Project.where(:user_id =>user_id, :archived => true)
+  end
   
   def self.empty_active_projects(context_id,user_id)
     if context_id == nil
@@ -83,15 +87,15 @@ class Project < ActiveRecord::Base
     
   end
 
-  def delete
-    children_projects = self.descendants
-    children_projects.each do |project|
-      project.update!(parent_project_id: self.parent_project_id)
-    end 
-    Chore.where(:project_id => self.id).update_all(:project_id => nil)
-    self.update!(:archived => true)
-    #self.destroy
-  end
+ # def delete
+ #   children_projects = self.descendants
+ #   children_projects.each do |project|
+ #     project.update!(parent_project_id: self.parent_project_id)
+ #   end
+ #   Chore.where(:project_id => self.id).update_all(:project_id => nil)
+ #   self.update!(:archived => true)
+ #   #self.destroy
+ # end
   
    def archive
     children_projects = self.descendants

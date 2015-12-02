@@ -17,6 +17,11 @@ describe Project do
   should respond_to(:context_id)
   should respond_to(:parent_project_id) 
   should respond_to(:user_id)
+  should respond_to(:comments)
+  should respond_to(:someday)
+  should respond_to(:thread_id)
+  should respond_to(:email_address)
+  should respond_to(:archived)
 
 }
 
@@ -36,12 +41,18 @@ describe Project do
  end
 
   describe "When we have both active and inactive projects" do
-    before {@someday_project = Project.create(:title => "Someday Title", :context_id => @context.id, :user_id => @user.id, :someday => true)}
+    before {
+      @someday_project = Project.create(:title => "Someday Title", :context_id => @context.id, :user_id => @user.id, :someday => true)
+      @archived_project = Project.create(:title => "Someday Title", :context_id => @context.id, :user_id => @user.id, :archived => true)
+    }
     it "all_active_projects should return only active ones" do
       expect(Project.all_active_projects(@context.id, @user.id)).to eq([@project])
     end
     it "all_someday_projects should return only active ones" do
       expect(Project.all_someday_projects(@context.id, @user.id)).to eq([@someday_project])
+    end
+    it "all_archived_projects should return only archived ones" do
+      expect(Project.all_archived_projects(@user.id)).to eq([@archived_project])
     end
  end
  
@@ -83,9 +94,19 @@ describe Project do
       #puts "projects context is now "+@project.context_id.to_s
       expect(@child_project.context_id).to eq(@another_context.id)
     end
+  end
+
+ describe "When we archive a project" do
+   it "it should move it from the list of active ones to archived ones" do
+     expect(Project.all_active_projects(@context.id, @user.id)).to eq([@project])
+     expect(Project.all_archived_projects(@user.id)).to eq([])
+     @project.archive
+     expect(Project.all_active_projects(@context.id, @user.id)).to eq([])
+     expect(Project.all_archived_projects(@user.id)).to eq([@project])
+   end
  end
 
- describe "When we delete a project" do
+ describe "When we archive a project" do
     before do
       @medium_project = FactoryGirl.create(:project, :parent_project_id => @project.id, :context_id => @context.id, :user_id => @user.id)
       @bottom_project =  FactoryGirl.create(:project, :parent_project_id => @medium_project.id, :context_id => @context.id, :user_id => @user.id)
@@ -97,7 +118,7 @@ describe Project do
 
     end
     it "The children projects should be promoted and chores became orphan" do
-      @medium_project.delete
+      @medium_project.archive
 
       @bottom_project = Project.find(@bottom_project.id)
       @medium_chore = Chore.find(@medium_chore.id)

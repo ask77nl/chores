@@ -12,5 +12,6 @@ FactoryGirl.define do
     deadline {startdate + rand(30)}
     #mocking up schedule in the format, that is received by a selector form, which is JSON string
     schedule "{\"interval\":1,\"until\":null,\"count\":null,\"validations\":null,\"rule_type\":\"IceCube::DailyRule\"}"
+    archived false
   end
 end
