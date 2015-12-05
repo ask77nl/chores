@@ -52,6 +52,7 @@ load_and_authorize_resource
   def show
     @project = Project.find(params[:id])
 
+    #we need to unit test the email part
     if(@project.thread_id)
       email_account = Emailaccount.where(email_address: @project.email_address).first
       inbox = Inbox::API.new(Rails.configuration.inbox_app_id, Rails.configuration.inbox_app_secret, email_account.authentication_token)
