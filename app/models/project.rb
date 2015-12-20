@@ -49,7 +49,12 @@ class Project < ActiveRecord::Base
     if context_id == nil
       context_id = Context.first.id
     end
-    Project.nested_set.leaves.joins("LEFT OUTER JOIN chores on projects.id = chores.project_id").where({projects: {context_id: context_id,user_id: user_id, someday: false, archived: false}, chores: {id: nil}}).order("projects.lft asc")
+    #Project.nested_set.leaves.joins("LEFT OUTER JOIN chores on projects.id = chores.project_id").where({projects: {context_id: context_id,user_id: user_id, someday: false, archived: false}, chores: {id:nil}}).order("projects.lft asc")
+    leaves_ids = Project.nested_set.leaves.where({context_id: context_id,user_id: user_id, someday: false, archived: false}).pluck(:id)
+    non_empty_leaves_ids = Project.nested_set.leaves.joins("JOIN chores on projects.id = chores.project_id").where({projects: {context_id: context_id,user_id: user_id, someday: false, archived: false}, chores: {archived: false}}).pluck(:id)
+
+    Project.find(leaves_ids - non_empty_leaves_ids)
+
   end
   
   def self.all_someday_projects(context_id,user_id)
