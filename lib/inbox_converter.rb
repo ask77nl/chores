@@ -10,7 +10,7 @@ module InboxConverter
       sleep 2
       thread = inbox.threads.first
     end
-    threads_array = inbox.threads.where(:tag => 'inbox').all
+    threads_array = inbox.threads.where(:in => 'inbox').all
 
     #turn off again if there are trash treads in the inbox
     #threads_array.each do |thread|
@@ -25,7 +25,7 @@ module InboxConverter
  
  def unread_count(inbox)
    unread_count =0
-   inbox.threads.where(:tag => 'inbox').each do |thread|
+   inbox.threads.where(:in => 'inbox').each do |thread|
      if thread.raw_json['unread'] == true
        unread_count=unread_count+1
      end
