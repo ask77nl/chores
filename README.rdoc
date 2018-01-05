@@ -1,6 +1,7 @@
 == Chores
 
 Proof-of-concept implementation of a classic Getting Things Done workflow, see https://en.wikipedia.org/wiki/Getting_Things_Done for more details on GTD.
+
 Supported features:
 - To-Dos, Appointments and 'Waiting for...' tasks
 - Next Action tasks
@@ -13,7 +14,11 @@ Supported features:
 == Technology stack
 
 Full-stack framework: Ruby on Rails 4.1, 
+
 Front-end template: Bootstrap 3
+
 Database: Postgres (prod), SQLite (dev)
+
 Testing: Capybara, Cucumber, Selenium
+
 Deployment: Heroku
