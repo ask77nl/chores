@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 gem 'rails', '4.1.4'
-gem 'bootstrap-sass', '3.3.3'
+gem 'bootstrap-sass', '>=3.4.1'
 gem 'devise'
 gem 'rolify'
 gem 'cancan'
